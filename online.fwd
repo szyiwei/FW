@@ -94,6 +94,15 @@
       "url": "https://raw.githubusercontent.com/szyiwei/ForwardWidgets/refs/heads/main/widgets/list.js"
     },
     {
+      "id": "Hanime1",
+      "title": "Hanime1",
+      "description": "获取 Hanime1 动画",
+      "requiredVersion": "0.0.2",
+      "version": "6.2.0",
+      "author": "skywazzle",
+      "url": "https://raw.githubusercontent.com/szyiwei/ForwardWidgets/refs/heads/main/widgets/Hanime1.js"
+    },
+    {
       "id": "movie_shows",
       "title": "热门榜单",
       "description": "含电影/剧集/动漫/国内综艺",
