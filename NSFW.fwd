@@ -1,57 +1,43 @@
 {
   "title": "TFEL's NSFW模块",
   "description": "自用NSFW模块合集",
-  "icon": "https://raw.githubusercontent.com/TFEL00/ForwardWidgets/refs/heads/main/icon.png",
+  "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon.png",
   "widgets": [
     {
       "id": "jable",
       "title": "Jable",
       "description": "在线观看Jable视频",
       "requiredVersion": "0.0.1",
-      "version": "1.0.8",
-      "author": "nibiru",
-      "url": "https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/widgets/jable.js",
-      "backup_url": "https://raw.githubusercontent.com/ocd0711/forward_module/master/widgets/🔞 jable.js"
+      "version": "1.3.0",
+      "author": "nibiru｜MakkaPakka｜蝴蝶",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/jable.js"
     },
     {
-      "id": "ti.bemarkt.javday",
+      "id": "javday_int",
       "title": "JavDay",
       "description": "在线观看JavDay视频",
       "requiredVersion": "0.0.1",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": "Ti",
-      "url": "https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/widgets/javday.js",
-      "backup_url": "https://raw.githubusercontent.com/ocd0711/forward_module/master/widgets/ti.bemarkt.javday.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/javday.js"
     },
     {
-      "id": "ti.bemarkt.javrate",
-      "title": "JavRate",
-      "description": "在线观看JavRate视频",
+      "id": "91porny_int",
+      "title": "91Porny",
+      "description": "在线观看91Porny视频",
       "requiredVersion": "0.0.1",
-      "version": "2.1.0",
-      "author": "Ti",
-      "url": "https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/widgets/javrate.js",
-      "backup_url": "https://raw.githubusercontent.com/ocd0711/forward_module/master/widgets/ti.bemarkt.javrate.js"
+      "version": "0.9.6",
+      "author": "網路",
+      "url": "https://raw.githubusercontent.com/yiwei/FW/refs/heads/main/widgets/91porny.js"
     },
     {
-      "id": "Pornhub",
+      "id": "Pornhub_int",
       "title": "PornHub",
       "description": "在线观看PornHub视频",
       "requiredVersion": "0.0.1",
-      "version": "1.0.5",
+      "version": "1.1.5",
       "author": "海带",
-      "url": "https://raw.githubusercontent.com/Madai-v/ForwardWidgets/refs/heads/main/Widgets/ph.js",
-      "backup_url": "https://raw.githubusercontent.com/ocd0711/forward_module/master/widgets/pornhub.js"
-    },
-    {
-      "id": "Bitch",
-      "title": "Bitch Lives",
-      "description": "🎥 Bitch Lives",
-      "requiredVersion": "0.0.1",
-      "version": "0.0.1",
-      "author": "Discount Code：VEUS",
-      "url": "https://gist.githubusercontent.com/MrRegret/61a5cbf0637b95a0d800994a51860fb2/raw",
-      "backup_url": "https://raw.githubusercontent.com/ocd0711/forward_module/master/widgets/bitch.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/Widgets/Pornhub.js"
     },
     {
       "id": "Hanime1",
@@ -61,6 +47,50 @@
       "version": "6.2.0",
       "author": "skywazzle",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1.js"
+    },
+    {
+      "id": "jable_makka_spec_v4",
+      "title": "Jable_ovo",
+      "description": "简易的Jable模块",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.3",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/jable_ovo.js"
+    },
+    {
+      "id": "javday_pro_final_mak",
+      "title": "JAVDay_ovo",
+      "description": "简易的JavDay模块",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.2",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/JAVDay_ovo.js"
+    },
+    {
+      "id": "91porn_makka",
+      "title": "91Porn_ovo",
+      "description": "简易的91Porn模块",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.2",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/Widgets/91Porn_ovo.js"
+    },
+    {
+      "id": "missav_makka_play",
+      "title": "MissAV_ovo",
+      "description": "简易的missav模块",
+      "requiredVersion": "0.0.1",
+      "version": "2.1.1",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV_ovo.js"
+    {
+      "id": "missav1",
+      "title": "MissAV1",
+      "description": "在线观看MissAV视频",
+      "requiredVersion": "0.0.3",
+      "version": "4.0.0",
+      "author": "\ud835\udcd1\ud835\udcfe\ud835\udcfd\ud835\udcfd\ud835\udcee\ud835\udcfb\ud835\udcef\ud835\udcf5\ud835\udd02",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV1.js"
     },
   ]
 }
