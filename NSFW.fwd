@@ -1,7 +1,7 @@
 {
-  "title": "TFEL's NSFW模块",
+  "title": "szyiwei's NSFW模块",
   "description": "自用NSFW模块合集",
-  "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon.png",
+  "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon1.png",
   "widgets": [
     {
       "id": "jable",
@@ -83,6 +83,7 @@
       "version": "2.1.1",
       "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV_ovo.js"
+    },
     {
       "id": "missav1",
       "title": "MissAV1",
