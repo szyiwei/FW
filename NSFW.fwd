@@ -1,7 +1,7 @@
 {
   "title": "szyiwei's NSFW模块",
   "description": "自用NSFW模块合集",
-  "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon1.png",
+  "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon.png",
   "widgets": [
     {
       "id": "jable",
@@ -10,7 +10,7 @@
       "requiredVersion": "0.0.1",
       "version": "1.3.0",
       "author": "nibiru｜MakkaPakka｜蝴蝶",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/jable.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Jable.js"
     },
     {
       "id": "javday_int",
@@ -19,7 +19,7 @@
       "requiredVersion": "0.0.1",
       "version": "1.2.0",
       "author": "Ti",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/javday.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/JAVDay.js"
     },
     {
       "id": "91porny_int",
@@ -28,7 +28,7 @@
       "requiredVersion": "0.0.1",
       "version": "0.9.6",
       "author": "網路",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91porny.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91Porny.js"
     },
     {
       "id": "Pornhub_int",
@@ -55,7 +55,7 @@
       "requiredVersion": "0.0.1",
       "version": "1.0.3",
       "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/jable_ovo.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Jable_ovo.js"
     },
     {
       "id": "javday_pro_final_mak",
