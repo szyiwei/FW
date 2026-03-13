@@ -53,5 +53,14 @@
       "url": "https://gist.githubusercontent.com/MrRegret/61a5cbf0637b95a0d800994a51860fb2/raw",
       "backup_url": "https://raw.githubusercontent.com/ocd0711/forward_module/master/widgets/bitch.js"
     },
+    {
+      "id": "Hanime1",
+      "title": "Hanime1",
+      "description": "获取 Hanime1 动画",
+      "requiredVersion": "0.0.2",
+      "version": "6.2.0",
+      "author": "skywazzle",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1.js"
+    },
   ]
 }
