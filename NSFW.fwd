@@ -42,10 +42,10 @@
     {
       "id": "Hanime1",
       "title": "Hanime1",
-      "description": "获取 Hanime1 动画",
+      "description": "把hanime1装进口袋",
       "requiredVersion": "0.0.2",
-      "version": "6.2.0",
-      "author": "skywazzle",
+      "version": "4.4.1",
+      "author": "skywazzle/TaYhu",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1.js"
     },
     {
