@@ -40,13 +40,13 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Pornhub.js"
     },
     {
-      "id": "Hanime1",
-      "title": "Hanime1",
+      "id": "Hanime1-fw",
+      "title": "Hanime1-fw",
       "description": "把hanime1装进口袋",
       "requiredVersion": "0.0.2",
-      "version": "4.4.1",
+      "version": "4.5.0",
       "author": "skywazzle/TaYhu",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1_fw.js"
     },
     {
       "id": "jable_makka_spec_v4",
@@ -92,6 +92,15 @@
       "version": "4.0.0",
       "author": "\ud835\udcd1\ud835\udcfe\ud835\udcfd\ud835\udcfd\ud835\udcee\ud835\udcfb\ud835\udcef\ud835\udcf5\ud835\udd02",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV1.js"
+    },
+    {
+      "id": "Bitch",
+      "title": "Bitch Lives",
+      "description": "碧池直播",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Discount Code：VEUS",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/NSFW-LIVE.js"
     },
   ]
 }
