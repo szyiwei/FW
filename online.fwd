@@ -30,5 +30,14 @@
       "author": "两块",
       "url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/VodStream.js"
     },
+    {
+      "id": "VOD_STREAM",
+      "title": "VOD STREAM",
+      "description": "获取聚合VOD影视资源，智能分组，连接质量排序",
+      "requiredVersion": "0.0.1",
+      "version": "2.4.5",
+      "author": "MoYa",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/Widgets/MOYAN STREAM.js"
+    },
   ]
 }
