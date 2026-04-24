@@ -8,7 +8,6 @@ DOMAIN-SUFFIX,tmdbimage.vvebo.vip
 DOMAIN-SUFFIX,letterboxd.com
 DOMAIN-SUFFIX,sleepcycle.com
 DOMAIN-SUFFIX,trakt.tv
-DOMAIN-SUFFIX,missav.ai
 
 # emby
 DOMAIN-SUFFIX,ciallo.party
@@ -23,6 +22,7 @@ DOMAIN-SUFFIX,dadakuai.552554.xyz
 DOMAIN-SUFFIX,miraiemby.com
 DOMAIN-SUFFIX,ottiptv.cc
 DOMAIN-SUFFIX,ani.v300.eu.org
+DOMAIN,cf.xgua.de
 DOMAIN,emby.wenjian.de
 DOMAIN,115.wenjian.de
 DOMAIN,ani.makiise.top
@@ -36,3 +36,4 @@ DOMAIN,vip.ffzy-online.com
 DOMAIN,play.ly166.com
 DOMAIN,svip.ryplay14.com
 DOMAIN,v.lzcdn27.com
+DOMAIN,vd.hxcztech.com
