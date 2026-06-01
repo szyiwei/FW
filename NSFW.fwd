@@ -4,12 +4,12 @@
   "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon.png",
   "widgets": [
     {
-      "id": "jable",
+      "id": "jable_int",
       "title": "Jable",
-      "description": "在线观看Jable视频",
-      "requiredVersion": "0.0.1",
-      "version": "1.3.0",
-      "author": "nibiru｜MakkaPakka｜蝴蝶",
+      "description": "Jable分类浏览和全局搜索",
+      "requiredVersion": "0.0.2",
+      "version": "1.4.0",
+      "author": "nibiru｜MakkaPakka｜EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Jable.js"
     },
     {
