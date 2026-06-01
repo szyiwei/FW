@@ -1,18 +1,18 @@
 WidgetMetadata = {
     id: "Pornhub_int",
     title: "Pornhub",
-    version: "1.1.5",
+    version: "1.3.1",
     requiredVersion: "0.0.1",
-    description: "網路收集到的模塊",
-    author: "海带",
-    site: "https://github.com/Madai-v/ForwardWidgets",
-    detailCacheDuration: 1200,
+    description: "Pornhub 视频聚合模块",
+    author: "海带|EL",
+    site: "https://cn.pornhub.com",
+    detailCacheDuration: 60,
     modules: [
         {
             id: "searchKeyword",
             title: "🔍 全站搜索",
             functionName: "getSearchResults",
-            cacheDuration: 180,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "search_query",
@@ -108,7 +108,7 @@ WidgetMetadata = {
             id: "searchUser",
             title: "​🌟 优选艺人",
             functionName: "getUserUploads",
-            cacheDuration: 300,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "username",
@@ -119,7 +119,53 @@ WidgetMetadata = {
                         paramName: "sort_by",
                         value: ["new", "views", "rating"],
                     },
-                    enumOptions: [{ 'title': 'HongKongDoll', 'value': 'HongKongDoll' }, { title: '麻豆传媒', value: 'asiam' }, { title: '麻豆-LiRongRong', value: 'Li Rong Rong' }, { 'title': 'Cabbage Sweety', 'value': 'Cabbage Sweety' }, { 'title': 'Lindainlove', 'value': 'Lindainlove' }, { 'title': 'SweetieYico', 'value': 'SweetieYico' }, { 'title': 'june liu', 'value': 'june liu' }, { 'title': 'wanrous', 'value': 'wanrous' }, { 'title': '77bandage', 'value': '77bandage' }, { 'title': 'youyou', 'value': 'youyou' }, { 'title': 'manachanx', 'value': 'manachanx' }, { title: 'lindainlove', value: 'lindainlove' }, { title: 'Karesi ni Baretara Kaisan', value: 'Karesi ni Baretara Kaisan' }, { title: 'k production film', value: 'k production film' }, { 'title': '798DS', 'value': '798DS' }, { 'title': 'aiwanxiongxiong', 'value': 'aiwanxiongxiong' }, { 'title': 'andmlove', 'value': 'andmlove' }, { 'title': 'ano ano chan', 'value': 'ano ano chan' }, { 'title': 'bibi Fluffy', 'value': 'bibi Fluffy' }, { 'title': 'CandyKissVip', 'value': 'CandyKissVip' }, { 'title': 'Chinese Bunny', 'value': 'Chinese Bunny' }, { 'title': 'DemiFairyTW', 'value': 'DemiFairyTW' }, { 'title': 'Elle Lee', 'value': 'Elle Lee' }, { 'title': 'Eve', 'value': 'Eve' }, { 'title': 'fortunecutie', 'value': 'fortunecutie' }, { 'title': 'LIs Evans', 'value': 'LIs Evans' }, { 'title': 'loliiiiipop99', 'value': 'loliiiiipop99' }, { 'title': 'Makissse', 'value': 'Makissse' }, { 'title': 'nan12138', 'value': 'nan12138' }, { 'title': 'Nana_taipei', 'value': 'Nana_taipei' }, { 'title': 'Nuomibaby', 'value': 'Nuomibaby' }, { 'title': 'papaxmama', 'value': 'papaxmama' }, { 'title': 'Qiobnxingcaiii', 'value': 'Qiobnxingcaiii' }, { 'title': 'SakuraCandy', 'value': 'SakuraCandy' }, { 'title': 'sskok16', 'value': 'sskok16' }, { 'title': 'SSR Peach', 'value': 'SSR Peach' }, { 'title': 'thelittlejuicer', 'value': 'thelittlejuicer' }, { 'title': 'TLMS_SVJ', 'value': 'TLMS_SVJ' }, { 'title': 'twtutu', 'value': 'twtutu' }, { 'title': 'Vita Won', 'value': 'Vita Won' }, { 'title': 'Yuqiao Chen', 'value': 'Yuqiao Chen' }, { 'title': 'YuzuKitty', 'value': 'YuzuKitty' }
+                    enumOptions: [
+                        { title: 'HongKongDoll', value: 'HongKongDoll' },
+                        { title: 'Nana_taipei', value: 'Nana_taipei' },
+                        { title: 'Sweetie Fox', value: 'sweetie-fox' },
+                        { title: 'Diana Rider', value: 'diana-rider' },
+                        { title: 'Sola Zola', value: 'solazola' },
+                        { title: 'Candy Love', value: 'candy-love' },
+                        { title: 'Anastangel', value: 'anastangel' },
+                        { title: 'HottiesTwo', value: 'hottiestwo' },
+                        { title: 'Shinaryen', value: 'shinaryen' },
+                        { title: 'Mila Muse', value: 'milamuse' },
+                        { title: 'Melody Marks', value: 'melody-marks' },
+                        { title: 'Eva Elfie', value: 'eva-elfie' },
+                        { title: '麻豆传媒', value: 'asiam' },
+                        { title: '麻豆-LiRongRong', value: 'Li Rong Rong' },
+                        { title: 'Cabbage Sweety', value: 'Cabbage Sweety' },
+                        { title: 'Lindainlove', value: 'Lindainlove' },
+                        { title: 'SweetieYico', value: 'SweetieYico' },
+                        { title: 'june liu', value: 'june liu' },
+                        { title: '77bandage', value: '77bandage' },
+                        { title: 'youyou', value: 'youyou' },
+                        { title: 'manachanx', value: 'manachanx' },
+                        { title: 'k production film', value: 'k production film' },
+                        { title: '798DS', value: '798DS' },
+                        { title: 'aiwanxiongxiong', value: 'aiwanxiongxiong' },
+                        { title: 'ano ano chan', value: 'ano ano chan' },
+                        { title: 'bibi Fluffy', value: 'bibi Fluffy' },
+                        { title: 'CandyKissVip', value: 'CandyKissVip' },
+                        { title: 'Chinese Bunny', value: 'Chinese Bunny' },
+                        { title: 'DemiFairyTW', value: 'DemiFairyTW' },
+                        { title: 'Eve', value: 'Eve' },
+                        { title: 'fortunecutie', value: 'fortunecutie' },
+                        { title: 'LIs Evans', value: 'LIs Evans' },
+                        { title: 'loliiiiipop99', value: 'loliiiiipop99' },
+                        { title: 'Makissse', value: 'Makissse' },
+                        { title: 'nan12138', value: 'nan12138' },
+                        { title: 'Nuomibaby', value: 'nuomibaby' },
+                        { title: 'papaxmama', value: 'papaxmama' },
+                        { title: 'Qiobnxingcaiii', value: 'Qiobnxingcaiii' },
+                        { title: 'SakuraCandy', value: 'SakuraCandy' },
+                        { title: 'thelittlejuicer', value: 'thelittlejuicer' },
+                        { title: 'TLMS_SVJ', value: 'TLMS_SVJ' },
+                        { title: 'twtutu', value: 'twtutu' },
+                        { title: 'Vita Won', value: 'Vita Won' },
+                        { title: 'Yuqiao Chen', value: 'Yuqiao Chen' },
+                        { title: 'comatozze', value: 'comatozze' },
+                        { title: 'Mirari Model', value: 'mirari-model' }
                     ]
                 },
                 {
@@ -227,7 +273,7 @@ WidgetMetadata = {
             id: "recommended",
             title: "🎬 推荐视频",
             functionName: "getRecommendedVideos",
-            cacheDuration: 60,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "cookie",
@@ -259,7 +305,7 @@ WidgetMetadata = {
             id: "languageVideos",
             title: "​🌐 语言筛选",
             functionName: "getVideosByLanguage",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "language",
@@ -630,6 +676,105 @@ WidgetMetadata = {
 };
 
 // 通用工具函数 - 减少代码冗余
+const PH_BASE_URL = "https://cn.pornhub.com";
+const COMMON_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/137.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
+};
+const DETAIL_HEADERS = {
+    ...COMMON_HEADERS,
+    "Referer": PH_BASE_URL + "/"
+};
+const DETAIL_PAGE_HEADERS = {
+    ...COMMON_HEADERS,
+    "Referer": PH_BASE_URL + "/",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/137.0.0.0 Safari/537.36"
+};
+
+function createUrl(path) {
+    if (!path) return PH_BASE_URL;
+    return /^https?:\/\//i.test(path) ? path : PH_BASE_URL + (path.startsWith("/") ? path : "/" + path);
+}
+
+async function requestHtml(url, headers) {
+    const response = await Widget.http.get(url, { headers: headers || COMMON_HEADERS });
+    if (!response || !response.data) {
+        throw new Error("页面加载失败");
+    }
+    return response.data;
+}
+
+function createDefaultHeaders(extraHeaders) {
+    return Object.assign({}, COMMON_HEADERS, extraHeaders || {});
+}
+
+function normalizeText(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+}
+
+function buildUrl(path, query) {
+    const base = createUrl(path);
+    if (!query) return base;
+    const queryString = Object.keys(query)
+        .filter(function (key) {
+            return query[key] !== undefined && query[key] !== null && query[key] !== "";
+        })
+        .map(function (key) {
+            return encodeURIComponent(key) + "=" + encodeURIComponent(String(query[key]));
+        })
+        .join("&");
+    return queryString ? base + (base.indexOf("?") >= 0 ? "&" : "?") + queryString : base;
+}
+
+function buildSearchQuery(searchQuery) {
+    return normalizeText(searchQuery).replace(/[\s\-]+/g, ' ');
+}
+
+function buildSortQuery(sortBy) {
+    if (sortBy === 'new') return 'mr';
+    if (sortBy === 'views') return 'mv';
+    if (sortBy === 'rating') return 'tr';
+    return '';
+}
+
+function createPageHeaders(referer) {
+    return createDefaultHeaders({
+        Referer: referer || PH_BASE_URL + "/"
+    });
+}
+
+function getFallbackVideoItems($) {
+    return $("a, li, div, article").filter(function () {
+        const $node = $(this);
+        return !!(
+            /view_video\.php\?viewkey=/.test($node.attr('href') || '') ||
+            $node.attr('data-video-vkey') ||
+            $node.attr('data-id') ||
+            $node.find("a[href*='viewkey=']").length
+        );
+    });
+}
+
+function getBestVideoItems($, selectors, label) {
+    let $items = $();
+    for (let i = 0; i < selectors.length; i++) {
+        const $found = $(selectors[i]);
+        if ($found.length) {
+            $items = $found;
+            break;
+        }
+    }
+    if (!$items.length) {
+        $items = getFallbackVideoItems($);
+    }
+    return $items;
+}
+
+async function requestJsonLikeHtml(url, headers) {
+    return await requestHtml(url, createDefaultHeaders(headers));
+}
+
 // 将时间格式（如"7:34"）转换为秒数
 function convertDurationToSeconds(duration) {
     if (!duration) return 0;
@@ -643,6 +788,349 @@ function convertDurationToSeconds(duration) {
 // 清理URL中的换行符和首尾空格
 function trimUrl(url) {
     return url ? url.replace(/\r?\n|\r/g, "").trim() : "";
+}
+
+// 简单封面缓存：详情页拿到后回填列表页
+const COVER_CACHE = {};
+const DETAIL_COVER_CACHE = {};
+const DETAIL_COVER_FAILED = {};
+const DETAIL_COVER_FAIL_TTL = 10 * 60 * 1000;
+const LIST_COVER_HYDRATE_LIMIT = 5;
+const LIST_COVER_HYDRATE_CONCURRENCY = 3;
+
+// 通用视频节点选择器
+const VIDEO_ITEM_SELECTOR = [
+    "a[href*='view_video.php?viewkey=']",
+    "a[href*='/view_video.php?viewkey=']",
+    "li.pcVideoListItem",
+    "li.videoblock",
+    "div.pcVideoListItem",
+    "div.videoblock",
+    "div.videoBox",
+    "li[data-video-vkey]",
+    "div[data-video-vkey]",
+    "article[data-video-vkey]"
+].join(", ");
+
+function findVideoItems($) {
+    return $(VIDEO_ITEM_SELECTOR);
+}
+
+function extractBackgroundImageUrl($element) {
+    const style = $element.attr("style") || "";
+    const match = style.match(/background-image\s*:\s*url\((['"]?)(.*?)\1\)/i);
+    return match && match[2] ? trimUrl(match[2]) : "";
+}
+
+function normalizeMediaUrl(url) {
+    url = trimUrl(url || "");
+    if (!url) return "";
+    if (url.startsWith("//")) return "https:" + url;
+    return url;
+}
+
+function pickFirstValidUrl(values) {
+    for (let i = 0; i < values.length; i++) {
+        const url = normalizeMediaUrl(values[i]);
+        if (url && !/^data:/i.test(url) && !/^blob:/i.test(url) && !/^(?:about:blank|javascript:|#)/i.test(url)) {
+            return url;
+        }
+    }
+    return "";
+}
+
+function looksLikePlaceholderUrl(url) {
+    url = normalizeMediaUrl(url);
+    if (!url) return true;
+    return /(?:placeholder|spacer|loading|blank|default|sprite|gif;base64|data:image\/gif)/i.test(url) || url.length < 12;
+}
+
+function isValidCoverUrl(url) {
+    url = normalizeMediaUrl(url);
+    if (!url) return false;
+    if (looksLikePlaceholderUrl(url)) return false;
+    if (/^(?:javascript:|about:blank|#)/i.test(url)) return false;
+    return true;
+}
+
+function splitSrcset(value) {
+    return trimUrl(value || "")
+        .split(",")
+        .map(function (item) { return item.trim().split(/\s+/)[0]; })
+        .filter(Boolean);
+}
+
+function pickBestFromSrcset(value) {
+    const items = splitSrcset(value);
+    return items.length ? items[items.length - 1] : "";
+}
+
+function extractScriptMediaUrl($, $element) {
+    const scriptText = ($element.closest("html").find("script").map(function () {
+        return $(this).html() || "";
+    }).get().join("\n")) || "";
+    const patterns = [
+        /poster\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumbnailUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumbUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumb(?:nail)?\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /coverUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /imageUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /image\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /previewUrl\s*[:=]\s*['"]([^'"]+)['"]/i
+    ];
+    for (let i = 0; i < patterns.length; i++) {
+        const match = scriptText.match(patterns[i]);
+        if (match && match[1]) return normalizeMediaUrl(match[1]);
+    }
+    return "";
+}
+
+function scanScriptForMediaUrl($, $element) {
+    return extractScriptMediaUrl($, $element);
+}
+
+function getPlayerInitializationText($, $element) {
+    const $root = $element.closest('html');
+    return $root.find('script').map(function () {
+        return $(this).html() || '';
+    }).get().join('\n');
+}
+
+function extractPageScriptMediaUrl($, $element) {
+    const scriptText = getPlayerInitializationText($, $element);
+    if (!scriptText) return '';
+    const candidates = [
+        /poster\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumbnailUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumbnail_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /posterUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /poster_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /imageUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /image_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /coverUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /previewUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumbUrl\s*[:=]\s*['"]([^'"]+)['"]/i
+    ];
+    for (let i = 0; i < candidates.length; i++) {
+        const match = scriptText.match(candidates[i]);
+        if (match && match[1]) {
+            const url = normalizeMediaUrl(trimUrl(match[1]));
+            if (url && !looksLikePlaceholderUrl(url)) return url;
+        }
+    }
+    return '';
+}
+
+function tryParseJsonLike(value) {
+    if (!value || typeof value !== 'string') return null;
+    const text = value.trim();
+    if (!text) return null;
+    try {
+        return JSON.parse(text);
+    } catch (e) {
+        try {
+            const fixed = text.replace(/\bundefined\b/g, 'null').replace(/'/g, '"');
+            return JSON.parse(fixed);
+        } catch (e2) {
+            return null;
+        }
+    }
+}
+
+function deepFindMediaUrl(value) {
+    const queue = [value];
+    const seen = new Set();
+    while (queue.length) {
+        const current = queue.shift();
+        if (!current) continue;
+        if (typeof current === 'string') {
+            const url = normalizeMediaUrl(current);
+            if (url && !looksLikePlaceholderUrl(url)) return url;
+            continue;
+        }
+        if (typeof current !== 'object') continue;
+        if (seen.has(current)) continue;
+        seen.add(current);
+        const highConfidenceKeys = ['poster', 'posterUrl', 'poster_url', 'thumbnailUrl', 'thumbnail_url', 'thumb', 'thumbUrl', 'thumb_url'];
+        const extendedKeys = ['image', 'imageUrl', 'image_url', 'preview', 'previewUrl', 'url', 'src', 'content', 'cover', 'coverUrl', 'cover_url'];
+        for (let i = 0; i < highConfidenceKeys.length; i++) {
+            if (current[highConfidenceKeys[i]] !== undefined) queue.push(current[highConfidenceKeys[i]]);
+        }
+        for (let i = 0; i < extendedKeys.length; i++) {
+            if (current[extendedKeys[i]] !== undefined) queue.push(current[extendedKeys[i]]);
+        }
+    }
+    return '';
+}
+
+function extractMediaFromPlayerInitialization($, $element) {
+    const scriptText = getPlayerInitializationText($, $element);
+    if (!scriptText) return '';
+
+    const directPatterns = [
+        /"mediaDefinitions"\s*:\s*(\[[\s\S]+?\])/i,
+        /var\s+flashvars_\d+\s*=\s*({[\s\S]+?});/i,
+        /"playerData"\s*:\s*(\{[\s\S]+?\})/i,
+        /"videoData"\s*:\s*(\{[\s\S]+?\})/i,
+        /"player"\s*:\s*(\{[\s\S]+?\})/i,
+        /"sources"\s*:\s*(\[[\s\S]+?\])/i,
+        /"thumbs"\s*:\s*(\[[\s\S]+?\]|\{[\s\S]+?\})/i,
+        /"poster"\s*:\s*("[^"]+"|\[[\s\S]+?\]|\{[\s\S]+?\})/i,
+        /"thumbnailUrl"\s*:\s*("[^"]+"|\[[\s\S]+?\]|\{[\s\S]+?\})/i
+    ];
+
+    for (let i = 0; i < directPatterns.length; i++) {
+        const match = scriptText.match(directPatterns[i]);
+        if (!match || !match[1]) continue;
+        const raw = match[1];
+        const parsed = tryParseJsonLike(raw);
+        const url = parsed ? deepFindMediaUrl(parsed) : normalizeMediaUrl(trimUrl(raw.replace(/^"|"$/g, '')));
+        if (url && !looksLikePlaceholderUrl(url)) return url;
+    }
+
+    const fallbackPatterns = [
+        /posterUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /poster_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumbnailUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumbnail_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumbUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /thumb(?:nail)?\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /imageUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+        /previewUrl\s*[:=]\s*['"]([^'"]+)['"]/i
+    ];
+    for (let i = 0; i < fallbackPatterns.length; i++) {
+        const match = scriptText.match(fallbackPatterns[i]);
+        if (match && match[1]) {
+            const url = normalizeMediaUrl(trimUrl(match[1]));
+            if (url && !looksLikePlaceholderUrl(url)) return url;
+        }
+    }
+
+    const pageScriptUrl = extractPageScriptMediaUrl($, $element);
+    if (pageScriptUrl) return pageScriptUrl;
+
+    return '';
+}
+function extractScriptInjectedCover($, $element) {
+    const scriptText = getPlayerInitializationText($, $element);
+    if (!scriptText) return '';
+
+    const patterns = [
+        /"thumbnail"\s*:\s*\{[\s\S]*?"url"\s*:\s*"([^"]+)"/i,
+        /"thumbnailUrl"\s*:\s*"([^"]+)"/i,
+        /"posterUrl"\s*:\s*"([^"]+)"/i,
+        /"poster"\s*:\s*"([^"]+)"/i,
+        /"previewUrl"\s*:\s*"([^"]+)"/i,
+        /"imageUrl"\s*:\s*"([^"]+)"/i,
+        /data-(?:thumb|preview|poster|image)\s*=\s*["']([^"']+)["']/i,
+        /cover(?:Url|Image)?\s*[:=]\s*["']([^"']+)["']/i
+    ];
+
+    for (let i = 0; i < patterns.length; i++) {
+        const match = scriptText.match(patterns[i]);
+        if (match && match[1]) {
+            const url = normalizeMediaUrl(trimUrl(match[1]));
+            if (isValidCoverUrl(url)) return url;
+        }
+    }
+
+    return '';
+}
+
+const MEDIA_ATTRS = [
+    "src",
+    "data-src",
+    "data-original",
+    "data-lazy-src",
+    "data-thumb",
+    "data-mediumthumb",
+    "data-image",
+    "data-fullimg",
+    "data-preview",
+    "data-preview-image",
+    "data-previewimage",
+    "data-cover",
+    "data-poster",
+    "poster",
+    "data-webm",
+    "data-mediabook"
+];
+
+const MEDIA_CONTAINER_ATTRS = [
+    "data-thumb",
+    "data-src",
+    "data-mediumthumb",
+    "data-image",
+    "data-original",
+    "data-fullimg",
+    "data-preview",
+    "data-preview-image",
+    "data-previewimage",
+    "data-cover",
+    "data-poster",
+    "poster"
+];
+
+function collectMediaCandidates($, $element) {
+    const candidates = [];
+    const $targets = $element.find("img, source, video").addBack("img, source, video");
+
+    $targets.each(function () {
+        const $node = $(this);
+        for (let i = 0; i < MEDIA_ATTRS.length; i++) {
+            candidates.push($node.attr(MEDIA_ATTRS[i]));
+        }
+        candidates.push(
+            pickBestFromSrcset($node.attr("srcset")),
+            pickBestFromSrcset($node.attr("data-srcset"))
+        );
+    });
+
+    for (let i = 0; i < MEDIA_CONTAINER_ATTRS.length; i++) {
+        candidates.push($element.attr(MEDIA_CONTAINER_ATTRS[i]));
+    }
+    candidates.push(
+        extractBackgroundImageUrl($element),
+        extractBackgroundImageUrl($element.find("a, div, span").first())
+    );
+
+    return candidates;
+}
+
+function resolveMediaUrl($, $element) {
+    const candidates = collectMediaCandidates($, $element);
+    let url = pickFirstValidUrl(candidates);
+    if (!isValidCoverUrl(url)) url = "";
+    if (!url) url = extractScriptInjectedCover($, $element);
+    if (!isValidCoverUrl(url)) url = extractScriptMediaUrl($, $element);
+    if (!isValidCoverUrl(url)) url = extractPageScriptMediaUrl($, $element);
+    if (!isValidCoverUrl(url)) url = extractMediaFromPlayerInitialization($, $element);
+    return isValidCoverUrl(url) ? url : "";
+}
+
+function extractCoverUrl($, element) {
+    return resolveMediaUrl($, $(element));
+}
+
+function extractListImageUrl($, element) {
+    const $element = $(element);
+    const direct = resolveMediaUrl($, $element);
+    if (isValidCoverUrl(direct)) return direct;
+
+    const $card = $element.closest('li, div, article');
+    if ($card && $card.length) {
+        const cardUrl = resolveMediaUrl($, $card);
+        if (isValidCoverUrl(cardUrl)) return cardUrl;
+    }
+
+    const $linkedImage = $element.find("a[href*='viewkey='] img, a[href*='/view_video.php?viewkey='] img").first();
+    if ($linkedImage.length) {
+        const linkedUrl = resolveMediaUrl($, $linkedImage);
+        if (isValidCoverUrl(linkedUrl)) return linkedUrl;
+    }
+
+    return direct;
 }
 
 // 从元素中提取viewkey - 减少重复代码
@@ -667,36 +1155,42 @@ function extractViewkey($, element) {
     return viewkey ? viewkey.replace(/^(video|vkey|v|vfavouriteVideo)_/, "") : null;
 }
 
-// 提取视频预览URL - 优先data-webm，其次data-mediabook
+// 提取视频预览URL - 统一多源兜底
 function extractPreviewUrl($, element, viewkey) {
     var $element = $(element);
-    var previewUrl = null;
+    var candidates = [];
+    var $targets = $element.find('img, source, video').addBack('img, source, video');
 
-    // 1. 首先尝试从a标签获取data-webm
-    var previewLinkElement = $element.find('a.js-videoPreview, a.webm-videoPreview, a[data-webm]');
-    if (previewLinkElement.length) {
-        previewUrl = previewLinkElement.attr('data-webm');
-        if (previewUrl) {
-            return trimUrl(previewUrl);
-        }
-    }
+    $targets.each(function () {
+        var $node = $(this);
+        candidates.push(
+            $node.attr('src'),
+            $node.attr('data-src'),
+            $node.attr('data-original'),
+            $node.attr('data-lazy-src'),
+            $node.attr('data-webm'),
+            $node.attr('data-preview'),
+            $node.attr('data-mediabook'),
+            $node.attr('poster'),
+            pickBestFromSrcset($node.attr('srcset')),
+            pickBestFromSrcset($node.attr('data-srcset'))
+        );
+    });
 
-    // 2. 尝试从img标签获取data-webm
-    var thumbElement = $element.find('img.thumb, img.js-videoThumb, img[data-thumb]');
-    if (thumbElement.length) {
-        previewUrl = thumbElement.attr('data-webm');
-        if (previewUrl) {
-            return trimUrl(previewUrl);
-        }
+    candidates.push(
+        $element.attr('data-webm'),
+        $element.attr('data-preview'),
+        $element.attr('data-mediabook'),
+        $element.attr('poster'),
+        extractBackgroundImageUrl($element),
+        extractBackgroundImageUrl($element.find('a, div, span').first())
+    );
 
-        // 3. 降级到data-mediabook
-        previewUrl = thumbElement.attr('data-mediabook');
-        if (previewUrl) {
-            return trimUrl(previewUrl);
-        }
-    }
-
-    return "";
+    var previewUrl = pickFirstValidUrl(candidates);
+    if (looksLikePlaceholderUrl(previewUrl)) previewUrl = "";
+    if (!previewUrl) previewUrl = scanScriptForMediaUrl($, $element);
+    if (looksLikePlaceholderUrl(previewUrl)) return "";
+    return previewUrl || "";
 }
 
 // 提取视频的播放量、收藏量和上传日期
@@ -752,114 +1246,436 @@ function extractVideoStats($, element) {
 }
 
 // 从视频元素提取通用信息
-function extractVideoInfo($, element, viewkey) {
+function buildVideoItem($, element, viewkey, fallbackLink = "") {
     var $element = $(element);
 
-    // 提取视频标题
-    var titleElement = $element.find('.title a, .videoTitle a, a.title');
-    var title = titleElement.length ? (titleElement.attr('title') || titleElement.text().trim()) : "未知标题";
+    var title = $element.attr('title')
+        || $element.find('.title a[title]').attr('title')
+        || $element.find('.title a').text().trim()
+        || $element.find('.title').text().trim()
+        || $element.find('a[title]').attr('title')
+        || $element.text().trim()
+        || "未知标题";
 
-    // 提取缩略图URL
-    var thumbElement = $element.find('img.thumb, img.js-videoThumb, img[data-thumb]');
-    var thumbnailUrl = "";
-    if (thumbElement.length) {
-        thumbnailUrl = thumbElement.attr('src') || thumbElement.attr('data-mediumthumb') || thumbElement.attr('data-thumb') || "";
-        thumbnailUrl = trimUrl(thumbnailUrl);
+    var link = $element.attr('href') || $element.find('.title a').attr('href') || $element.find("a[href*='viewkey=']").attr('href') || fallbackLink || '';
+    if (link && !/^https?:\/\//.test(link)) {
+        link = link.startsWith('/') ? `https://cn.pornhub.com${link}` : `https://cn.pornhub.com/${link}`;
     }
+    if (!link) link = `https://cn.pornhub.com/view_video.php?viewkey=${viewkey}`;
 
-    // 提取视频预览URL
-    var previewUrl = extractPreviewUrl($, element, viewkey);
-
-    // 提取视频时长
-    var durationElement = $element.find('.duration, .videoDuration');
-    var durationText = durationElement.length ? durationElement.text().trim() : "未知时长";
+    var cachedCover = COVER_CACHE[viewkey] || DETAIL_COVER_CACHE[viewkey] || "";
+    var listCoverUrl = extractCoverUrl($, element);
+    var detailCoverUrl = cachedCover || (viewkey ? DETAIL_COVER_CACHE[viewkey] : "") || "";
+    var coverUrl = listCoverUrl || detailCoverUrl || "";
+    var previewUrl = coverUrl || detailCoverUrl || extractPreviewUrl($, element, viewkey) || extractBackgroundImageUrl($element) || "";
+    var durationText = $element.find('.duration, .videoDuration, [class*="duration"]').first().text().trim() || "未知时长";
     var duration = convertDurationToSeconds(durationText);
-
-    // 提取上传者信息
     var uploaderElement = $element.find('.usernameBadgesWrapper a, .usernameWrap a');
     var uploader = uploaderElement.length ? uploaderElement.text().trim() : "未知上传者";
-
-    // 提取视频统计信息（播放量、收藏量、上传日期）
     var stats = extractVideoStats($, element);
+    var author = extractAuthor($, element);
 
-    // 构建视频详情页URL
-    var link = "/view_video.php?viewkey=" + viewkey;
-
-    // 整合所有信息并输出单条日志
     var videoData = {
         id: viewkey,
         type: "link",
         mediaType: "movie",
         title: title,
-        coverUrl: thumbnailUrl,
+        coverUrl: coverUrl,
         previewUrl: previewUrl,
         duration: duration,
         durationText: durationText,
         uploader: uploader,
         link: link,
+        description: author ? `作者：${author}` : "",
         views: stats.views,
         favorites: stats.favorites,
         uploadDate: stats.uploadDate
     };
 
-    console.log("视频信息: " + JSON.stringify(videoData));
-
     return videoData;
+}
+
+function extractVideoInfo($, element, viewkey) {
+    return buildVideoItem($, element, viewkey);
+}
+
+function extractDetailCoverFromHtml(html, $root) {
+    try {
+        const root = $root || Widget.html.load(html || "");
+        const htmlText = html || '';
+
+        function pushFromValueQueue(queue, value) {
+            if (value === undefined || value === null) return;
+            if (Array.isArray(value)) {
+                for (let i = 0; i < value.length; i++) queue.push(value[i]);
+            } else {
+                queue.push(value);
+            }
+        }
+
+        function findUrlDeep(value) {
+            const queue = [value];
+            const seen = new Set();
+            while (queue.length) {
+                const current = queue.shift();
+                if (!current) continue;
+                if (typeof current === 'string') {
+                    const url = normalizeMediaUrl(current);
+                    if (url && !looksLikePlaceholderUrl(url)) return url;
+                    continue;
+                }
+                if (typeof current !== 'object') continue;
+                if (seen.has(current)) continue;
+                seen.add(current);
+
+                const keys = ['thumbnailUrl', 'thumbnail_url', 'thumbnail', 'poster', 'posterUrl', 'poster_url', 'image', 'imageUrl', 'image_url', 'imagePath', 'cover', 'coverUrl', 'cover_url', 'coverImage', 'preview', 'previewUrl', 'thumb', 'thumbUrl', 'thumb_url', 'url', 'src', 'content', 'large', 'medium', 'small'];
+                for (let i = 0; i < keys.length; i++) {
+                    if (current[keys[i]] !== undefined) pushFromValueQueue(queue, current[keys[i]]);
+                }
+            }
+            return '';
+        }
+
+        const metaCandidates = [
+            'meta[property="og:image:secure_url"]',
+            'meta[property="og:image"]',
+            'meta[name="twitter:image:src"]',
+            'meta[name="twitter:image"]',
+            'meta[property="twitter:image"]',
+            'meta[property="twitter:image:src"]',
+            'link[rel="image_src"]'
+        ];
+        for (let i = 0; i < metaCandidates.length; i++) {
+            const node = root(metaCandidates[i]).first();
+            const value = trimUrl(node.attr('content') || '');
+            if (value && !looksLikePlaceholderUrl(value)) return normalizeMediaUrl(value);
+        }
+
+        const posterSelectors = [
+            'meta[property="og:image:secure_url"]',
+            'meta[property="og:image"]',
+            'meta[name="twitter:image:src"]',
+            'meta[name="twitter:image"]',
+            'link[rel="image_src"]',
+            'video[poster]',
+            'video source',
+            'img[data-mediumthumb]',
+            'img[data-thumb]',
+            'img[data-src]',
+            'img[data-original]',
+            'img[data-lazy-src]',
+            'img[data-preview]',
+            'img[data-fullimg]',
+            'img[srcset]',
+            'img[src]'
+        ];
+        for (let i = 0; i < posterSelectors.length; i++) {
+            const node = root(posterSelectors[i]).first();
+            if (!node.length) continue;
+            const value = pickFirstValidUrl([
+                node.attr('content'),
+                node.attr('href'),
+                node.attr('poster'),
+                node.attr('data-mediumthumb'),
+                node.attr('data-thumb'),
+                node.attr('data-src'),
+                node.attr('data-original'),
+                node.attr('data-lazy-src'),
+                node.attr('data-preview'),
+                node.attr('data-fullimg'),
+                node.attr('src'),
+                pickBestFromSrcset(node.attr('srcset')),
+                pickBestFromSrcset(node.attr('data-srcset'))
+            ]);
+            if (value && !looksLikePlaceholderUrl(value)) return value;
+        }
+
+        const scripts = root('script').map(function () { return root(this).html() || ''; }).get();
+        const jsonLdScripts = root('script[type="application/ld+json"]').map(function () { return root(this).html() || ''; }).get();
+        const scanText = [htmlText].concat(scripts, jsonLdScripts).join('\n');
+
+        const pageScriptCover = extractPageScriptMediaUrl(root, root('html'));
+        if (pageScriptCover) return pageScriptCover;
+
+        const playerCover = extractMediaFromPlayerInitialization(root, root('html'));
+        if (playerCover) return playerCover;
+
+        const directPatterns = [
+            /poster\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /posterUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /poster_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /thumbnailUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /thumbnail_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /thumbnail(?:Image|Path)?\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /thumbnail(?:Image|Path)?\s*[:=]\s*\{[\s\S]*?['"]url['"]\s*:\s*['"]([^'"]+)['"]/i,
+            /thumb(?:nail)?Url\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /thumbUrl\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /thumb_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /image(?:Url|Path)?\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /image_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /cover(?:Url|Image)?\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /cover_url\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /coverImage\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /preview(?:Url)?\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /data-src\s*[:=]\s*['"]([^'"]+)['"]/i,
+            /"thumbnailUrl"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"thumbnail"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"poster"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"image"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"cover"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"thumb"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"coverImage"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"posterUrl"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"imageUrl"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"thumbUrl"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i,
+            /"previewUrl"\s*:\s*(\[[\s\S]+?\]|"[^"]+"|\{[\s\S]+?\})/i
+        ];
+        for (let i = 0; i < directPatterns.length; i++) {
+            const match = scanText.match(directPatterns[i]);
+            if (!match || !match[1]) continue;
+            const raw = match[1];
+            if (/^\{[\s\S]*\}$/.test(raw) || /^\[[\s\S]*\]$/.test(raw)) {
+                try {
+                    const parsed = JSON.parse(raw);
+                    const url = findUrlDeep(parsed);
+                    if (url) return url;
+                } catch (e) {}
+            } else {
+                const url = normalizeMediaUrl(trimUrl(raw));
+                if (url && !looksLikePlaceholderUrl(url)) return url;
+            }
+        }
+
+        const jsonScripts = jsonLdScripts.concat(scripts);
+        for (let i = 0; i < jsonScripts.length; i++) {
+            const body = jsonScripts[i];
+            if (!body || !/[\{\[]/.test(body)) continue;
+            try {
+                const parsed = JSON.parse(body);
+                const url = findUrlDeep(parsed);
+                if (url) return url;
+            } catch (e) {
+                const relaxed = tryParseJsonLike(body);
+                if (relaxed) {
+                    const url = findUrlDeep(relaxed);
+                    if (url) return url;
+                }
+            }
+        }
+
+        return '';
+    } catch (e) {
+        return '';
+    }
+}
+
+function shouldRetryDetailCover(viewkey) {
+    const failedAt = DETAIL_COVER_FAILED[viewkey];
+    if (!failedAt) return true;
+    return (Date.now() - failedAt) > DETAIL_COVER_FAIL_TTL;
+}
+
+function markDetailCoverFailed(viewkey) {
+    DETAIL_COVER_FAILED[viewkey] = Date.now();
+}
+
+function fetchDetailCoverForViewkey(viewkey, retryCount = 1) {
+    if (!viewkey) return Promise.resolve('');
+    if (DETAIL_COVER_CACHE[viewkey]) return Promise.resolve(DETAIL_COVER_CACHE[viewkey]);
+    if (!shouldRetryDetailCover(viewkey)) return Promise.resolve('');
+
+    const url = `https://cn.pornhub.com/view_video.php?viewkey=${viewkey}`;
+    const headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/137.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+        "Referer": "https://cn.pornhub.com/"
+    };
+
+    function requestOnce() {
+        return Widget.http.get(url, { headers }).then(function (response) {
+            const html = response && response.data ? response.data : '';
+            const cover = html ? extractDetailCoverFromHtml(html, Widget.html.load(html)) : '';
+            if (cover) {
+                DETAIL_COVER_CACHE[viewkey] = cover;
+                delete DETAIL_COVER_FAILED[viewkey];
+                return cover;
+            }
+            return '';
+        });
+    }
+
+    function failAndReturnEmpty() {
+        markDetailCoverFailed(viewkey);
+        return '';
+    }
+
+    return requestOnce().then(function (cover) {
+        if (cover) return cover;
+        if (retryCount > 0) {
+            return requestOnce().catch(function () {
+                return '';
+            }).then(function (retryCover) {
+                return retryCover || failAndReturnEmpty();
+            });
+        }
+        return failAndReturnEmpty();
+    }).catch(function () {
+        if (retryCount > 0) {
+            return requestOnce().catch(function () {
+                return '';
+            }).then(function (retryCover) {
+                return retryCover || failAndReturnEmpty();
+            });
+        }
+        return failAndReturnEmpty();
+    });
+}
+
+async function hydrateMissingCovers(items, limit = LIST_COVER_HYDRATE_LIMIT, syncCount = 5) {
+    const result = Array.isArray(items) ? items : [];
+    const targets = [];
+    for (let i = 0; i < result.length && targets.length < limit; i++) {
+        const item = result[i];
+        if (!item || item.coverUrl) continue;
+        const viewkey = item.id || ((item.link || '').match(/viewkey=([^&]+)/) || [])[1];
+        if (!viewkey || !shouldRetryDetailCover(viewkey)) continue;
+        targets.push({ item, viewkey });
+    }
+
+    const syncTargets = targets.slice(0, Math.max(0, syncCount));
+    const asyncTargets = targets.slice(syncTargets.length);
+
+    if (syncTargets.length) {
+        await Promise.all(syncTargets.map(async function (current) {
+            const detailCover = await fetchDetailCoverForViewkey(current.viewkey);
+            if (detailCover) {
+                current.item.coverUrl = detailCover;
+                if (!current.item.previewUrl) current.item.previewUrl = detailCover;
+                COVER_CACHE[current.viewkey] = detailCover;
+            }
+        }));
+    }
+
+    if (asyncTargets.length) {
+        (async function () {
+            let cursor = 0;
+            async function worker() {
+                while (cursor < asyncTargets.length) {
+                    const current = asyncTargets[cursor++];
+                    const detailCover = await fetchDetailCoverForViewkey(current.viewkey);
+                    if (detailCover) {
+                        current.item.coverUrl = detailCover;
+                        if (!current.item.previewUrl) current.item.previewUrl = detailCover;
+                        COVER_CACHE[current.viewkey] = detailCover;
+                    }
+                }
+            }
+            const workers = [];
+            const count = Math.min(LIST_COVER_HYDRATE_CONCURRENCY, asyncTargets.length);
+            for (let i = 0; i < count; i++) workers.push(worker());
+            await Promise.all(workers);
+        })();
+    }
+
+    return result;
 }
 
 // 从HTML中提取m3u8链接
 function extractM3u8FromHtml(html) {
     try {
-        // 方法1: mediaDefinitions
-        let match = html.match(/"mediaDefinitions"\s*:\s*(\[.+?\])/);
+        function normalizeVideoItems(items) {
+            return (items || [])
+                .filter(function (item) { return item && (item.videoUrl || item.url); })
+                .map(function (item) {
+                    return {
+                        url: item.videoUrl || item.url || "",
+                        quality: item.quality || item.resolution || item.label || "",
+                        format: item.format || item.type || ""
+                    };
+                })
+                .filter(function (item) { return !!item.url; });
+        }
+
+        function pickBestHls(items) {
+            var hlsItems = items.filter(function (item) {
+                return /hls|m3u8/i.test(item.format) || /\.m3u8(\?|$)/i.test(item.url);
+            });
+            if (!hlsItems.length) return null;
+            hlsItems.sort(function (a, b) {
+                return (parseInt(b.quality, 10) || 0) - (parseInt(a.quality, 10) || 0);
+            });
+            return {
+                videoUrl: hlsItems[0].url,
+                quality: hlsItems[0].quality ? String(hlsItems[0].quality).replace(/[^\d]/g, '') + 'p' : '',
+                formats: hlsItems.map(function (item) {
+                    return {
+                        url: item.url,
+                        format: item.quality ? String(item.quality).replace(/[^\d]/g, '') + 'p' : '',
+                        ext: 'm3u8',
+                        type: 'hls'
+                    };
+                })
+            };
+        }
+
+        // 方法1: mediaDefinitions（兼容新旧结构）
+        let match = html.match(/"mediaDefinitions"\s*:\s*(\[.+?\])/s);
         if (match) {
             try {
                 let defs = JSON.parse(match[1].replace(/'/g, '"').replace(/,\s*]/g, ']'));
-                let hlsItems = defs.filter(item => item && item.format === 'hls' && item.videoUrl);
-                if (hlsItems.length > 0) {
-                    hlsItems.sort((a, b) => (parseInt(b.quality) || 0) - (parseInt(a.quality) || 0));
-                    let formats = hlsItems.map(i => ({
-                        url: i.videoUrl,
-                        format: (i.quality ? i.quality + 'p' : ''),
-                        ext: 'm3u8',
-                        type: 'hls'
-                    }));
-                    return {
-                        videoUrl: hlsItems[0].videoUrl,
-                        quality: (hlsItems[0].quality ? hlsItems[0].quality + 'p' : ''),
-                        formats
-                    };
-                }
+                let normalized = normalizeVideoItems(defs);
+                let picked = pickBestHls(normalized);
+                if (picked) return picked;
             } catch { }
         }
 
-        // 方法2: flashvars
-        match = html.match(/var\s+flashvars_\d+\s*=\s*({.+?});/);
+        // 方法2: flashvars / player setup 中的 mediaDefinitions
+        match = html.match(/var\s+flashvars_\d+\s*=\s*({.+?});/s);
         if (match) {
             try {
                 let flashvars = JSON.parse(match[1]);
-                let hlsItems = flashvars.mediaDefinitions?.filter(item => item && item.format === 'hls' && item.videoUrl) || [];
-                if (hlsItems.length > 0) {
-                    hlsItems.sort((a, b) => (parseInt(b.quality) || 0) - (parseInt(a.quality) || 0));
-                    let formats = hlsItems.map(i => ({
-                        url: i.videoUrl,
-                        format: (i.quality ? i.quality + 'p' : ''),
-                        ext: 'm3u8',
-                        type: 'hls'
-                    }));
+                let normalized = normalizeVideoItems(flashvars.mediaDefinitions);
+                let picked = pickBestHls(normalized);
+                if (picked) return picked;
+            } catch { }
+        }
+
+        // 方法3: 从页面脚本中直接提取 m3u8 / videoUrl
+        var directUrlPatterns = [
+            /https?:\/\/[^\"'\s]+\.m3u8(?:\?[^\"'\s]*)?/i,
+            /videoUrl\s*[:=]\s*["']([^"']+\.m3u8(?:\?[^"']*)?)["']/i,
+            /source\s*[:=]\s*["']([^"']+\.m3u8(?:\?[^"']*)?)["']/i
+        ];
+        for (var i = 0; i < directUrlPatterns.length; i++) {
+            var directMatch = html.match(directUrlPatterns[i]);
+            if (directMatch) {
+                var url = directMatch[1] || directMatch[0];
+                if (url) {
+                    url = url.replace(/&amp;/g, '&');
                     return {
-                        videoUrl: hlsItems[0].videoUrl,
-                        quality: (hlsItems[0].quality ? hlsItems[0].quality + 'p' : ''),
-                        formats
+                        videoUrl: url,
+                        quality: '',
+                        formats: [{ url: url, format: '', ext: 'm3u8', type: 'hls' }]
                     };
                 }
+            }
+        }
+
+        // 方法4: 兜底提取 JSON 片段中的 sources
+        match = html.match(/"sources"\s*:\s*(\[[\s\S]+?\])/i);
+        if (match) {
+            try {
+                var sources = JSON.parse(match[1].replace(/'/g, '"').replace(/,\s*]/g, ']'));
+                var normalizedSources = normalizeVideoItems(sources);
+                var pickedSources = pickBestHls(normalizedSources);
+                if (pickedSources) return pickedSources;
             } catch { }
         }
 
         return null;
     } catch (error) {
-        console.log("从HTML提取m3u8链接失败: " + error.message);
-        return null;
+            return null;
     }
 }
 
@@ -897,7 +1713,6 @@ function detectPagination(htmlContent, requestedPage) {
     // 限制请求的页码不超过最大页码
     page = Math.min(page, maxPage);
 
-    console.log("分页信息: " + JSON.stringify({ page: page, maxPage: maxPage, hasPagination: hasPagination }));
 
     return { page: page, maxPage: maxPage, hasPagination: hasPagination };
 }
@@ -934,26 +1749,22 @@ function extractAuthor($, element) {
 // 搜索功能主函数 
 async function getSearchResults(params) {
     const searchQuery = params.search_query || '';
-    const page = Math.max(1, Number(params.page) || 1);  // 确保页码正确
+    const page = Math.max(1, Number(params.page) || 1);
     const sortBy = params.sort_by || "";
-    const searchType = params.search_type || "no";  // 获取是否开启精准搜索的设置
+    const searchType = params.search_type || "no";
 
-    const formattedQuery = searchQuery.trim().replace(/[\s\-]+/g, '+').toLowerCase();;
-    let baseUrl = `https://cn.pornhub.com/video/search?search=${formattedQuery}`;
-    if (sortBy === 'new') baseUrl += '&o=mr';
-    else if (sortBy === 'views') baseUrl += '&o=mv';
-    else if (sortBy === 'rating') baseUrl += '&o=tr';
-    if (page > 1) baseUrl += `&page=${page}`;  // 根据页码构建URL
-
-    // 添加日志，查看生成的 baseUrl
-    console.log(`[getSearchResults] 当前请求的搜索 URL: ${baseUrl}`);
-
-    const headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/137.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        "Referer": "https://cn.pornhub.com/"
+    const query = {
+        search: buildSearchQuery(searchQuery)
     };
+    const sortCode = buildSortQuery(sortBy);
+    if (sortCode) query.o = sortCode;
+    if (page > 1) query.page = page;
+
+    const baseUrl = buildUrl('/video/search', query);
+
+    const headers = createDefaultHeaders({
+        "Referer": "https://cn.pornhub.com/"
+    });
 
     try {
         const response = await Widget.http.get(baseUrl, { headers });
@@ -961,13 +1772,21 @@ async function getSearchResults(params) {
         if (response && response.data) {
             const $ = Widget.html.load(response.data);  // ✅ 正确加载页面
             if (!$) return [];
-            const $list = $("li.pcVideoListItem.js-pop.videoblock.videoBox.videoBoxesSearch");
-
-            // 添加日志，查看返回的 $list 长度
-            console.log(`[getSearchResults] 返回的搜索结果项数: ${$list.length}`);
+            let $list = findVideoItems($);
+            if (!$list.length) {
+                $list = $("a, li, div, article").filter(function () {
+                    const $node = $(this);
+                    return !!(
+                        /view_video\.php\?viewkey=/.test($node.attr('href') || '') ||
+                        $node.attr('data-video-vkey') ||
+                        $node.attr('data-id') ||
+                        $node.find("a[href*='viewkey=']").length
+                    );
+                });
+            }
 
             if ($list.length > 0) {
-                return parseSearchResults($, $list, searchQuery, formattedQuery, searchType);  // 传递正确的searchQuery和searchType
+                return parseSearchResults($, $list, searchQuery, searchType);
             } else {
                 console.log("[getSearchResults] 未找到任何视频，返回空数组");
                 return [];
@@ -982,15 +1801,19 @@ async function getSearchResults(params) {
 }
 
 // 搜索功能解析函数
-function parseSearchResults($, $list, searchQuery, formattedQuery, searchType) {
+function parseSearchResults($, $list, searchQuery, searchType) {
     const result = [];
+    const normalizedQuery = normalizeText(searchQuery).toLowerCase();
     console.log(`解析搜索结果，匹配总项数: ${$list.length}`);
 
     $list.each((i, el) => {
         const $item = $(el);
 
         // 提取视频 ID
-        const vkey = $item.find("a[href*='viewkey=']").attr("href")?.match(/viewkey=([^&]+)/)?.[1];
+        const vkey = $item.attr('data-video-vkey')
+            || $item.attr('data-id')
+            || $item.find("a[href*='viewkey=']").attr("href")?.match(/viewkey=([^&]+)/)?.[1]
+            || ($item.attr('href') || '').match(/viewkey=([^&]+)/)?.[1];
         if (!vkey) {
             console.log("未找到 vkey, 跳过");
             return; // 如果没有找到视频ID，跳过该项
@@ -999,7 +1822,9 @@ function parseSearchResults($, $list, searchQuery, formattedQuery, searchType) {
         // 提取视频标题
         const title = $item.find(".title a").attr("title") ||
             $item.find(".title a").text() ||
-            $item.find(".title").text().trim();
+            $item.find(".title").text().trim() ||
+            $item.attr('title') ||
+            $item.text().trim();
 
         // 使用 extractAuthor 函数提取作者名
         const author = extractAuthor($, $item);  // 提取作者名
@@ -1009,25 +1834,23 @@ function parseSearchResults($, $list, searchQuery, formattedQuery, searchType) {
         const description = author ? `作者：${author}` : "";
 
         // 如果开启精准搜索，先进行筛选
-        if (searchType === 'yes' && !filterExactSearchResults(title, author, searchQuery)) {
-            // console.log(`标题 ${title} 或者 作者 ${author} 不匹配，跳过`); 
-            return; // 如果不匹配，跳过该项
-        } else {
-            console.log(`✅[精准搜索] 匹配成功: 标题 ${title}, 作者 ${author}`);
+        if (searchType === 'yes' && !filterExactSearchResults(title, author, normalizedQuery)) {
+            return;
         }
 
         // 提取其他数据并添加到结果中
-        let link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
+        let link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || $item.attr('href') || "";
         if (link && !/^https?:\/\//.test(link)) {
             link = "https://cn.pornhub.com" + link;
         }
 
-        const img = $item.find("img");
-        const coverUrl = img.attr("src") || img.attr("data-src") || img.attr("data-thumb");
-        const previewUrl = img.attr("data-mediabook") || img.attr("data-preview") || img.attr("data-webm") || "";
-        const durationText = $item.find(".duration, .videoDuration").text().trim();
+        const listCoverUrl = extractListImageUrl($, $item);
+        const detailCoverUrl = vkey ? (COVER_CACHE[vkey] || DETAIL_COVER_CACHE[vkey] || "") : "";
+        const coverUrl = listCoverUrl || detailCoverUrl || "";
+        const previewUrl = coverUrl || detailCoverUrl || extractPreviewUrl($, $item, vkey) || extractBackgroundImageUrl($item) || "";
+        const durationText = $item.find(".duration, .videoDuration, [class*='duration']").first().text().trim();
 
-        result.push({
+        const item = {
             id: vkey,
             type: "link",
             mediaType: "movie",
@@ -1037,7 +1860,8 @@ function parseSearchResults($, $list, searchQuery, formattedQuery, searchType) {
             previewUrl: previewUrl,
             durationText: durationText,
             link: link
-        });
+        };
+        result.push(item);
     });
 
     console.log(`解析到的视频数: ${result.length}`);
@@ -1046,43 +1870,45 @@ function parseSearchResults($, $list, searchQuery, formattedQuery, searchType) {
 
 // 精准搜索过滤函数：对视频标题和作者进行匹配
 function filterExactSearchResults(title, author, searchQuery) {
-    const query = searchQuery.toLowerCase();
-    return title.toLowerCase().includes(query) || author.toLowerCase().includes(query);  // 判断标题或作者是否包含搜索关键词
+    const query = normalizeText(searchQuery).toLowerCase();
+    const titleText = normalizeText(title).toLowerCase();
+    const authorText = normalizeText(author).toLowerCase();
+    return titleText.includes(query) || authorText.includes(query);
 }
 
-
-
+function createListFallbackSelector($) {
+    return $("a, li, div, article").filter(function () {
+        const $node = $(this);
+        return !!(
+            /view_video\.php\?viewkey=/.test($node.attr('href') || '') ||
+            $node.attr('data-video-vkey') ||
+            $node.attr('data-id') ||
+            $node.find("a[href*='viewkey=']").length
+        );
+    });
+}
 
 // 获取我的最爱列表视频
 function getFavorites(params) {
     return new Promise(function (resolve, reject) {
         try {
             console.log("开始获取收藏列表: " + JSON.stringify(params));
-            // 参数验证
             if (!params.username) {
-                console.log("错误: 未提供用户名");
                 reject(new Error("请提供用户名"));
                 return;
             }
 
-            // 构建基础URL
-            var baseUrl = "https://cn.pornhub.com/users/" + params.username + "/videos/favorites";
-
-            // 添加排序参数
-            var sortParam = getSortParam(params.sort_by);
-            if (sortParam) {
-                baseUrl += "?" + sortParam;
-            }
+            var baseUrl = buildUrl("/users/" + encodeURIComponent(params.username) + "/videos/favorites", {
+                o: params.sort_by === 'views' ? 'mv' : params.sort_by === 'rating' ? 'tr' : ''
+            });
 
             console.log("基础URL: " + baseUrl);
 
-            // 首次请求（用于检测分页）
             Widget.http.get(baseUrl, {
-                headers: {
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+                headers: createDefaultHeaders({
                     "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
                     "Referer": "https://cn.pornhub.com/"
-                }
+                })
             }).then(function (firstPageResponse) {
                 // 检查响应
                 if (!firstPageResponse || !firstPageResponse.data) {
@@ -1115,8 +1941,7 @@ function getFavorites(params) {
                 // 构建最终URL
                 var fullUrl = baseUrl;
                 if (page > 1) {
-                    // 如果已有排序参数，使用&连接页码参数，否则使用?
-                    fullUrl += (sortParam ? '&' : '?') + "page=" + page;
+                    fullUrl += (baseUrl.indexOf('?') >= 0 ? '&' : '?') + "page=" + page;
                 }
 
                 console.log("最终请求URL: " + fullUrl);
@@ -1125,11 +1950,10 @@ function getFavorites(params) {
                 var responsePromise;
                 if (page > 1) {
                     responsePromise = Widget.http.get(fullUrl, {
-                        headers: {
-                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+                        headers: createDefaultHeaders({
                             "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
                             "Referer": "https://cn.pornhub.com/"
-                        }
+                        })
                     });
                 } else {
                     responsePromise = Promise.resolve(firstPageResponse);
@@ -1150,13 +1974,13 @@ function getFavorites(params) {
                 var videos = [];
                 var processedViewkeys = {}; // 用于去重
 
-                // 尝试多种选择器找到视频项
-                var videoItems = $("#videoFavoritesListSection .pcVideoListItem");
+                // 统一使用通用视频选择器
+                var videoItems = $("#videoFavoritesListSection").find(VIDEO_ITEM_SELECTOR);
                 if (!videoItems.length) {
-                    videoItems = $("li.pcVideoListItem[id^=\"vfavouriteVideo\"]");
+                    videoItems = findVideoItems($);
                 }
                 if (!videoItems.length) {
-                    videoItems = $("li.pcVideoListItem, div.videoblock, div.videoBox");
+                    videoItems = createListFallbackSelector($);
                 }
 
                 console.log("找到 " + videoItems.length + " 个视频项");
@@ -1200,6 +2024,16 @@ function getFavorites(params) {
                         // 添加到已处理集合
                         processedViewkeys[viewkey] = true;
 
+                        if (!videoInfo.coverUrl && viewkey && shouldRetryDetailCover(viewkey)) {
+                            fetchDetailCoverForViewkey(viewkey).then(function (detailCover) {
+                                if (detailCover) {
+                                    videoInfo.coverUrl = detailCover;
+                                    videoInfo.previewUrl = videoInfo.previewUrl || detailCover;
+                                    COVER_CACHE[viewkey] = detailCover;
+                                }
+                            });
+                        }
+
                     } catch (error) {
                         console.log("处理视频项时出错: " + error.message);
                     }
@@ -1220,118 +2054,178 @@ function getFavorites(params) {
 }
 
 
+function getArtistCatalog() {
+    return [
+        { title: 'HongKongDoll', value: 'HongKongDoll', type: 'model' },
+        { title: '麻豆传媒', value: 'asiam', type: 'channels' },
+        { title: '麻豆-LiRongRong', value: 'Li Rong Rong', type: 'pornstar' },
+        { title: 'june liu', value: 'june liu', type: 'pornstar' },
+        { title: 'Cabbage Sweety', value: 'Cabbage Sweety', type: 'model' },
+        { title: 'Lindainlove', value: 'Lindainlove', type: 'model' },
+        { title: 'SweetieYico', value: 'SweetieYico', type: 'model' },
+        { title: 'wanrous', value: 'wanrous', type: 'model' },
+        { title: '77bandage', value: '77bandage', type: 'model' },
+        { title: 'youyou', value: 'youyou', type: 'model' },
+        { title: 'manachanx', value: 'manachanx', type: 'model' },
+        { title: 'Karesi ni Baretara Kaisan', value: 'Karesi ni Baretara Kaisan', type: 'model' },
+        { title: 'k production film', value: 'k production film', type: 'model' },
+        { title: '798DS', value: '798DS', type: 'model' },
+        { title: 'aiwanxiongxiong', value: 'aiwanxiongxiong', type: 'model' },
+        { title: 'andmlove', value: 'andmlove', type: 'model' },
+        { title: 'ano ano chan', value: 'ano ano chan', type: 'model' },
+        { title: 'bibi Fluffy', value: 'bibi Fluffy', type: 'model' },
+        { title: 'CandyKissVip', value: 'CandyKissVip', type: 'model' },
+        { title: 'Chinese Bunny', value: 'Chinese Bunny', type: 'model' },
+        { title: 'DemiFairyTW', value: 'DemiFairyTW', type: 'model' },
+        { title: 'Elle Lee', value: 'Elle Lee', type: 'model' },
+        { title: 'Eve', value: 'Eve', type: 'model' },
+        { title: 'fortunecutie', value: 'fortunecutie', type: 'model' },
+        { title: 'LIs Evans', value: 'LIs Evans', type: 'model' },
+        { title: 'loliiiiipop99', value: 'loliiiiipop99', type: 'model' },
+        { title: 'Makissse', value: 'Makissse', type: 'model' },
+        { title: 'nan12138', value: 'nan12138', type: 'model' },
+        { title: 'Nana_taipei', value: 'Nana_taipei', type: 'model' },
+        { title: 'Nuomibaby', value: 'nuomibaby', type: 'model' },
+        { title: 'papaxmama', value: 'papaxmama', type: 'model' },
+        { title: 'Qiobnxingcaiii', value: 'Qiobnxingcaiii', type: 'model' },
+        { title: 'SakuraCandy', value: 'SakuraCandy', type: 'model' },
+        { title: 'sskok16', value: 'sskok16', type: 'model' },
+        { title: 'SSR Peach', value: 'SSR Peach', type: 'model' },
+        { title: 'thelittlejuicer', value: 'thelittlejuicer', type: 'model' },
+        { title: 'TLMS_SVJ', value: 'TLMS_SVJ', type: 'model' },
+        { title: 'twtutu', value: 'twtutu', type: 'model' },
+        { title: 'Vita Won', value: 'Vita Won', type: 'model' },
+        { title: 'Yuqiao Chen', value: 'Yuqiao Chen', type: 'model' },
+        { title: 'YuzuKitty', value: 'YuzuKitty', type: 'model' },
+        { title: 'comatozze', value: 'comatozze', type: 'model' },
+        { title: 'Sweetie Fox', value: 'sweetie-fox', type: 'model' },
+        { title: 'Lina MiguRtt', value: 'linamigurtt', type: 'model' },
+        { title: 'Diana Rider', value: 'diana-rider', type: 'model' },
+        { title: 'Mirari Model', value: 'mirari-model', type: 'model' },
+        { title: 'Sola Zola', value: 'solazola', type: 'model' },
+        { title: 'Candy Love', value: 'candy-love', type: 'model' },
+        { title: 'Anastangel', value: 'anastangel', type: 'model' },
+        { title: 'HottiesTwo', value: 'hottiestwo', type: 'model' },
+        { title: 'Shinaryen', value: 'shinaryen', type: 'model' },
+        { title: 'Mila Muse', value: 'milamuse', type: 'model' },
+        { title: 'Melody Marks', value: 'melody-marks', type: 'pornstar' },
+        { title: 'Eva Elfie', value: 'eva-elfie', type: 'pornstar' }
+    ];
+}
+
+function normalizeArtistUsername(username) {
+    return normalizeText(username).replace(/\s+/g, '-').toLowerCase();
+}
+
+function getSortQueryForArtist(type, sortBy) {
+    if (type === 'channels') {
+        if (sortBy === 'views') return 'o=vi';
+        if (sortBy === 'rating') return 'o=ra';
+        return '';
+    }
+    if (sortBy === 'views') return 'o=mv';
+    if (sortBy === 'rating') return 'o=tr';
+    if (sortBy === 'new') return 'o=mr';
+    return '';
+}
+
+function buildArtistUrl(type, username, params) {
+    const page = Math.max(1, Number(params.page) || 1);
+    const sortBy = params.sort_by || 'new';
+    const formattedUsername = normalizeArtistUsername(username);
+    const headers = createPageHeaders(PH_BASE_URL + '/');
+
+    if (type === 'pornstar') {
+        return {
+            uploadUrl: buildUrl(`/pornstar/${encodeURIComponent(formattedUsername)}/videos/upload`, {
+                o: 'mr',
+                page: page > 1 ? page : ''
+            }),
+            homepageUrl: buildUrl(`/pornstar/${encodeURIComponent(formattedUsername)}`),
+            headers: headers
+        };
+    }
+
+    if (type === 'model') {
+        return {
+            url: buildUrl(`/model/${encodeURIComponent(formattedUsername)}/videos`, {
+                o: getSortQueryForArtist(type, sortBy).replace('o=', '') || 'mr',
+                page: page > 1 ? page : ''
+            }),
+            headers: headers
+        };
+    }
+
+    if (type === 'channels') {
+        const isDefault = sortBy === 'new' || sortBy === 'default' || !sortBy;
+        return {
+            url: isDefault && page === 1
+                ? buildUrl(`/channels/${encodeURIComponent(formattedUsername)}`)
+                : isDefault
+                    ? buildUrl(`/channels/${encodeURIComponent(formattedUsername)}/videos`, { page })
+                    : buildUrl(`/channels/${encodeURIComponent(formattedUsername)}/videos`, {
+                        o: getSortQueryForArtist(type, sortBy).replace('o=', ''),
+                        page: page > 1 ? page : ''
+                    }),
+            headers: headers
+        };
+    }
+
+    throw new Error('不支持的艺人类型');
+}
+
 //功能分流
 async function getUserUploads(params = {}) {
-    const logo = params.logo; // "yx"=优选艺人, "ss"=搜索艺人
+    const logo = params.logo;
+    if (logo === 'yx') {
+        const option = getArtistCatalog().find(function (opt) {
+            return opt.value === params.username;
+        });
+        if (!option) throw new Error('优选艺人未选中或无效');
+        return await doFetch(option.type, option.value, params);
+    }
 
-    if (logo === "yx") {
-        // 1. 优选艺人模式：params.username是type，查表拿真实用户名
-        const enumOptions = [{ title: 'HongKongDoll', value: 'HongKongDoll', type: 'model' }, { title: '麻豆传媒', value: 'asiam', type: 'channels' }, { title: '麻豆-LiRongRong', value: 'Li Rong Rong', type: 'pornstar' }, { 'title': 'june liu', 'value': 'june liu', 'type': 'pornstar' }, { 'title': 'Cabbage Sweety', 'value': 'Cabbage Sweety', 'type': 'model' }, { 'title': 'Lindainlove', 'value': 'Lindainlove', 'type': 'model' }, { 'title': 'SweetieYico', 'value': 'SweetieYico', 'type': 'model' }, { 'title': 'wanrous', 'value': 'wanrous', 'type': 'model' }, { 'title': '77bandage', 'value': '77bandage', 'type': 'model' }, { 'title': 'youyou', 'value': 'youyou', 'type': 'model' }, { 'title': 'manachanx', 'value': 'manachanx', type: 'model' }, { title: 'lindainlove', value: 'lindainlove', type: 'model' }, { title: 'Karesi ni Baretara Kaisan', value: 'Karesi ni Baretara Kaisan', type: 'model' }, { title: 'k production film', value: 'k production film', type: 'model' }, { title: '798DS', value: '798DS', type: 'model' }, { title: 'aiwanxiongxiong', value: 'aiwanxiongxiong', type: 'model' }, { title: 'andmlove', value: 'andmlove', type: 'model' }, { title: 'ano ano chan', value: 'ano ano chan', type: 'model' }, { title: 'bibi Fluffy', value: 'bibi Fluffy', type: 'model' }, { title: 'CandyKissVip', value: 'CandyKissVip', type: 'model' }, { title: 'Chinese Bunny', value: 'Chinese Bunny', type: 'model' }, { title: 'DemiFairyTW', value: 'DemiFairyTW', type: 'model' }, { title: 'Elle Lee', value: 'Elle Lee', type: 'model' }, { title: 'Eve', value: 'Eve', type: 'model' }, { title: 'fortunecutie', value: 'fortunecutie', type: 'model' }, { title: 'LIs Evans', value: 'LIs Evans', type: 'model' }, { title: 'loliiiiipop99', value: 'loliiiiipop99', type: 'model' }, { title: 'Makissse', value: 'Makissse', type: 'model' }, { title: 'nan12138', value: 'nan12138', type: 'model' }, { title: 'Nana_taipei', value: 'Nana_taipei', type: 'model' }, { title: 'Nuomibaby', value: 'Nuomibaby', type: 'model' }, { title: 'papaxmama', value: 'papaxmama', type: 'model' }, { title: 'Qiobnxingcaiii', value: 'Qiobnxingcaiii', type: 'model' }, { title: 'SakuraCandy', value: 'SakuraCandy', type: 'model' }, { title: 'sskok16', value: 'sskok16', type: 'model' }, { title: 'SSR Peach', value: 'SSR Peach', type: 'model' }, { title: 'thelittlejuicer', value: 'thelittlejuicer', type: 'model' }, { title: 'TLMS_SVJ', value: 'TLMS_SVJ', type: 'model' }, { title: 'twtutu', value: 'twtutu', type: 'model' }, { title: 'Vita Won', value: 'Vita Won', type: 'model' }, { title: 'Yuqiao Chen', value: 'Yuqiao Chen', type: 'model' }, { title: 'YuzuKitty', value: 'YuzuKitty', type: 'model' },
-        ];
-        const option = enumOptions.find(opt => opt.value === params.username);
-        if (!option) throw new Error("优选艺人未选中或无效");
-        const username = option.value;    // "HongKongDoll"等
-        const userType = option.type;     // "model"/"channels"/"pornstar"
+    if (logo === 'ss') {
+        const userType = normalizeText(params.user_type || 'model').toLowerCase();
+        const username = normalizeText(params.username);
+        if (!username) throw new Error('请输入艺人名称');
         return await doFetch(userType, username, params);
     }
 
-    if (logo === "ss") {
-        // 2. 搜索艺人模式：params.user_type是类型，params.username是用户输入的名称
-        const userType = (params.user_type || "model").toLowerCase();
-        const username = (params.username || "").trim();
-        if (!username) throw new Error("请输入艺人名称");
-        // 下面和优选一样，类型分流
-        return await doFetch(userType, username, params);
-    }
-
-    throw new Error("未知入口，请检查logo参数");
+    throw new Error('未知入口，请检查logo参数');
 }
 
 // 公共 fetch 逻辑（类型分流解析）
 async function doFetch(type, username, params) {
-    const sortBy = params.sort_by || "new";
-    const page = Math.max(1, Number(params.page) || 1);
+    const requestInfo = buildArtistUrl(type, username, params);
 
-    // 对传入的 username 进行处理：空格替换为连字符并转为小写
-    const formattedUsername = username.trim().replace(/\s+/g, '-').toLowerCase();
-
-    // 拼接URL
-    let url = "";
-    if (type === "pornstar") {
-        // 1. 尝试请求 /videos/upload
-        let uploadUrl = `/pornstar/${encodeURIComponent(formattedUsername)}/videos/upload?o=mr${page > 1 ? `&page=${page}` : ''}`;
-        const headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/137.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
-        };
-
-        console.log(`[doFetch] 尝试请求明星上传页: ${uploadUrl}`);
-
-
-        // 构建完整URL
-        const fullUrl = `https://cn.pornhub.com${uploadUrl}`;
-
-        // 发送请求
-        const response = await Widget.http.get(fullUrl, { headers });
-        // 输出请求和响应信息
+    if (type === 'pornstar') {
+        console.log(`[doFetch] 尝试请求明星上传页: ${requestInfo.uploadUrl}`);
+        const response = await Widget.http.get(requestInfo.uploadUrl, { headers: requestInfo.headers });
         console.log(`HTTP状态码: ${response.statusCode}`);
 
-        // 如果上传页状态码为 200
         if (response.statusCode === 200) {
-            const $ = Widget.html.load(response.data); // 解析HTML
-            const $list = $("ul#moreData.full-row-thumbs.videos.row-5-thumbs");
-
-            // 判断上传页是否存在视频列表
-            if ($list.length > 0 && $list.find("li.pcVideoListItem, .wrap.flexibleHeight").length > 0) {
-                console.log(`[doFetch] 上传页存在视频，返回并解析该页`);
-                return parsePornstarVideos(response.data); // 如果上传页存在，直接解析
-            } else {
-                console.log(`[doFetch] 上传页存在但无视频内容，准备降级到主页解析`);
+            const $ = Widget.html.load(response.data);
+            const $list = $('ul#moreData.full-row-thumbs.videos.row-5-thumbs');
+            if ($list.length > 0 && $list.find(VIDEO_ITEM_SELECTOR).length > 0) {
+                console.log('[doFetch] 上传页存在视频，返回并解析该页');
+                return parsePornstarVideos(response.data);
             }
+            console.log('[doFetch] 上传页存在但无视频内容，准备降级到主页解析');
         }
 
-        // 如果上传页面存在但没有视频内容，降级请求主页
-        const homepageUrl = `https://cn.pornhub.com/pornstar/${encodeURIComponent(formattedUsername)}`;
-        const resp2 = await Widget.http.get(homepageUrl, { headers });
-        if (!resp2 || !resp2.data) throw new Error("明星主页无法获取");
-        return parsePornstarHomePage(resp2.data); // 请求主页并解析
-
-    } else if (type === "model") {
-        if (sortBy === "new") url = `/model/${encodeURIComponent(formattedUsername)}/videos?o=mr${page > 1 ? `&page=${page}` : ''}`;
-        else if (sortBy === "views") url = `/model/${encodeURIComponent(formattedUsername)}/videos?o=mv${page > 1 ? `&page=${page}` : ''}`;
-        else if (sortBy === "rating") url = `/model/${encodeURIComponent(formattedUsername)}/videos?o=tr${page > 1 ? `&page=${page}` : ''}`;
-        else url = `/model/${encodeURIComponent(formattedUsername)}/videos${page > 1 ? `?page=${page}` : ''}`;
-    } else if (type === "channels") {
-        if ((sortBy === "new" || sortBy === "default") && page === 1)
-            url = `/channels/${encodeURIComponent(formattedUsername)}`;
-        else if ((sortBy === "new" || sortBy === "default") && page > 1)
-            url = `/channels/${encodeURIComponent(formattedUsername)}/videos?page=${page}`;
-        else if (sortBy === "views")
-            url = `/channels/${encodeURIComponent(formattedUsername)}/videos?o=vi${page > 1 ? `&page=${page}` : ''}`;
-        else if (sortBy === "rating")
-            url = `/channels/${encodeURIComponent(formattedUsername)}/videos?o=ra${page > 1 ? `&page=${page}` : ''}`;
-        else
-            url = `/channels/${encodeURIComponent(formattedUsername)}`;
-    } else {
-        throw new Error("不支持的艺人类型");
+        const resp2 = await Widget.http.get(requestInfo.homepageUrl, { headers: requestInfo.headers });
+        if (!resp2 || !resp2.data) throw new Error('明星主页无法获取');
+        return parsePornstarHomePage(resp2.data);
     }
 
-    const baseUrl = `https://cn.pornhub.com${url}`;
-    const headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/137.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
-    };
+    console.log(`[doFetch] 尝试请求: ${requestInfo.url}`);
+    const response = await Widget.http.get(requestInfo.url, { headers: requestInfo.headers });
+    if (!response || !response.data) throw new Error('页面加载失败');
 
-    console.log(`[doFetch] 尝试请求: ${baseUrl}`);
-    // 请求其他类型（model, channels）的内容
-    const response = await Widget.http.get(baseUrl, { headers });
-    if (!response || !response.data) throw new Error("页面加载失败");
-
-    if (type === "model") return parseModelVideos(response.data);
-    if (type === "channels") return parseChannelVideos(response.data);
-    throw new Error("不支持的艺人类型");
+    if (type === 'model') return parseModelVideos(response.data);
+    if (type === 'channels') return parseChannelVideos(response.data);
+    throw new Error('不支持的艺人类型');
 }
 
 
@@ -1350,7 +2244,7 @@ function parseModelVideos(html) {
     var $firstSection = $sections.first();
 
     // 2. 在这个 section 里找所有视频卡片
-    var videoItems = $firstSection.find(".videoblock, .videoBox, .pcVideoListItem, li[data-video-vkey]");
+    var videoItems = $firstSection.find(VIDEO_ITEM_SELECTOR);
     console.log("[日志] 第一个 videoSection 下视频卡片数量：", videoItems.length);
 
     var videos = [];
@@ -1381,42 +2275,20 @@ function parseChannelVideos(html) {
 
     if (!$ul.length) throw new Error("未找到频道视频主区块");
 
-    $ul.find("li.pcVideoListItem, li.videoblock, li.videoBox").each(function () {
+    $ul.find(VIDEO_ITEM_SELECTOR).each(function () {
         const $item = $(this);
         let vkey = $item.attr('data-video-vkey') ||
             $item.attr('data-id') ||
             ($item.find("a[href*='viewkey=']").attr("href") || "").match(/viewkey=([^&]+)/)?.[1];
         if (!vkey) return;
 
-        const title = $item.find(".title a").attr("title") ||
-            $item.find(".title a").text() ||
-            $item.find(".title").text().trim();
-
-        let link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
-        if (link && !/^https?:\/\//.test(link)) link = "https://cn.pornhub.com" + link;
-
-        const img = $item.find("img");
-        const coverUrl = img.attr("src") || img.attr("data-thumb") || img.attr("data-src") || "";
-        const previewUrl = img.attr("data-mediabook") || img.attr("data-preview") || img.attr("data-webm") || "";
-
-        const durationText = $item.find(".duration, .videoDuration").text().trim();
-        const author = extractAuthor($, $item);
-
-        result.push({
-            id: vkey,
-            type: "link",
-            mediaType: "movie",
-            title: title,
-            coverUrl: coverUrl,
-            previewUrl: previewUrl,
-            durationText: durationText,
-            link: link,
-            description: author ? `作者：${author}` : ""
-        });
+        const link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
+        const videoInfo = buildVideoItem($, $item, vkey, link);
+        result.push(videoInfo);
     });
 
     if (result.length === 0) throw new Error("未提取到频道视频数据");
-    return result;
+    return hydrateMissingCovers(result, Math.min(3, result.length), 3);
 }
 
 // Pornstar主页（有上传区）视频提取
@@ -1430,7 +2302,7 @@ function parsePornstarVideos(html) {
         return [];
     }
 
-    $list.find("li.pcVideoListItem, .wrap.flexibleHeight").each(function () {
+    $list.find(VIDEO_ITEM_SELECTOR).each(function () {
         const $item = $(this);
 
         let vkey = $item.attr('data-video-vkey')
@@ -1438,29 +2310,10 @@ function parsePornstarVideos(html) {
             || ($item.find("a[href*='viewkey=']").attr("href") || "").match(/viewkey=([^&]+)/)?.[1];
         if (!vkey) return;
 
-        const title = $item.find(".title a").attr("title")
-            || $item.find(".title a").text()
-            || $item.find(".title").text().trim();
-
-        let link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
-        if (link && !/^https?:\/\//.test(link)) link = "https://cn.pornhub.com" + link;
-
-        const img = $item.find("img");
-        const coverUrl = img.attr("src") || img.attr("data-thumb") || img.attr("data-src") || "";
-        const previewUrl = img.attr("data-mediabook") || img.attr("data-preview") || img.attr("data-webm") || "";
-        const durationText = $item.find(".duration, .videoDuration").text().trim();
-
-        result.push({
-            id: vkey,
-            type: "link",
-            mediaType: "movie",
-            title: title,
-            coverUrl: coverUrl,
-            previewUrl: previewUrl,
-            durationText: durationText,
-            link: link,
-            description: ""
-        });
+        const link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
+        const videoInfo = buildVideoItem($, $item, vkey, link);
+        videoInfo.description = "";
+        result.push(videoInfo);
     });
 
     if (result.length === 0) {
@@ -1486,21 +2339,8 @@ function parsePornstarHomePage(html) {
         let link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
         if (link && !/^https?:\/\//.test(link)) link = "https://cn.pornhub.com" + link;
 
-        const img = $item.find("img");
-        const coverUrl = img.attr("src") || img.attr("data-thumb") || img.attr("data-src") || "";
-        const previewUrl = img.attr("data-mediabook") || img.attr("data-preview") || img.attr("data-webm") || "";
-        const durationText = $item.find(".duration, .videoDuration").text().trim();
-
-        result.push({
-            id: vkey,
-            type: "link",
-            mediaType: "movie",
-            title: title,
-            coverUrl: coverUrl,
-            previewUrl: previewUrl,
-            durationText: durationText,
-            link: link
-        });
+        const videoInfo = buildVideoItem($, $item, vkey, link);
+        result.push(videoInfo);
     });
     if (result.length === 0) throw new Error("未提取到主页视频数据");
     return result;
@@ -1566,9 +2406,20 @@ async function getRecommendedVideos(params = {}) {
 
     // 解析视频区块
     const $ = Widget.html.load(html);
-    const videoSelector = ".pcVideoListItem, .videoblock, .videoBox, li.videoblock.videoBox";
     const result = [];
-    $(videoSelector).each(function () {
+    let items = findVideoItems($);
+    if (!items.length) {
+        items = $("a, li, div, article").filter(function () {
+            const $node = $(this);
+            return !!(
+                /view_video\.php\?viewkey=/.test($node.attr('href') || '') ||
+                $node.attr('data-video-vkey') ||
+                $node.attr('data-id') ||
+                $node.find("a[href*='viewkey=']").length
+            );
+        });
+    }
+    items.each(function () {
         const $item = $(this);
 
         let vkey = $item.attr('data-video-vkey')
@@ -1576,196 +2427,116 @@ async function getRecommendedVideos(params = {}) {
             || ($item.find("a[href*='viewkey=']").attr("href") || "").match(/viewkey=([^&]+)/)?.[1];
         if (!vkey) return;
 
-        const title = $item.find(".title a").attr("title")
-            || $item.find(".title a").text()
-            || $item.find(".title").text().trim();
-
-        let link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
-        if (link && !/^https?:\/\//.test(link)) {
-            link = "https://cn.pornhub.com" + link;
-        }
-
-        const img = $item.find("img");
-        const coverUrl = img.attr("src") || img.attr("data-thumb") || img.attr("data-src") || "";
-        const previewUrl = img.attr("data-mediabook") || img.attr("data-preview") || img.attr("data-webm") || "";
-        const durationText = $item.find(".duration, .videoDuration").text().trim();
-
-        let authorName = extractAuthor($, $item);
-        const description = authorName ? `作者：${authorName}` : "";
-
-        result.push({
-            id: vkey,
-            type: "link",
-            mediaType: "movie",
-            title: title,
-            coverUrl: coverUrl,
-            previewUrl: previewUrl,
-            durationText: durationText,
-            link: link,
-            description: description
-        });
+        const link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
+        const videoInfo = buildVideoItem($, $item, vkey, link);
+        result.push(videoInfo);
     });
 
     if (result.length === 0) {
         throw new Error("页面结构可能已变，未提取到推荐视频数据。");
     }
-    return result;
+    return hydrateMissingCovers(result, Math.min(3, result.length), 3);
 }
 
 // 按分类获取视频列表
 async function getVideos(originalParams = {}) {
-    // 参数解包，保证不会undefined
     const params = { ...originalParams };
-    const pageType = params.pageType || "";     // "cm" 最新 "ht" 热播 "mv" 最多观看 "tr" 最高评分
-    const c = params.c || "";                   // 分类id（"teen"为特殊18-25岁）
-    const cc = params.country || "";            // 国家代码（只在mv、ht下有效且不能为world）
-    const page = params.page || 1;
-    const hd = params.hd || "";                 // 高清参数，1为高清，其它为空
-    const sort_by = params.sort_by || "";       // 时间范围参数，仅mv/tr下有效
-    const p = params.p || ""; // 平台类型参数
+    const pageType = params.pageType || "";
+    const c = params.c || "";
+    const cc = params.country || "";
+    const page = Math.max(1, Number(params.page) || 1);
+    const hd = params.hd || "";
+    const sort_by = params.sort_by || "";
+    const p = params.p || "";
+    const isTeen = c === "teen";
+    const isLatestFeatured = !pageType || pageType === "latestFeatured";
+
+    const query = { page };
+    if (hd === "1") query.hd = "1";
+    if (p) query.p = p;
+    if (c && !isTeen) query.c = c;
+    if (cc && cc !== "world") query.cc = cc;
+    if (sort_by) query.t = sort_by;
 
     let url = "";
-
-    // 1. 最新视频
     if (pageType === "cm") {
-        if (c === "teen") {
-            url = `https://cn.pornhub.com/categories/teen?o=cm&page=${page}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        } else {
-            url = `https://cn.pornhub.com/video?o=cm&page=${page}`;
-            if (c) url += `&c=${c}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        }
+        url = isTeen
+            ? buildUrl("/categories/teen", Object.assign({ o: "cm" }, query))
+            : buildUrl("/video", Object.assign({ o: "cm" }, query));
+    } else if (pageType === "ht") {
+        url = isTeen
+            ? buildUrl("/categories/teen", Object.assign({ o: "ht" }, query))
+            : buildUrl("/video", Object.assign({ o: "ht" }, query));
+    } else if (pageType === "mv") {
+        url = isTeen
+            ? buildUrl("/categories/teen", Object.assign({ o: "mv" }, query))
+            : buildUrl("/video", Object.assign({ o: "mv" }, query));
+    } else if (pageType === "tr") {
+        url = isTeen
+            ? buildUrl("/categories/teen", Object.assign({ o: "tr" }, query))
+            : buildUrl("/video", Object.assign({ o: "tr" }, query));
+    } else if (isLatestFeatured) {
+        url = isTeen
+            ? buildUrl("/categories/teen", query)
+            : buildUrl("/video", query);
+    } else {
+        url = buildUrl("/video", Object.assign({ o: pageType || "cm" }, query));
     }
-    // 2. 热播视频
-    else if (pageType === "ht") {
-        if (c === "teen") {
-            url = `https://cn.pornhub.com/categories/teen?o=ht&page=${page}`;
-            if (cc && cc !== "world") url += `&cc=${cc}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        } else {
-            url = `https://cn.pornhub.com/video?o=ht&page=${page}`;
-            if (c) url += `&c=${c}`;
-            if (cc && cc !== "world") url += `&cc=${cc}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        }
-    }
-    // 3. 最多观看
-    else if (pageType === "mv") {
-        if (c === "teen") {
-            url = `https://cn.pornhub.com/categories/teen?o=mv&page=${page}`;
-            if (sort_by) url += `&t=${sort_by}`;
-            if (cc && cc !== "world") url += `&cc=${cc}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        } else {
-            url = `https://cn.pornhub.com/video?o=mv&page=${page}`;
-            if (c) url += `&c=${c}`;
-            if (sort_by) url += `&t=${sort_by}`;
-            if (cc && cc !== "world") url += `&cc=${cc}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        }
-    }
-    // 4. 最高评分
-    else if (pageType === "tr") {
-        if (c === "teen") {
-            url = `https://cn.pornhub.com/categories/teen?o=tr&page=${page}`;
-            if (sort_by) url += `&t=${sort_by}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        } else {
-            url = `https://cn.pornhub.com/video?o=tr&page=${page}`;
-            if (c) url += `&c=${c}`;
-            if (sort_by) url += `&t=${sort_by}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        }
-    }
-    // 5. 最新精选
-    else if (pageType === "latestFeatured") {
-
-        if (c === "teen") {
-            url = `https://cn.pornhub.com/categories/teen?page=${page}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        } else {
-            url = `https://cn.pornhub.com/video?page=${page}`;
-            if (c) url += `&c=${c}`;
-            if (hd === "1") url += `&hd=1`;
-            if (p) url += `&p=${p}`;
-        }
-    }
-    // 6. 其它类型兜底
-    else {
-        url = `https://cn.pornhub.com/video?o=${pageType}&page=${page}`;
-        if (c) url += `&c=${c}`;
-        if (hd === "1") url += `&hd=1`;
-        if (p) url += `&p=${p}`;
-    }
-
-    console.log("最终拼接的URL:", url);
 
     try {
         const response = await Widget.http.get(url, {
-            headers: {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
-            }
+            headers: createPageHeaders(PH_BASE_URL + "/")
         });
 
         const htmlContent = response.data;
         const $ = Widget.html.load(htmlContent);
 
-        const videoSelector = $(".pcVideoListItem.js-pop.videoblock.videoBox").length
-            ? ".pcVideoListItem.js-pop.videoblock.videoBox"
-            : ".pcVideoListItem, .videoblock, .videoBox";
+        const selectors = [
+            "[data-video-vkey]",
+            "li.pcVideoListItem",
+            "li.videoblock",
+            "div.pcVideoListItem",
+            "div.videoblock",
+            "div.videoBox",
+            "article[data-video-vkey]",
+            "a[href*='view_video.php?viewkey=']"
+        ];
+        const $items = getBestVideoItems($, selectors, "getVideos");
 
         const items = [];
-        $(videoSelector).each(function () {
+        $items.each(function () {
             const $item = $(this);
 
             let vkey = $item.attr('data-video-vkey')
                 || $item.attr('data-id')
+                || ($item.attr('href') || "").match(/viewkey=([^&]+)/)?.[1]
                 || ($item.find("a[href*='viewkey=']").attr("href") || "").match(/viewkey=([^&]+)/)?.[1];
             if (!vkey) return;
 
-            const title = $item.find(".title a").attr("title")
-                || $item.find(".title").text().trim();
-            let link = $item.find(".title a").attr("href") || "";
+            const title = $item.attr('title')
+                || $item.find(".title a[title]").attr("title")
+                || $item.find(".title a").text().trim()
+                || $item.find(".title").text().trim()
+                || $item.text().trim()
+                || "未知标题";
+
+            let link = $item.attr('href') || $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || "";
             if (link && !/^https?:\/\//.test(link)) {
-                link = "https://cn.pornhub.com" + link;
+                link = link.startsWith('/') ? `https://cn.pornhub.com${link}` : `https://cn.pornhub.com/${link}`;
             }
 
-            const img = $item.find("img");
-            const coverUrl = img.attr("src") || img.attr("data-thumb") || img.attr("data-src") || "";
-            const previewUrl = img.attr("data-mediabook") || img.attr("data-preview") || img.attr("data-webm") || "";
-            const durationText = $item.find(".duration, .videoDuration").text().trim();
-
-            const authorName = extractAuthor($, $item); // $item是$(this)
-            const description = authorName ? `作者：${authorName}` : "";
-
-            items.push({
-                id: vkey,
-                type: "link",
-                mediaType: "movie",
-                title: title,
-                coverUrl: coverUrl,
-                previewUrl: previewUrl,
-                durationText: durationText,
-                link: link,
-                description: description
-            });
+            const videoInfo = buildVideoItem($, $item, vkey, link);
+            const authorName = extractAuthor($, $item);
+            videoInfo.description = authorName ? `作者：${authorName}` : videoInfo.description;
+            items.push(videoInfo);
         });
 
         if (items.length === 0) {
-            throw new Error("页面结构可能已变，未提取到视频数据。");
+            const hasVideoHint = /viewkey=|data-video-vkey|pcVideoListItem|videoblock|videoBox/i.test(htmlContent);
+            throw new Error(hasVideoHint ? "页面结构可能已变，候选元素存在但未提取到视频数据。" : "页面未返回视频列表内容，可能被重定向、登录失效或结构变更。");
         }
 
+        await hydrateMissingCovers(items, LIST_COVER_HYDRATE_LIMIT, 5);
         return items;
 
     } catch (error) {
@@ -1781,56 +2552,62 @@ async function getVideosByLanguage(originalParams = {}) {
     const p = params.p || "";
     const hd = params.hd || "";
     const sort_by = params.sort_by || "";
-    const page = params.page || 1;
+    const page = Math.max(1, Number(params.page) || 1);
 
-    // 拼接基础url
-    let url = `https://cn.pornhub.com/language/${encodeURIComponent(language)}?page=${page}`;
-    if (p) url += `&p=${p}`;
-    if (hd === "1") url += `&hd=1`;
-    if (sort_by) url += `&o=${sort_by}`;
+    let url = `https://cn.pornhub.com/language/${encodeURIComponent(language)}`;
+    const qs = [];
+    if (page > 1) qs.push(`page=${page}`);
+    if (p) qs.push(`p=${encodeURIComponent(p)}`);
+    if (hd === "1") qs.push(`hd=1`);
+    if (sort_by) qs.push(`o=${encodeURIComponent(sort_by)}`);
+    if (qs.length) url += `?${qs.join("&")}`;
 
     console.log("按语言筛选拼接URL:", url);
 
     try {
         const response = await Widget.http.get(url, {
-            headers: {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
-            }
+            headers: createPageHeaders(PH_BASE_URL + "/")
         });
 
-        const htmlContent = response.data;
+        const htmlContent = response.data || "";
         const $ = Widget.html.load(htmlContent);
 
-        // 选择器同前
-        const videoSelector = $(".pcVideoListItem.js-pop.videoblock.videoBox").length
-            ? ".pcVideoListItem.js-pop.videoblock.videoBox"
-            : ".pcVideoListItem, .videoblock, .videoBox";
+        const selectors = [
+            "ul.videos.underplayer-thumbs.fixedSizeThumbsVideosListing li[data-video-vkey]",
+            "ul.videosGridWrapper li[data-video-vkey]",
+            "li[data-video-vkey]",
+            "a[href*='view_video.php?viewkey=']",
+            VIDEO_ITEM_SELECTOR
+        ];
+        const $list = getBestVideoItems($, selectors, "parseLanguagePage");
 
         const items = [];
-        $(videoSelector).each(function () {
+        $list.each(function () {
             const $item = $(this);
-            let vkey = $item.attr('data-video-vkey')
+            const vkey = $item.attr('data-video-vkey')
                 || $item.attr('data-id')
+                || $item.attr('href')?.match(/viewkey=([^&]+)/)?.[1]
                 || ($item.find("a[href*='viewkey=']").attr("href") || "").match(/viewkey=([^&]+)/)?.[1];
             if (!vkey) return;
 
-            const title = $item.find(".title a").attr("title")
-                || $item.find(".title").text().trim();
-            let link = $item.find(".title a").attr("href") || "";
-            if (link && !/^https?:\/\//.test(link)) {
-                link = "https://cn.pornhub.com" + link;
-            }
+            const title = $item.find(".title a[title]").attr("title")
+                || $item.find(".title a").text().trim()
+                || $item.find(".title").text().trim()
+                || $item.find("a[title]").attr("title")
+                || "未知标题";
 
-            const img = $item.find("img");
-            const coverUrl = img.attr("src") || img.attr("data-thumb") || img.attr("data-src") || "";
-            const previewUrl = img.attr("data-mediabook") || img.attr("data-preview") || img.attr("data-webm") || "";
-            const durationText = $item.find(".duration, .videoDuration").text().trim();
+            let link = $item.find(".title a").attr("href") || $item.find("a[href*='viewkey=']").attr("href") || $item.attr('href') || "";
+            if (link && !/^https?:\/\//.test(link)) link = "https://cn.pornhub.com" + link;
 
-            const authorName = extractAuthor($, $item); // $item是$(this)
+            const listCoverUrl = extractListImageUrl($, $item);
+            const detailCoverUrl = vkey ? (COVER_CACHE[vkey] || DETAIL_COVER_CACHE[vkey] || "") : "";
+            const coverUrl = listCoverUrl || detailCoverUrl || "";
+            const previewUrl = coverUrl || detailCoverUrl || extractPreviewUrl($, $item, vkey) || extractBackgroundImageUrl($item) || "";
+            const durationText = $item.find(".duration, .videoDuration, [class*='duration']").first().text().trim();
+            const authorName = extractAuthor($, $item);
             const description = authorName ? `作者：${authorName}` : "";
 
-            items.push({
+            const item = {
                 id: vkey,
                 type: "link",
                 mediaType: "movie",
@@ -1840,13 +2617,28 @@ async function getVideosByLanguage(originalParams = {}) {
                 durationText: durationText,
                 link: link,
                 description: description
-            });
+            };
+            items.push(item);
+
+            if (!coverUrl && vkey) {
+                fetchDetailCoverForViewkey(vkey).then(function (detailCover) {
+                    if (detailCover) {
+                        COVER_CACHE[vkey] = detailCover;
+                        if (item && item.id === vkey) {
+                            item.coverUrl = detailCover;
+                            if (!item.previewUrl) item.previewUrl = detailCover;
+                        }
+                    }
+                });
+            }
         });
 
         if (items.length === 0) {
-            throw new Error("页面结构可能已变，未提取到视频数据。");
+            const hasVideoHint = /viewkey=|data-video-vkey|videosGridWrapper|fixedSizeThumbsVideosListing|pcVideoListItem|videoblock|videoBox/i.test(htmlContent);
+            throw new Error(hasVideoHint ? "语言页页面结构可能已变，候选元素存在但未提取到视频数据。" : "语言页未返回视频列表内容，可能被重定向、登录失效或结构变更。");
         }
 
+        await hydrateMissingCovers(items, LIST_COVER_HYDRATE_LIMIT, 5);
         return items;
 
     } catch (error) {
@@ -1866,30 +2658,16 @@ function extractRecommendedVideos(htmlContent, maxCount = 10) {
         }
     }
     const $ = Widget.html.load(relatedHtml || htmlContent);
+    const $items = getBestVideoItems($, ["li[data-video-vkey]", "ul.videos.underplayer-thumbs.fixedSizeThumbsVideosListing li[data-video-vkey]"], "extractRecommendedVideos");
 
     const result = [];
-    $("li[data-video-vkey]").slice(0, maxCount).each(function (i, element) {
+    $items.slice(0, maxCount).each(function (i, element) {
         const $element = $(element);
-        const vkey = $element.attr('data-video-vkey');
+        const vkey = $element.attr('data-video-vkey') || extractViewkey($, element);
         if (!vkey) return;
-        const title = $element.find('.title').text().trim() || $element.find('a[title]').attr('title') || '';
-        const img = $element.find('img');
-        const coverUrl = img.attr('src') || img.attr('data-thumb') || img.attr('data-src') || '';
-        const previewUrl = img.attr('data-mediabook') || img.attr('data-preview') || img.attr('data-webm') || '';
-        const durationText = $element.find('.duration, .videoDuration').text().trim();
-        const authorName = extractAuthor($, element);
-        const description = authorName ? `作者：${authorName}` : "";
-        result.push({
-            id: vkey,
-            type: "link",
-            mediaType: "movie",
-            title: title,
-            coverUrl: coverUrl,
-            previewUrl: previewUrl,
-            durationText: durationText,
-            link: `https://cn.pornhub.com/view_video.php?viewkey=${vkey}`,
-            description: description
-        });
+        const link = $element.find("a[href*='viewkey=']").attr("href") || `https://cn.pornhub.com/view_video.php?viewkey=${vkey}`;
+        const videoInfo = buildVideoItem($, $element, vkey, link);
+        result.push(videoInfo);
     });
     return result;
 }
@@ -1911,13 +2689,17 @@ async function loadDetail(link) {
         // 2. 构建详情页链接并获取HTML
         const fullVideoUrl = `https://cn.pornhub.com/view_video.php?viewkey=${viewkey}`;
         const response = await Widget.http.get(fullVideoUrl, {
-            headers: {
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-            }
+            headers: createPageHeaders(PH_BASE_URL + "/")
         });
         const htmlContent = response.data;
+        const $root = Widget.html.load(htmlContent);
 
-        // 3. 用详情HTML直接提取 m3u8
+        // 3. 先补封面，再用详情HTML直接提取 m3u8
+        let coverUrl = extractDetailCoverFromHtml(htmlContent, $root);
+        if (coverUrl) {
+            COVER_CACHE[viewkey] = coverUrl;
+            DETAIL_COVER_CACHE[viewkey] = coverUrl;
+        }
         const m3u8Data = extractM3u8FromHtml(htmlContent);
 
         if (!m3u8Data || !m3u8Data.videoUrl) {
@@ -1926,7 +2708,6 @@ async function loadDetail(link) {
         }
 
         // 4. 主视频作者
-        const $root = Widget.html.load(htmlContent);
         const mainAuthorA = $root('.usernameWrap a').first();
         const mainAuthor = mainAuthorA.attr('title') || "";
 
@@ -1942,10 +2723,11 @@ async function loadDetail(link) {
             videoUrl: m3u8Data.videoUrl,
             customHeaders: {
                 "Referer": fullVideoUrl,
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
             },
             quality: m3u8Data.quality,
             title: "视频播放",
+            coverUrl: coverUrl,
             duration: 0,
             formats: m3u8Data.formats,
             description: mainAuthor ? `作者：${mainAuthor}` : "",
