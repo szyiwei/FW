@@ -102,5 +102,23 @@
       "author": "Discount Code：VEUS",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/NSFW-LIVE.js"
     },
+    {
+      "id": "91porn_makka",
+      "title": "91Porn",
+      "description": "91Porn 分类浏览与全局搜索模块",
+      "requiredVersion": "0.0.1",
+      "version": "2.0.0",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91Porn_EL.js"
+    },
+    {
+      "id": "XVideos",
+      "title": "XVideos",
+      "description": "XVideos 视频资源浏览模块，支持最新、热门、分类、标签、频道和明星筛选",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/XVideos_EL.js"
+    },
   ]
 }
