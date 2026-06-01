@@ -40,13 +40,13 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Pornhub.js"
     },
     {
-      "id": "Hanime1-fw",
-      "title": "Hanime1-fw",
-      "description": "把hanime1装进口袋",
+      "id": "hanime1",
+      "title": "Hanime1",
+      "description": "统一版：全局搜索、排行、分类、高级检索、新番预告",
       "requiredVersion": "0.0.2",
       "version": "4.5.0",
-      "author": "skywazzle/TaYhu",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1_fw.js"
+      "author": "TaYhu|EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1.js"
     },
     {
       "id": "jable_makka_spec_v4",
@@ -101,33 +101,6 @@
       "version": "1.0.0",
       "author": "Discount Code：VEUS",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/NSFW-LIVE.js"
-    },
-    {
-      "id": "hanime1_me_channels",
-      "title": "Hanime1-手动翻页",
-      "description": "独立分类，大跨度翻页专用",
-      "requiredVersion": "0.0.2",
-      "version": "1.2.0",
-      "author": "skywazzle/TaYhu",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1_channels.js"
-    },
-    {
-      "id": "hanime1_me_daily",
-      "title": "Hanime1-日常精选",
-      "description": "高频模块：排行榜、新番预告",
-      "requiredVersion": "0.0.2",
-      "version": "1.2.0",
-      "author": "skywazzle/TaYhu",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1_daily.js"
-    },
-    {
-      "id": "hanime1_me_advanced",
-      "title": "Hanime1-全能检索",
-      "description": "影片分类与搜索，上滑无限加载",
-      "requiredVersion": "0.0.2",
-      "version": "1.2.0",
-      "author": "skywazzle/TaYhu",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1_advanced.js"
     },
   ]
 }
