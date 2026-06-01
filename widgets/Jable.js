@@ -2,10 +2,10 @@
 WidgetMetadata = {
   id: "jable_int",
   title: "Jable",
-  description: "修复声音&恢复大量分类",
-  author: "nibiru｜MakkaPakka｜蝴蝶",
-  site: "https://widgets-xd.vercel.app",
-  version: "1.3.0",
+  description: "Jable分类浏览和全局搜索",
+  author: "nibiru｜MakkaPakka｜EL",
+  site: "https://jable.tv",
+  version: "1.4.0",
   requiredVersion: "0.0.2",
   detailCacheDuration: 60,
   modules: [
@@ -1157,23 +1157,56 @@ WidgetMetadata = {
       ],
     },
   ],
+  search: {
+    title: "全局搜索",
+    functionName: "searchGlobal",
+    params: [
+      { name: "keyword", title: "关键词", type: "input", description: "关键词", value: "" },
+      { name: "from", title: "页码", type: "page", description: "页码", value: "1" },
+    ],
+  },
 };
 
 
 async function search(params = {}) {
-  const keyword = encodeURIComponent(params.keyword || "");
-  
-  let url = `https://jable.tv/search/${keyword}/?mode=async&function=get_block&block_id=list_videos_videos_list_search_result&q=${keyword}`;
-  
+  const keyword = (params.keyword || "").trim();
+  if (!keyword) {
+    return [{
+      id: "tip",
+      type: "text",
+      title: "请输入关键词开始搜索"
+    }];
+  }
+
+  return await searchByKeyword(keyword, params);
+}
+
+async function searchGlobal(params = {}) {
+  const keyword = (params.keyword || "").trim();
+  if (!keyword) {
+    return [{
+      id: "tip",
+      type: "text",
+      title: "请输入关键词开始全局搜索"
+    }];
+  }
+
+  return await searchByKeyword(keyword, params);
+}
+
+async function searchByKeyword(keyword, params = {}) {
+  const encodedKeyword = encodeURIComponent(keyword);
+  let url = `https://jable.tv/search/${encodedKeyword}/?mode=async&function=get_block&block_id=list_videos_videos_list_search_result&q=${encodedKeyword}`;
+
   if (params.sort_by) {
     url += `&sort_by=${params.sort_by}`;
   }
-  
+
   if (params.from) {
     url += `&from=${params.from}`;
   }
-  
-  return await loadPage({ ...params, url });
+
+  return await loadPage({ ...params, url, includeImageFields: true });
 }
 
 async function loadPage(params = {}) {
@@ -1209,20 +1242,21 @@ async function loadPageSections(params = {}) {
 
     const htmlContent = response.data;
 
-    return parseHtml(htmlContent);
+    return parseHtml(htmlContent, params);
   } catch (error) {
     console.error("\u6d4b\u8bd5\u8fc7\u7a0b\u51fa\u9519:", error.message);
     throw error;
   }
 }
 
-async function parseHtml(htmlContent) {
+async function parseHtml(htmlContent, options = {}) {
   const $ = Widget.html.load(htmlContent);
   const sectionSelector = ".site-content .py-3,.pb-e-lg-40";
   const itemSelector = ".video-img-box";
   const coverSelector = "img";
   const durationSelector = ".absolute-bottom-right .label";
   const titleSelector = ".title a";
+  const includeImageFields = Boolean(options.includeImageFields);
 
   let sections = [];
   const sectionElements = $(sectionSelector).toArray();
@@ -1260,6 +1294,11 @@ async function parseHtml(htmlContent) {
             releaseDate: duration,
             playerType: "system"
           };
+          if (includeImageFields) {
+            item.posterPath = cover;
+            item.image = cover;
+            item.coverUrl = cover;
+          }
           items.push(item);
         }
       }
@@ -1276,6 +1315,37 @@ async function parseHtml(htmlContent) {
   return sections;
 }
 
+function extractPlaybackUrlFromVideoTags($) {
+  const selectors = ["video source", "video", "source", "iframe"];
+  for (const selector of selectors) {
+    const el = $(selector).first();
+    const url = el.attr("src") || el.attr("data-src") || el.attr("data-url") || "";
+    if (url && /(?:m3u8|mp4|ts)(?:\?|$)/i.test(url)) {
+      return url;
+    }
+  }
+  return "";
+}
+
+function extractPlaybackUrlFromScripts(htmlContent) {
+  const patterns = [
+    /var\s+hlsUrl\s*=\s*['"]([^'"]+)['"]/i,
+    /(?:hlsUrl|videoUrl|sourceUrl|playlist|m3u8)\s*[:=]\s*['"]([^'"]+)['"]/i,
+    /['"](https?:\/\/[^'"]+?\.(?:m3u8|mp4|ts)(?:\?[^'"]*)?)['"]/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = htmlContent.match(pattern);
+    if (match && match[1]) return match[1];
+  }
+  return "";
+}
+
+function normalizePlaybackUrl(url) {
+  if (!url) return "";
+  return url.startsWith("//") ? `https:${url}` : url;
+}
+
 async function loadDetail(link) {
   const response = await Widget.http.get(link, {
     headers: {
@@ -1283,38 +1353,31 @@ async function loadDetail(link) {
       "Referer": "https://jable.tv/"
     },
   });
-  
-  // 优化了正则匹配，防止报错
-  let hlsUrl = "";
-  const match = response.data.match(/var\s+hlsUrl\s*=\s*['"](.*?)['"]/i);
-  if (match && match[1]) {
-    hlsUrl = match[1];
-  }
 
-  if (!hlsUrl) {
+  const htmlContent = response.data || "";
+  const $ = Widget.html.load(htmlContent);
+
+  let playbackUrl = extractPlaybackUrlFromVideoTags($);
+  if (!playbackUrl) {
+    playbackUrl = extractPlaybackUrlFromScripts(htmlContent);
+  }
+  playbackUrl = normalizePlaybackUrl(playbackUrl);
+
+  if (!playbackUrl) {
     throw new Error("无法获取有效的播放地址，可能需要代理验证");
   }
-  
-  const $ = Widget.html.load(response.data);
-  let videoDuration = null;
-  const durationElements = $('.absolute-bottom-right .label, .duration, [class*="duration"]');
-  if (durationElements.length > 0) {
-    videoDuration = durationElements.first().text().trim();
-  }
-  
+
   const item = {
     id: link,
     type: "detail",
-    videoUrl: hlsUrl,
-    // 👉 核心修复：强制使用 ijk 播放器解决无声问题
-    playerType: "ijk", 
-    // 👉 核心修复：添加防盗链头部
+    videoUrl: playbackUrl,
+    playerType: "ijk",
     customHeaders: {
       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
       "Referer": link,
       "Origin": "https://jable.tv"
     }
   };
-  
+
   return item;
 }
