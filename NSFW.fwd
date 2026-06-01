@@ -35,8 +35,8 @@
       "title": "PornHub",
       "description": "在线观看PornHub视频",
       "requiredVersion": "0.0.1",
-      "version": "1.1.5",
-      "author": "海带",
+      "version": "1.3.1",
+      "author": "海带|EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Pornhub.js"
     },
     {
@@ -78,10 +78,10 @@
     {
       "id": "missav_makka_play",
       "title": "MissAV_ovo",
-      "description": "简易的missav模块",
+      "description": "MissAV 视频聚合模块，支持中文字幕、日本AV、素人、无码影片、亚洲AV、女优、类型、发行商与搜索",
       "requiredVersion": "0.0.1",
-      "version": "2.1.1",
-      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
+      "version": "2.4.0",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖/EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV_ovo.js"
     },
     {
