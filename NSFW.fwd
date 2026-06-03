@@ -129,5 +129,14 @@
       "author": "Eric",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Jable_Stream.js"
     },
+    {
+      "id": "missav_stream",
+      "title": "MissAV Stream",
+      "description": "通过番号匹配 MissAV 播放源，并聚合到当前视频详情页",
+      "requiredVersion": "0.0.1",
+      "version": "1.1.0",
+      "author": "meeowzzz",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/missav_stream.js"
+    },
   ]
 }
