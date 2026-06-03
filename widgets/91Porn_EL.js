@@ -717,9 +717,15 @@ function _define_property(obj, key, value) {
     else obj[key] = value;
     return obj;
 }
+
+// 🛠️ 优化一：全面升级防爬虫头部伪装 (Headers)
 const DEFAULT_HEADERS = {
-    'Accept-Language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7'
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'Accept-Language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7',
+    'Connection': 'keep-alive'
 };
+
 class WidgetAPI {
     async get(url, options) {
         let baseOptions = {
@@ -771,7 +777,7 @@ WidgetMetadata = {
     title: '91Porn',
     author: '𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|EL',
     description: '91Porn 分类浏览与全局搜索模块',
-    version: '2.0.0',
+    version: '2.3.0',
     requiredVersion: '0.0.1',
     site: 'https://91porn.com',
     detailCacheDuration: 60,
@@ -786,8 +792,8 @@ WidgetMetadata = {
             params: [
                 { name: 'page', title: '页码', type: 'page', value: '1' },
                 {
-                    name: 'category',
-                    title: '分类',
+                    name: 'sort_by',
+                    title: '排序',
                     type: 'enumeration',
                     value: 'hot',
                     enumOptions: [
@@ -802,12 +808,24 @@ WidgetMetadata = {
         },
         {
             id: '91porn.ori',
-            title: '原创',
-            description: '91原创',
+            title: '栏目',
+            description: '91原创 / 高清视频',
             cacheDuration: 3600,
             requiresWebView: false,
             functionName: 'loadOri',
-            params: [{ name: 'page', title: '页码', type: 'page', value: '1' }]
+            params: [
+                { name: 'page', title: '页码', type: 'page', value: '1' },
+                {
+                    name: 'sort_by',
+                    title: '排序',
+                    type: 'enumeration',
+                    value: 'ori',
+                    enumOptions: [
+                        { value: 'ori', title: CATEGORY_MAP.ori.title },
+                        { value: 'hd', title: CATEGORY_MAP.hd.title }
+                    ]
+                }
+            ]
         },
         {
             id: '91porn.tf',
@@ -819,8 +837,8 @@ WidgetMetadata = {
             params: [
                 { name: 'page', title: '页码', type: 'page', value: '1' },
                 {
-                    name: 'category',
-                    title: '分类',
+                    name: 'sort_by',
+                    title: '排序',
                     type: 'enumeration',
                     value: 'tf',
                     enumOptions: [
@@ -840,8 +858,8 @@ WidgetMetadata = {
             params: [
                 { name: 'page', title: '页码', type: 'page', value: '1' },
                 {
-                    name: 'category',
-                    title: '分类',
+                    name: 'sort_by',
+                    title: '排序',
                     type: 'enumeration',
                     value: 'long',
                     enumOptions: [
@@ -882,9 +900,11 @@ function buildSearchUrl(keyword, page = 1) {
     return `${DEFAULT_BASE_URL}/v.php?viewtype=basic&keywords=${encodeURIComponent(keyword)}${page > 1 ? `&page=${page}` : ''}`;
 }
 
+// 🛠️ 优化二：引入 Cheerio 链式 .get()，大幅提升海量节点解析性能
 function parseVideoCards($, options = {}) {
-    return Array.from($('.videos-text-align'))
-        .map((el) => parseVideoCard($(el), options))
+    return $('.videos-text-align')
+        .map((i, el) => parseVideoCard($(el), options))
+        .get()
         .filter(Boolean);
 }
 
@@ -935,24 +955,14 @@ function setCardReleaseDate(item, $el) {
     } catch (error) {}
 }
 
-async function getList(params = {}) {
-    const page = params.page || 1;
-    const keywords = (params.keywords || '').trim();
-    const sortBy = params.sort_by || 'hot';
-    const baseUrl = params.base_url || DEFAULT_BASE_URL;
-
-    try {
-        const url = keywords ? `${baseUrl}/v.php?viewtype=basic&page=${page}&keywords=${encodeURIComponent(keywords)}` : `${baseUrl}/v.php?category=${sortBy}&viewtype=basic&page=${page}`;
-        const $ = await widgetAPI.getHtml(url);
-        return parseVideoCards($);
-    } catch (error) {
-        console.error('视频列表加载失败', error);
-        return [];
-    }
+function resolveCategoryKey(params, fallback) {
+    const key = params.sort_by || params.category;
+    return CATEGORY_MAP[key] ? key : fallback;
 }
 
-async function loadCategory(params, categoryKey) {
-    const cfg = CATEGORY_MAP[categoryKey];
+async function loadList(params = {}, defaultSort = 'hot') {
+    const sortKey = resolveCategoryKey(params, defaultSort);
+    const cfg = CATEGORY_MAP[sortKey];
     if (!cfg) return [];
     const page = params?.page || 1;
     try {
@@ -965,24 +975,21 @@ async function loadCategory(params, categoryKey) {
     }
 }
 
-function resolveCategoryKey(params, fallback) {
-    return CATEGORY_MAP[params.category] ? params.category : fallback;
-}
-
 async function loadHotGroup(params = {}) {
-    return loadCategory(params, resolveCategoryKey(params, 'hot'));
+    return loadList(params, 'hot');
 }
 
 async function loadFavoritesGroup(params = {}) {
-    return loadCategory(params, resolveCategoryKey(params, 'tf'));
+    return loadList(params, 'tf');
 }
 
 async function loadLongGroup(params = {}) {
-    return loadCategory(params, resolveCategoryKey(params, 'long'));
+    return loadList(params, 'long');
 }
 
-async function loadOri(params) { return loadCategory(params, 'ori'); }
-async function loadHd(params) { return loadCategory(params, 'hd'); }
+async function loadOri(params = {}) {
+    return loadList(params, 'ori');
+}
 
 async function searchList(params = {}) {
     const keyword = (params.keywords || '').trim();
@@ -1064,18 +1071,36 @@ async function loadDetail(url) {
         const { player, videoUrl } = getVideoUrlAndPlayer($);
         if (!videoUrl) throw new Error('未找到视频资源');
 
+        const poster = player.attr('poster') || '';
         const detail = {
             id: url,
-            type: 'detail',
+            type: 'url',
             mediaType: 'movie',
             link: url,
             title: getDetailTitle($),
-            backdropPath: player.attr('poster') || '',
+            backdropPath: poster,
             videoUrl
         };
 
         applyDetailMeta($, detail);
-        detail.childItems = parseRelatedItems($);
+
+        try {
+            const videoID = poster.split('/').pop()?.split('.').shift();
+            if (videoID) {
+                detail.trailers = [{
+                    url: `https://vthumb.killcovid2021.com/thumb/${videoID}.mp4`,
+                    coverUrl: poster,
+                    posterPath: poster,
+                    backdropPath: poster,
+                    image: poster,
+                    thumbnail: poster
+                }];
+            }
+        } catch (e) {
+            console.warn('预告片生成跳过:', e);
+        }
+
+        detail.relatedItems = parseRelatedItems($); 
         return detail;
     } catch (error) {
         console.error('视频详情加载失败', error);
