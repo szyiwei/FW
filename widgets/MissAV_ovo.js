@@ -1,5 +1,5 @@
 // =================================================================
-// 1. 全局常量与核心配置定义（强制置顶）
+// 1. 全局常量与核心配置定义（强制置顶，绝对避免初始化死区）
 // =================================================================
 
 const BASE_URL = "https://missav.ai";
@@ -40,7 +40,7 @@ const ACTRESS_ENDPOINTS = [
     { title: "浅野こころ", value: "dm179/cn/actresses/%E6%B5%85%E9%87%8E%E3%81%93%E3%81%93%E3%82%8D" },
     { title: "北野未奈", value: "dm179/cn/actresses/%E5%8C%97%E9%87%8E%E6%9C%AA%E5%A5%88" },
     { title: "清原みゆう", value: "dm179/cn/actresses/%E6%B8%85%E5%8E%9F%E3%81%BF%E3%82%86%E3%81%86" },
-    { title: "沙月惠奈", value: "dm179/cn/actresses/%E6%B2%99%E6%9C%8B%E6%83%A0%E5%A5%88" },
+    { title: "沙月惠奈", value: "dm179/cn/actresses/%E6%B2%99%E6%9C%88%E6%83%A0%E5%A5%88" },
     { title: "miru", value: "dm179/cn/actresses/miru" },
     { title: "七森莉莉", value: "dm179/cn/actresses/%E4%B8%83%E6%A3%AE%E8%8E%89%E8%8E%89" },
     { title: "七濑爱丽丝", value: "dm179/cn/actresses/%E4%B8%83%E6%BF%91%E7%88%B1%E4%B8%BD%E4%B8%9D" },
@@ -52,7 +52,7 @@ const ACTRESS_ENDPOINTS = [
     { title: "未步なな", value: "dm179/cn/actresses/%E6%9C%AA%E6%AD%A5%E3%81%AA%E3%81%AA" },
     { title: "村上悠华", value: "dm179/cn/actresses/%E6%9D%91%E4%B8%8A%E6%82%A0%E5%8D%8E" },
     { title: "三田真铃", value: "dm179/cn/actresses/%E4%B8%89%E7%94%B0%E7%9C%9F%E9%13%83" },
-    { title: "八挂うみ", value: "dm179/cn/actresses/%E5%八%AB%E6%8E%9B%E3%81%86%E3%81%BF" },
+    { title: "八挂うみ", value: "dm179/cn/actresses/%E5%85%AB%E6%8E%9B%E3%81%86%E3%81%BF" },
     { title: "初美なのか", value: "dm179/cn/actresses/%E5%88%9D%E7%BE%8E%E3%81%AA%E3%81%AE%E3%81%8B" },
     { title: "宫下玲奈", value: "dm179/cn/actresses/%E5%AE%AE%E4%B8%8B%E7%8E%B2%E5%A5%88" },
     { title: "新有菜", value: "dm58/actresses/%E6%A9%8B%E6%9C%AC%E6%9C%89%E8%8F%9C%20%28%E6%96%B0%E6%9C%89%E8%8F%9C%29" },
@@ -147,7 +147,7 @@ const MAKERS_ENDPOINTS = [
     { title: "Waap Entertainment", value: "dm825/cn/makers/Waap%20Entertainment" },
     { title: "Crystal-Eizou", value: "dm825/cn/makers/Crystal-Eizou" },
     { title: "kawaii", value: "dm825/cn/makers/kawaii" },
-    { title: "ゴーゴーズ", value: "dm825/cn/makers/%E3%82%B4%E3%83%BC%E3%82%B4%E3%83%BC%E3%82%BA" },
+    { title: "ゴーゴーズ", value: "dm825/cn/makers/%E3%2B%E3%83%BC%E3%82%B4%E3%83%BC%E3%82%BA" },
     { title: "プラネットプラス", value: "dm825/cn/makers/%E3%83%97%E3%83%A9%E3%83%8D%E3%83%83%E3%83%88%E3%83%97%E3%83%A9%E3%82%B9" },
     { title: "OPPAI", value: "dm825/cn/makers/OPPAI" },
     { title: "STAR PARADISE", value: "dm825/cn/makers/STAR%20PARADISE" },
@@ -159,9 +159,6 @@ const MAKERS_ENDPOINTS = [
     { title: "桃太郎映像出版", value: "dm825/cn/makers/%E6%A1%83%E5%A4%AA%E9%83%8E%E6%98%A0%E5%83%8F%E5%87%BA%E7%89%88" }
 ];
 
-const GENRES_STATIC = GENRES_ENDPOINTS;
-const MAKERS_STATIC = MAKERS_ENDPOINTS;
-
 
 // =================================================================
 // 2. 模块元数据定义声明 (WidgetMetadata)
@@ -171,8 +168,8 @@ WidgetMetadata = {
     id: "missav_makka_play",
     title: "MissAV_ovo",
     author: "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|CC|EL",
-    description: "MissAV 视频聚合增强模块，完美打通跨模块番号自动关联展示，全部分类支持多维度排序过滤",
-    version: "2.9.8",
+    description: "MissAV 终极聚合增强版，完全修复正片播放管线，集成中文字幕强匹配亮标功能",
+    version: "3.0.2",
     requiredVersion: "0.0.1",
     site: "https://missav.ai",
     modules: [
@@ -314,7 +311,7 @@ WidgetMetadata = {
         title: "🌐 全局搜索",
         functionName: "searchGlobal",
         params: [
-            { name: "keyword", title: "关键词", type: "input", description: "全网资源多维度快速联动检索", value: "" },
+            { name: "keyword", title: "关键词", type: "input", description: "全网资源多维度快速功能整合联动检索", value: "" },
             { name: "page", title: "页码", type: "page", value: "1" },
             { name: "sort_by", title: "排序", type: "enumeration", value: "", enumOptions: getSortOptions() }
         ]
@@ -323,13 +320,19 @@ WidgetMetadata = {
 
 
 // =================================================================
-// 3. 基础依赖底层工具函数
+// 3. 基础依赖底层通用辅助工具函数
 // =================================================================
 
 function resolveUrl(path) {
     if (!path) return "";
     if (path.startsWith("http")) return path;
     return `${BASE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+function resolveAvatarImageUrl(path) {
+    if (!path) return "";
+    if (path.startsWith("http")) return path;
+    return `${AVATAR_BASE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 function buildListUrl(endpoint, page = 1, filters = "", sort_by = "") {
@@ -347,7 +350,6 @@ function resolveEndpointByPrimaryCategory(primaryCategory, endpoint) {
     return endpoint || "dm632/cn/release";
 }
 
-// ✨【完美补齐】：补回最近更新核心类型判定变量支持
 function isRecentUpdatesCategory(primaryCategory) {
     return primaryCategory === RECENT_UPDATES_CATEGORY || primaryCategory === RECENT_UPDATES_ENDPOINT;
 }
@@ -367,14 +369,10 @@ function buildJavTrailersId(text) {
 
 
 // =================================================================
-// 4. 跨模块番号高速嗅探流引擎 (实现外部详情页聚合播放)
+// 4. 跨模块流媒体提供者流接口 (支持中文字幕亮标识别)
 // =================================================================
 
 function getText(value) { return String(value || "").trim(); }
-
-function normalizeCode(value) {
-    return getText(value).toUpperCase().replace(/[\s_\-]+/g, "");
-}
 
 function extractSearchCode(text, options = {}) {
     const allowPureNumeric = options.allowPureNumeric !== false;
@@ -433,6 +431,22 @@ function extractCodeFromParams(params = {}) {
         if (code) return code;
     }
     return "";
+}
+
+function detectChineseSubtitle(html = "") {
+    if (!html) return false;
+    const kwMatch = html.match(/<meta\s+name=["']keywords["']\s+content=["']([^"']+)["']/i);
+    if (kwMatch && kwMatch[1]) {
+        const firstKeyword = kwMatch[1].split(/[,，]/)[0]?.trim();
+        if (firstKeyword === "中文字幕") return true;
+    }
+    const descMatch = html.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
+    if (descMatch && descMatch[1]) {
+        const desc = descMatch[1];
+        if (desc.includes("中文字幕版") || desc.includes("更新至中文字幕") || desc.includes("中文字幕")) return true;
+    }
+    const lower = html.toLowerCase();
+    return lower.includes("chinese-subtitle") || lower.includes("chinese subtitle");
 }
 
 async function loadResource(params = {}) {
@@ -501,10 +515,13 @@ async function loadResource(params = {}) {
         }
 
         if (videoUrl) {
+            const isChinese = detectChineseSubtitle(detailHtml);
+            const sourceName = isChinese ? "MissAV 中文字幕 🇨🇳" : "MissAV 正片 🎬";
+
             return [
                 {
-                    name: "MissAV 正片",
-                    description: `番号：${code}\n来源：MissAV 聚合\n详情页：${detailLink}`,
+                    name: sourceName,
+                    description: `番号：${code}\n来源：MissAV 聚合\n详情：${isChinese ? "已强匹配中文字幕" : "无专属字幕标记"}\n链接：${detailLink}`,
                     url: videoUrl,
                     customHeaders: {
                         "Referer": "https://missav.ai/",
@@ -522,7 +539,7 @@ async function loadResource(params = {}) {
 
 
 // =================================================================
-// 5. 爬虫列表数据清洗过滤引擎 (数据格式完美兼容 2.5)
+// 5. 网页大分类列表爬虫提取过滤核心层
 // =================================================================
 
 function normalizePeopleId(value) {
@@ -551,17 +568,6 @@ function buildPeopleItem(name, avatar, href) {
     return { id: peopleId, title, avatar: resolveUrl(avatar || ""), role: "主演" };
 }
 
-function buildGenreItem(name, href) {
-    const title = normalizeDisplayTitle(name);
-    const genreId = normalizeGenreId(href);
-    if (!title || !genreId || !genreId.includes("/genres/")) return null;
-    return { id: genreId, title };
-}
-
-function normalizeDetailLabel(label) { return (label || "").replace(/\s+/g, "").replace(/：/g, ":").toLowerCase(); }
-function getImageFromElement($, $el) { return $el.find("img").attr("data-src") || $el.find("img").attr("src") || ""; }
-
-// ✨【完美补齐】：补充 loadList 运行时缺失的画廊上下文构建组件
 function buildPeopleContext(id, title, avatar = "") {
     if (!id) return null;
     return { id, title, avatar: resolveUrl(avatar || ""), role: "主演" };
@@ -572,6 +578,15 @@ function buildGenreContext(id, title) {
     return { id, title };
 }
 
+function buildGenreItem(name, href) {
+    const title = normalizeDisplayTitle(name);
+    const genreId = normalizeGenreId(href);
+    if (!title || !genreId || !genreId.includes("/genres/")) return null;
+    return { id: genreId, title };
+}
+
+function normalizeDetailLabel(label) { return (label || "").replace(/\s+/g, "").replace(/：/g, ":").toLowerCase(); }
+function getImageFromElement($, $el) { return $el.find("img").attr("data-src") || $el.find("img").attr("src") || ""; }
 function isActressLabel(label) { return ["女优:", "女優:", "actress:", "actresses:"].includes(label); }
 function isGenreLabel(label) { return ["类型:", "類型:", "分类:", "分類:", "genre:", "genres:", "category:", "categories:"].includes(label); }
 
@@ -593,7 +608,7 @@ function parseVideoList(html, options = {}) {
         if (title) {
             const item = {
                 id: href || "redirected_video",
-                type: "link",
+                type: "url", // 🌟 核心修复：列表必须返回 type: "url"，否则 App 拒绝向 loadDetail 派发数据
                 title: title,
                 coverUrl: finalCover,
                 link: href,
@@ -626,7 +641,7 @@ function parseVideoList(html, options = {}) {
 
             const item = {
                 id: href,
-                type: "link",
+                type: "url", // 🌟 核心修复：全量切换为 type: "url"，激活路由引擎
                 title,
                 coverUrl: finalCover,
                 link: href,
@@ -669,11 +684,6 @@ function parseVideoList(html, options = {}) {
 // 6. 三方高性能预告片匹配调度中心
 // =================================================================
 
-const JAVTRAILERS_URL_CACHE = {};
-const JAVTRAILERS_URL_PROMISE_CACHE = {};
-const JAVTRAILERS_FETCH_TIMEOUT_MS = 1200;
-const JAVTRAILERS_MGSTAGE_PREFIXES = new Set(["ABF", "ABW", "JUFE", "MAAN", "PPT", "SIRO", "LUXU", "GANA"]);
-
 function parseJavCodeParts(title) {
     const raw = String(title || "").toUpperCase();
     const match = raw.match(/\b([A-Z0-9]+)-?(\d{2,5})\b/);
@@ -684,10 +694,20 @@ function parseJavCodeParts(title) {
     const numericContentPrefixMap = { WSA: "2" };
     const numericContentPrefix = numericContentPrefixMap[prefix] || "";
     return {
-        prefix, prefixLower, number: match[2], number3: match[2].padStart(3, "0"),
-        number5, code: `${numericContentPrefix}${prefixLower}${number5}`, plainCode: `${prefixLower}${number5}`
+        prefix,
+        prefixLower,
+        number: match[2],
+        number3: match[2].padStart(3, "0"),
+        number5,
+        code: `${numericContentPrefix}${prefixLower}${number5}`,
+        plainCode: `${prefixLower}${number5}`
     };
 }
+
+const JAVTRAILERS_URL_CACHE = {};
+const JAVTRAILERS_URL_PROMISE_CACHE = {};
+const JAVTRAILERS_FETCH_TIMEOUT_MS = 1200;
+const JAVTRAILERS_MGSTAGE_PREFIXES = new Set(["ABF", "ABW", "JUFE", "MAAN", "PPT", "SIRO", "LUXU", "GANA"]);
 
 function buildJavTrailersFallbackUrl(title) {
     const parts = parseJavCodeParts(title);
@@ -784,7 +804,7 @@ function buildMissavListCoverUrl(link) {
 
 
 // =================================================================
-// 7. 各大分类业务加载驱动网关
+// 7. 各大一级主分类加载驱动入口段
 // =================================================================
 
 async function loadRecentUpdates(params = {}) {
@@ -794,17 +814,23 @@ async function loadRecentUpdates(params = {}) {
 
 async function loadList(params = {}) {
     const { endpoint = "dm632/cn/release", page = 1, sort_by = "", filters = "", primary_category = "", peopleId = "", genreId = "" } = params;
-    const targetEndpoint = resolveEndpointByPrimaryCategory(primary_category, endpoint);
-    const targetSort = isRecentUpdatesCategory(primary_category) ? (sort_by || "published_at") : sort_by;
+    let targetEndpoint = resolveEndpointByPrimaryCategory(primary_category, endpoint);
+    let targetSort = isRecentUpdatesCategory(primary_category) ? (sort_by || "published_at") : sort_by;
 
     let targetUrl = buildListUrl(targetEndpoint, page, filters, targetSort);
 
     if (peopleId) {
         targetUrl = resolveUrl(String(peopleId));
-        if (page > 1) targetUrl += targetUrl.includes("?") ? `&page=${page}` : `?page=${page}`;
+        const urlParams = [];
+        if (sort_by) urlParams.push(`sort=${encodeURIComponent(sort_by)}`);
+        if (page > 1) urlParams.push(`page=${page}`);
+        if (urlParams.length) targetUrl += (targetUrl.includes("?") ? "&" : "?") + urlParams.join("&");
     } else if (genreId) {
         targetUrl = resolveUrl(String(genreId));
-        if (page > 1) targetUrl += targetUrl.includes("?") ? `&page=${page}` : `?page=${page}`;
+        const urlParams = [];
+        if (sort_by) urlParams.push(`sort=${encodeURIComponent(sort_by)}`);
+        if (page > 1) urlParams.push(`page=${page}`);
+        if (urlParams.length) targetUrl += (targetUrl.includes("?") ? "&" : "?") + urlParams.join("&");
     }
 
     try {
@@ -867,32 +893,40 @@ async function searchGlobal(params = {}) {
 
 
 // =================================================================
-// 8. 独立正片网页解码及详情渲染引擎 (100% 还原 2.5 纯正架构)
+// 8. 独立详情页视频流解码引擎 (100% 还原原版动态 eval 加密嗅探管线)
 // =================================================================
 
 function isInvalidAvatarUrl(url) { if (!url) return true; return /fourhoi\.com\/[^/]+\/(cover|preview|thumbnail)[^/]*\.(jpg|jpeg|png|webp)(?:\?.*)?$/i.test(url); }
 
-async function resolvePeopleAvatar(peopleId) {
-    if (!peopleId || !peopleId.includes("/actresses/")) return "";
-    if (Object.prototype.hasOwnProperty.call(PEOPLE_AVATAR_CACHE, peopleId)) return PEOPLE_AVATAR_CACHE[peopleId];
+async function resolvePeopleAvatar(peopleId, fallbackCover = "") {
+    if (!peopleId || !peopleId.includes("/actresses/")) return fallbackCover;
+    if (Object.prototype.hasOwnProperty.call(PEOPLE_AVATAR_CACHE, peopleId)) return PEOPLE_AVATAR_CACHE[peopleId] || fallbackCover;
     try {
         const avatarPageUrl = resolveAvatarPageUrl(peopleId);
-        if (!avatarPageUrl) return "";
+        if (!avatarPageUrl) return fallbackCover;
         const res = await Widget.http.get(avatarPageUrl, { headers: HEADERS });
-        if (!res.data || res.data.includes("Just a moment")) return "";
+        if (!res.data || res.data.includes("Just a moment")) return fallbackCover;
         const $ = Widget.html.load(res.data);
-        const avatar = pickFirstAvatar($);
-        if (!avatar || isInvalidAvatarUrl(avatar)) { PEOPLE_AVATAR_CACHE[peopleId] = ""; return ""; }
+        let avatar = pickFirstAvatar($);
+        
+        // 🌟 核心改进：当演员个人主页由于官方原因不提供独立 Avatar 元素时，使用其首部作品的大尺寸 Cover 作为绝佳的切片大图兜底，保证头像永不落空！
+        if (!avatar || isInvalidAvatarUrl(avatar)) {
+            avatar = $("div.group img").first().attr("data-src") || $("div.group img").first().attr("src") || "";
+        }
+        if (!avatar) {
+            PEOPLE_AVATAR_CACHE[peopleId] = fallbackCover;
+            return fallbackCover;
+        }
         PEOPLE_AVATAR_CACHE[peopleId] = resolveAvatarImageUrl(avatar);
         return PEOPLE_AVATAR_CACHE[peopleId];
-    } catch (e) { return ""; }
+    } catch (e) { return fallbackCover; }
 }
 
 function resolveAvatarPageUrl(peopleId) {
     if (!peopleId) return "";
     const normalized = normalizePeopleId(peopleId);
     if (!normalized || !normalized.includes("/actresses/")) return "";
-    return `${AVATAR_BASE_URL}/${normalized}`;
+    return `${BASE_URL}/${normalized}`;
 }
 
 function pickFirstAvatar($) {
@@ -1002,14 +1036,37 @@ async function loadDetail(link) {
             });
         }
 
+        // 🌟 核心改进：加深剧照抓取探测，全面过滤无效的外部静态图片，精准捕捉详情图集数据组
+        const backdropPaths = [];
+        $('img, a').each((_, el) => {
+            const src = $(el).attr('data-src') || $(el).attr('src') || $(el).attr('href') || '';
+            if (src && (src.includes('/preview/') || src.includes('/thumbnails/')) && !src.includes('.m3u8')) {
+                const cleanSrc = src.trim();
+                if (!backdropPaths.includes(cleanSrc)) {
+                    backdropPaths.push(cleanSrc);
+                }
+            }
+        });
+
+        // 🌟 核心改进：深度隔离推荐作品，防止 Cloudflare 空节点干扰干扰解析
+        let relatedItems = [];
+        try {
+            relatedItems = parseVideoList(html, { includeImageFields: true })
+                .filter(item => item && item.type === "url" && item.id !== "empty" && item.id !== "err_cf" && item.link !== link);
+        } catch (err) {
+            relatedItems = [];
+        }
+
         if (videoUrl) {
             const item = {
                 id: link,
-                type: "video",
+                type: "url", // 🌟 核心修复：按照 SKILL..md 规范， loadDetail 返回字典必须是 type: "url"，否则 App 降级为原生播放容器，隐藏所有高级 UI 元素
                 title,
                 videoUrl,
                 actors,
                 trailers,
+                backdropPaths, // 规范指定字段：剧照组
+                relatedItems,  // 规范指定字段：相似作品组
                 mediaType: "movie",
                 playerType: "system",
                 customHeaders: {
@@ -1021,7 +1078,8 @@ async function loadDetail(link) {
             if (peoples.length) item.peoples = peoples;
             if (genreItems.length) item.genreItems = genreItems;
             if (item.peoples) {
-                const avatars = await Promise.all(item.peoples.map((people) => people.avatar || resolvePeopleAvatar(people.id)));
+                // 🌟 核心修复：传递主视频 Cover 作为兜底图像传入多线程下载器
+                const avatars = await Promise.all(item.peoples.map((people) => people.avatar || resolvePeopleAvatar(people.id, missavListCoverUrl)));
                 for (let i = 0; i < avatars.length; i++) {
                     if (!avatars[i]) continue;
                     item.peoples[i].avatar = avatars[i];
