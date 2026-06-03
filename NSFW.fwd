@@ -120,5 +120,14 @@
       "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/XVideos_EL.js"
     },
+    {
+      "id": "jable_streams",
+      "title": "Jable Stream",
+      "description": "通过番号匹配 Jable 播放源，并聚合到当前视频详情页",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Eric",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Jable_Stream.js"
+    },
   ]
 }
