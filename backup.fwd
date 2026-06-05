@@ -58,6 +58,15 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/JPYY.js"
     },
     {
+      "id": "ddys",
+      "title": "低调影视播放源",
+      "description": "低调影视(ddys.app)搜索与播放源返回",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "TG@ZenMoFiShi",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/ddys.js"
+    },
+    {
       "id": "xunlei.subtitle",
       "title": "迅雷看看字幕",
       "description": "基于迅雷看看接口的字幕搜索 - 仅支持按片名搜索",
