@@ -1,7 +1,7 @@
 WidgetMetadata = {
     id: "Pornhub_int",
     title: "Pornhub",
-    version: "1.3.1",
+    version: "1.3.2",
     requiredVersion: "0.0.1",
     description: "Pornhub 视频聚合模块",
     author: "海带|EL",
@@ -795,7 +795,7 @@ const COVER_CACHE = {};
 const DETAIL_COVER_CACHE = {};
 const DETAIL_COVER_FAILED = {};
 const DETAIL_COVER_FAIL_TTL = 10 * 60 * 1000;
-const LIST_COVER_HYDRATE_LIMIT = 5;
+const LIST_COVER_HYDRATE_LIMIT = 20;
 const LIST_COVER_HYDRATE_CONCURRENCY = 3;
 
 // 通用视频节点选择器
@@ -845,12 +845,37 @@ function looksLikePlaceholderUrl(url) {
     return /(?:placeholder|spacer|loading|blank|default|sprite|gif;base64|data:image\/gif)/i.test(url) || url.length < 12;
 }
 
+function looksLikeVideoUrl(url) {
+    url = normalizeMediaUrl(url);
+    if (!url) return false;
+    return /\/\/kw\.phncdn\.com\//i.test(url) || /\.(?:webm|m3u8)(?:[?#]|$)/i.test(url) || /\.mp4(?:[?#]|$)/i.test(url);
+}
+
 function isValidCoverUrl(url) {
     url = normalizeMediaUrl(url);
     if (!url) return false;
     if (looksLikePlaceholderUrl(url)) return false;
+    if (looksLikeVideoUrl(url)) return false;
     if (/^(?:javascript:|about:blank|#)/i.test(url)) return false;
     return true;
+}
+
+function requiresImageReferer(url) {
+    url = normalizeMediaUrl(url);
+    if (!url) return false;
+    return /^https?:\/\/pix-cdn77\.phncdn\.com\//i.test(url);
+}
+
+function isClientLoadableCoverUrl(url) {
+    return isValidCoverUrl(url) && !requiresImageReferer(url);
+}
+
+function pickFirstClientLoadableCoverUrl(values) {
+    for (let i = 0; i < values.length; i++) {
+        const url = normalizeMediaUrl(values[i]);
+        if (isClientLoadableCoverUrl(url)) return url;
+    }
+    return "";
 }
 
 function splitSrcset(value) {
@@ -946,7 +971,7 @@ function deepFindMediaUrl(value) {
         if (!current) continue;
         if (typeof current === 'string') {
             const url = normalizeMediaUrl(current);
-            if (url && !looksLikePlaceholderUrl(url)) return url;
+            if (isClientLoadableCoverUrl(url)) return url;
             continue;
         }
         if (typeof current !== 'object') continue;
@@ -1052,9 +1077,7 @@ const MEDIA_ATTRS = [
     "data-previewimage",
     "data-cover",
     "data-poster",
-    "poster",
-    "data-webm",
-    "data-mediabook"
+    "poster"
 ];
 
 const MEDIA_CONTAINER_ATTRS = [
@@ -1100,13 +1123,12 @@ function collectMediaCandidates($, $element) {
 
 function resolveMediaUrl($, $element) {
     const candidates = collectMediaCandidates($, $element);
-    let url = pickFirstValidUrl(candidates);
-    if (!isValidCoverUrl(url)) url = "";
+    let url = pickFirstClientLoadableCoverUrl(candidates);
     if (!url) url = extractScriptInjectedCover($, $element);
-    if (!isValidCoverUrl(url)) url = extractScriptMediaUrl($, $element);
-    if (!isValidCoverUrl(url)) url = extractPageScriptMediaUrl($, $element);
-    if (!isValidCoverUrl(url)) url = extractMediaFromPlayerInitialization($, $element);
-    return isValidCoverUrl(url) ? url : "";
+    if (!isClientLoadableCoverUrl(url)) url = extractScriptMediaUrl($, $element);
+    if (!isClientLoadableCoverUrl(url)) url = extractPageScriptMediaUrl($, $element);
+    if (!isClientLoadableCoverUrl(url)) url = extractMediaFromPlayerInitialization($, $element);
+    return isClientLoadableCoverUrl(url) ? url : "";
 }
 
 function extractCoverUrl($, element) {
@@ -1265,7 +1287,7 @@ function buildVideoItem($, element, viewkey, fallbackLink = "") {
 
     var cachedCover = COVER_CACHE[viewkey] || DETAIL_COVER_CACHE[viewkey] || "";
     var listCoverUrl = extractCoverUrl($, element);
-    var detailCoverUrl = cachedCover || (viewkey ? DETAIL_COVER_CACHE[viewkey] : "") || "";
+    var detailCoverUrl = isClientLoadableCoverUrl(cachedCover) ? cachedCover : "";
     var coverUrl = listCoverUrl || detailCoverUrl || "";
     var previewUrl = coverUrl || detailCoverUrl || extractPreviewUrl($, element, viewkey) || extractBackgroundImageUrl($element) || "";
     var durationText = $element.find('.duration, .videoDuration, [class*="duration"]').first().text().trim() || "未知时长";
@@ -1321,7 +1343,7 @@ function extractDetailCoverFromHtml(html, $root) {
                 if (!current) continue;
                 if (typeof current === 'string') {
                     const url = normalizeMediaUrl(current);
-                    if (url && !looksLikePlaceholderUrl(url)) return url;
+                    if (isClientLoadableCoverUrl(url)) return url;
                     continue;
                 }
                 if (typeof current !== 'object') continue;
@@ -1348,7 +1370,7 @@ function extractDetailCoverFromHtml(html, $root) {
         for (let i = 0; i < metaCandidates.length; i++) {
             const node = root(metaCandidates[i]).first();
             const value = trimUrl(node.attr('content') || '');
-            if (value && !looksLikePlaceholderUrl(value)) return normalizeMediaUrl(value);
+            if (isClientLoadableCoverUrl(value)) return normalizeMediaUrl(value);
         }
 
         const posterSelectors = [
@@ -1387,7 +1409,7 @@ function extractDetailCoverFromHtml(html, $root) {
                 pickBestFromSrcset(node.attr('srcset')),
                 pickBestFromSrcset(node.attr('data-srcset'))
             ]);
-            if (value && !looksLikePlaceholderUrl(value)) return value;
+            if (isClientLoadableCoverUrl(value)) return value;
         }
 
         const scripts = root('script').map(function () { return root(this).html() || ''; }).get();
@@ -1395,10 +1417,10 @@ function extractDetailCoverFromHtml(html, $root) {
         const scanText = [htmlText].concat(scripts, jsonLdScripts).join('\n');
 
         const pageScriptCover = extractPageScriptMediaUrl(root, root('html'));
-        if (pageScriptCover) return pageScriptCover;
+        if (isClientLoadableCoverUrl(pageScriptCover)) return pageScriptCover;
 
         const playerCover = extractMediaFromPlayerInitialization(root, root('html'));
-        if (playerCover) return playerCover;
+        if (isClientLoadableCoverUrl(playerCover)) return playerCover;
 
         const directPatterns = [
             /poster\s*[:=]\s*['"]([^'"]+)['"]/i,
@@ -1438,11 +1460,11 @@ function extractDetailCoverFromHtml(html, $root) {
                 try {
                     const parsed = JSON.parse(raw);
                     const url = findUrlDeep(parsed);
-                    if (url) return url;
+                    if (isClientLoadableCoverUrl(url)) return url;
                 } catch (e) {}
             } else {
                 const url = normalizeMediaUrl(trimUrl(raw));
-                if (url && !looksLikePlaceholderUrl(url)) return url;
+                if (isClientLoadableCoverUrl(url)) return url;
             }
         }
 
@@ -1453,12 +1475,12 @@ function extractDetailCoverFromHtml(html, $root) {
             try {
                 const parsed = JSON.parse(body);
                 const url = findUrlDeep(parsed);
-                if (url) return url;
+                if (isClientLoadableCoverUrl(url)) return url;
             } catch (e) {
                 const relaxed = tryParseJsonLike(body);
                 if (relaxed) {
                     const url = findUrlDeep(relaxed);
-                    if (url) return url;
+                    if (isClientLoadableCoverUrl(url)) return url;
                 }
             }
         }
@@ -1481,7 +1503,8 @@ function markDetailCoverFailed(viewkey) {
 
 function fetchDetailCoverForViewkey(viewkey, retryCount = 1) {
     if (!viewkey) return Promise.resolve('');
-    if (DETAIL_COVER_CACHE[viewkey]) return Promise.resolve(DETAIL_COVER_CACHE[viewkey]);
+    if (isClientLoadableCoverUrl(DETAIL_COVER_CACHE[viewkey])) return Promise.resolve(DETAIL_COVER_CACHE[viewkey]);
+    if (DETAIL_COVER_CACHE[viewkey]) delete DETAIL_COVER_CACHE[viewkey];
     if (!shouldRetryDetailCover(viewkey)) return Promise.resolve('');
 
     const url = `https://cn.pornhub.com/view_video.php?viewkey=${viewkey}`;
@@ -1496,7 +1519,7 @@ function fetchDetailCoverForViewkey(viewkey, retryCount = 1) {
         return Widget.http.get(url, { headers }).then(function (response) {
             const html = response && response.data ? response.data : '';
             const cover = html ? extractDetailCoverFromHtml(html, Widget.html.load(html)) : '';
-            if (cover) {
+            if (isClientLoadableCoverUrl(cover)) {
                 DETAIL_COVER_CACHE[viewkey] = cover;
                 delete DETAIL_COVER_FAILED[viewkey];
                 return cover;
@@ -1532,51 +1555,59 @@ function fetchDetailCoverForViewkey(viewkey, retryCount = 1) {
     });
 }
 
-async function hydrateMissingCovers(items, limit = LIST_COVER_HYDRATE_LIMIT, syncCount = 5) {
-    const result = Array.isArray(items) ? items : [];
-    const targets = [];
-    for (let i = 0; i < result.length && targets.length < limit; i++) {
-        const item = result[i];
-        if (!item || item.coverUrl) continue;
-        const viewkey = item.id || ((item.link || '').match(/viewkey=([^&]+)/) || [])[1];
-        if (!viewkey || !shouldRetryDetailCover(viewkey)) continue;
-        targets.push({ item, viewkey });
+function normalizeReturnedCover(item) {
+    if (!item) return false;
+    const hadUnloadableCover = !!item.coverUrl && !isClientLoadableCoverUrl(item.coverUrl);
+    if (item.coverUrl && !isClientLoadableCoverUrl(item.coverUrl)) {
+        item.coverUrl = "";
     }
+    if (item.previewUrl && requiresImageReferer(item.previewUrl)) {
+        item.previewUrl = item.coverUrl || "";
+    }
+    return hadUnloadableCover;
+}
 
-    const syncTargets = targets.slice(0, Math.max(0, syncCount));
-    const asyncTargets = targets.slice(syncTargets.length);
-
-    if (syncTargets.length) {
-        await Promise.all(syncTargets.map(async function (current) {
+async function hydrateCoverTargets(targets) {
+    let cursor = 0;
+    async function worker() {
+        while (cursor < targets.length) {
+            const current = targets[cursor++];
             const detailCover = await fetchDetailCoverForViewkey(current.viewkey);
-            if (detailCover) {
+            if (isClientLoadableCoverUrl(detailCover)) {
                 current.item.coverUrl = detailCover;
                 if (!current.item.previewUrl) current.item.previewUrl = detailCover;
                 COVER_CACHE[current.viewkey] = detailCover;
             }
-        }));
+        }
     }
 
-    if (asyncTargets.length) {
-        (async function () {
-            let cursor = 0;
-            async function worker() {
-                while (cursor < asyncTargets.length) {
-                    const current = asyncTargets[cursor++];
-                    const detailCover = await fetchDetailCoverForViewkey(current.viewkey);
-                    if (detailCover) {
-                        current.item.coverUrl = detailCover;
-                        if (!current.item.previewUrl) current.item.previewUrl = detailCover;
-                        COVER_CACHE[current.viewkey] = detailCover;
-                    }
-                }
-            }
-            const workers = [];
-            const count = Math.min(LIST_COVER_HYDRATE_CONCURRENCY, asyncTargets.length);
-            for (let i = 0; i < count; i++) workers.push(worker());
-            await Promise.all(workers);
-        })();
+    const workers = [];
+    const count = Math.min(LIST_COVER_HYDRATE_CONCURRENCY, targets.length);
+    for (let i = 0; i < count; i++) workers.push(worker());
+    await Promise.all(workers);
+}
+
+async function hydrateMissingCovers(items, limit = LIST_COVER_HYDRATE_LIMIT, syncCount = 5) {
+    const result = Array.isArray(items) ? items : [];
+    const priorityTargets = [];
+    const optionalTargets = [];
+
+    for (let i = 0; i < result.length; i++) {
+        const item = result[i];
+        const hadUnloadableCover = normalizeReturnedCover(item);
+        if (!item || item.coverUrl) continue;
+        const viewkey = item.id || ((item.link || '').match(/viewkey=([^&]+)/) || [])[1];
+        if (!viewkey || !shouldRetryDetailCover(viewkey)) continue;
+        const target = { item, viewkey };
+        if (hadUnloadableCover) {
+            priorityTargets.push(target);
+        } else {
+            optionalTargets.push(target);
+        }
     }
+
+    const targets = priorityTargets.concat(optionalTargets.slice(0, Math.max(0, limit)));
+    if (targets.length) await hydrateCoverTargets(targets);
 
     return result;
 }
@@ -1786,7 +1817,8 @@ async function getSearchResults(params) {
             }
 
             if ($list.length > 0) {
-                return parseSearchResults($, $list, searchQuery, searchType);
+                const items = parseSearchResults($, $list, searchQuery, searchType);
+                return await hydrateMissingCovers(items, LIST_COVER_HYDRATE_LIMIT, 5);
             } else {
                 console.log("[getSearchResults] 未找到任何视频，返回空数组");
                 return [];
@@ -1803,6 +1835,7 @@ async function getSearchResults(params) {
 // 搜索功能解析函数
 function parseSearchResults($, $list, searchQuery, searchType) {
     const result = [];
+    const processedViewkeys = {};
     const normalizedQuery = normalizeText(searchQuery).toLowerCase();
     console.log(`解析搜索结果，匹配总项数: ${$list.length}`);
 
@@ -1818,6 +1851,7 @@ function parseSearchResults($, $list, searchQuery, searchType) {
             console.log("未找到 vkey, 跳过");
             return; // 如果没有找到视频ID，跳过该项
         }
+        if (processedViewkeys[vkey]) return;
 
         // 提取视频标题
         const title = $item.find(".title a").attr("title") ||
@@ -1845,7 +1879,8 @@ function parseSearchResults($, $list, searchQuery, searchType) {
         }
 
         const listCoverUrl = extractListImageUrl($, $item);
-        const detailCoverUrl = vkey ? (COVER_CACHE[vkey] || DETAIL_COVER_CACHE[vkey] || "") : "";
+        const cachedCover = vkey ? (COVER_CACHE[vkey] || DETAIL_COVER_CACHE[vkey] || "") : "";
+        const detailCoverUrl = isClientLoadableCoverUrl(cachedCover) ? cachedCover : "";
         const coverUrl = listCoverUrl || detailCoverUrl || "";
         const previewUrl = coverUrl || detailCoverUrl || extractPreviewUrl($, $item, vkey) || extractBackgroundImageUrl($item) || "";
         const durationText = $item.find(".duration, .videoDuration, [class*='duration']").first().text().trim();
@@ -1862,6 +1897,7 @@ function parseSearchResults($, $list, searchQuery, searchType) {
             link: link
         };
         result.push(item);
+        processedViewkeys[vkey] = true;
     });
 
     console.log(`解析到的视频数: ${result.length}`);
@@ -2024,16 +2060,6 @@ function getFavorites(params) {
                         // 添加到已处理集合
                         processedViewkeys[viewkey] = true;
 
-                        if (!videoInfo.coverUrl && viewkey && shouldRetryDetailCover(viewkey)) {
-                            fetchDetailCoverForViewkey(viewkey).then(function (detailCover) {
-                                if (detailCover) {
-                                    videoInfo.coverUrl = detailCover;
-                                    videoInfo.previewUrl = videoInfo.previewUrl || detailCover;
-                                    COVER_CACHE[viewkey] = detailCover;
-                                }
-                            });
-                        }
-
                     } catch (error) {
                         console.log("处理视频项时出错: " + error.message);
                     }
@@ -2041,7 +2067,7 @@ function getFavorites(params) {
 
                 console.log("成功提取 " + videos.length + " 个收藏视频");
 
-                resolve(videos);
+                hydrateMissingCovers(videos, LIST_COVER_HYDRATE_LIMIT, 5).then(resolve).catch(reject);
             }).catch(function (error) {
                 console.log("获取收藏列表失败: " + error.message);
                 reject(error);
@@ -2209,21 +2235,21 @@ async function doFetch(type, username, params) {
             const $list = $('ul#moreData.full-row-thumbs.videos.row-5-thumbs');
             if ($list.length > 0 && $list.find(VIDEO_ITEM_SELECTOR).length > 0) {
                 console.log('[doFetch] 上传页存在视频，返回并解析该页');
-                return parsePornstarVideos(response.data);
+                return await hydrateMissingCovers(parsePornstarVideos(response.data), LIST_COVER_HYDRATE_LIMIT, 5);
             }
             console.log('[doFetch] 上传页存在但无视频内容，准备降级到主页解析');
         }
 
         const resp2 = await Widget.http.get(requestInfo.homepageUrl, { headers: requestInfo.headers });
         if (!resp2 || !resp2.data) throw new Error('明星主页无法获取');
-        return parsePornstarHomePage(resp2.data);
+        return await hydrateMissingCovers(parsePornstarHomePage(resp2.data), LIST_COVER_HYDRATE_LIMIT, 5);
     }
 
     console.log(`[doFetch] 尝试请求: ${requestInfo.url}`);
     const response = await Widget.http.get(requestInfo.url, { headers: requestInfo.headers });
     if (!response || !response.data) throw new Error('页面加载失败');
 
-    if (type === 'model') return parseModelVideos(response.data);
+    if (type === 'model') return await hydrateMissingCovers(parseModelVideos(response.data), LIST_COVER_HYDRATE_LIMIT, 5);
     if (type === 'channels') return parseChannelVideos(response.data);
     throw new Error('不支持的艺人类型');
 }
@@ -2600,7 +2626,8 @@ async function getVideosByLanguage(originalParams = {}) {
             if (link && !/^https?:\/\//.test(link)) link = "https://cn.pornhub.com" + link;
 
             const listCoverUrl = extractListImageUrl($, $item);
-            const detailCoverUrl = vkey ? (COVER_CACHE[vkey] || DETAIL_COVER_CACHE[vkey] || "") : "";
+            const cachedCover = vkey ? (COVER_CACHE[vkey] || DETAIL_COVER_CACHE[vkey] || "") : "";
+            const detailCoverUrl = isClientLoadableCoverUrl(cachedCover) ? cachedCover : "";
             const coverUrl = listCoverUrl || detailCoverUrl || "";
             const previewUrl = coverUrl || detailCoverUrl || extractPreviewUrl($, $item, vkey) || extractBackgroundImageUrl($item) || "";
             const durationText = $item.find(".duration, .videoDuration, [class*='duration']").first().text().trim();
@@ -2620,17 +2647,6 @@ async function getVideosByLanguage(originalParams = {}) {
             };
             items.push(item);
 
-            if (!coverUrl && vkey) {
-                fetchDetailCoverForViewkey(vkey).then(function (detailCover) {
-                    if (detailCover) {
-                        COVER_CACHE[vkey] = detailCover;
-                        if (item && item.id === vkey) {
-                            item.coverUrl = detailCover;
-                            if (!item.previewUrl) item.previewUrl = detailCover;
-                        }
-                    }
-                });
-            }
         });
 
         if (items.length === 0) {
@@ -2696,9 +2712,11 @@ async function loadDetail(link) {
 
         // 3. 先补封面，再用详情HTML直接提取 m3u8
         let coverUrl = extractDetailCoverFromHtml(htmlContent, $root);
-        if (coverUrl) {
+        if (isClientLoadableCoverUrl(coverUrl)) {
             COVER_CACHE[viewkey] = coverUrl;
             DETAIL_COVER_CACHE[viewkey] = coverUrl;
+        } else {
+            coverUrl = "";
         }
         const m3u8Data = extractM3u8FromHtml(htmlContent);
 
@@ -2712,7 +2730,7 @@ async function loadDetail(link) {
         const mainAuthor = mainAuthorA.attr('title') || "";
 
         // 5. 推荐区块采集（极速切片，独立函数）
-        const recommendedVideos = extractRecommendedVideos(htmlContent, 10);
+        const recommendedVideos = await hydrateMissingCovers(extractRecommendedVideos(htmlContent, 10), Math.min(3, 10), 3);
         console.log("推荐区块采集数量:", recommendedVideos.length);
 
         // 6. 返回 ForwardWidget 兼容的详情对象
