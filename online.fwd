@@ -31,6 +31,26 @@
       "url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/VodStream.js"
     },
     {
+<<<<<<< HEAD
+      "id": "forward_rank",
+      "title": "聚合实时榜单",
+      "description": "基聚合各平台实时榜单数据",
+      "requiredVersion": "0.0.1",
+      "version": "1.2.9",
+      "author": "TG@ZenMoFish",
+      "url": "https://raw.githubusercontent.com/ZenmoFeiShi/Forward/refs/heads/main/forward_rank.js"
+    },
+    {
+      "id": "ddys",
+      "title": "低调影视播放源",
+      "description": "低调影视(ddys.app)搜索与播放源返回，供 Forward 搜索播放源使用",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "TG@ZenMoFish",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/ddys.js"
+    },    
+    {
+=======
       "id": "hot_picks",
       "title": "热门精选",
       "description": "获取最新热门影片推荐",
@@ -40,6 +60,7 @@
       "url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/HotPicks.js"
     },
     {
+>>>>>>> 36b5b2d05fdba2f0b54a8a94ec5e3a9c08da8607
       "id": "OleLive",
       "title": "欧乐影视",
       "description": "欧乐影视、分类浏览（电影/剧集/综艺/动漫/短剧）",
@@ -67,13 +88,13 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/JPYY.js"
     },
     {
-      "id": "xunlei.subtitle",
-      "title": "迅雷看看字幕",
-      "description": "基于迅雷看看接口的字幕搜索 - 仅支持按片名搜索",
+      "id": "ppnix.widget",
+      "title": "PPnix",
+      "description": "PPnix 影视 — 电影/电视剧分类浏览与搜索，支持自定义域名和 CF Cookie",
       "requiredVersion": "0.0.1",
-      "version": "1.1.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/THUNDER.js"
+      "version": "1.0.0",
+      "author": "Spider",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/PPnix.js"
     },
   ]
 }
