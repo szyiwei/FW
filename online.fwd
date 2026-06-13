@@ -31,6 +31,15 @@
       "url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/VodStream.js"
     },
     {
+      "id": "hot_picks",
+      "title": "热门精选",
+      "description": "获取最新热门影片推荐",
+      "requiredVersion": "0.0.1",
+      "version": "1.6.0",
+      "author": "两块",
+      "url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/HotPicks.js"
+    },
+    {
       "id": "OleLive",
       "title": "欧乐影视",
       "description": "欧乐影视、分类浏览（电影/剧集/综艺/动漫/短剧）",
