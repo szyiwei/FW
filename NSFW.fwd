@@ -103,7 +103,12 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/missav_stream.js"
     },
     {
-      "id": "kanav",
+      "id": "kanavtao",
+      "title": "kanavTao",
+      "description": "kanav网站聚合",
+      "requiredVersion": "0.0.2",
+      "version": "1.2.8",
+      "author": "廿二日",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/kanav.js"
     },
   ]
