@@ -16,7 +16,7 @@ var WidgetMetadata = {
       title: "ddys_protect Cookie",
       type: "input",
       description: "在浏览器登录 ddys.app 通过人机验证后，复制 ddys_protect_xxx=值 整段填入（含名）。不填将被站点拦截。",
-      value: ""
+      value: "ddys_protect_9ff7a5a24e94ca3c5f214a63ee379f1f=site%7C1%7C1%7C1781370795%7Cb7c359425cbdae10fa878d39cc62eee91cf9498bee7241dd8aa628800b43ca10"
     }
   ],
   modules: [
