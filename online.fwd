@@ -49,7 +49,7 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/ddys.js"
     },    
     {
-      "id": "OleLive",
+      "id": "oleLive",
       "title": "欧乐影视",
       "description": "欧乐影视、分类浏览（电影/剧集/综艺/动漫/短剧）",
       "requiredVersion": "0.0.1",
