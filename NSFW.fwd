@@ -111,5 +111,23 @@
       "author": "廿二日",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/kanav.js"
     },
+    {
+      "id": "xHamster",
+      "title": "xHamster",
+      "description": "xHamster 是一个以用户上传内容（UGC）为核心的成人视频网站和社区平台",
+      "requiredVersion": "0.0.1",
+      "version": "0.0.1",
+      "author": "GM",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/xHamster.js"
+    },
+    {
+      "id": "Tik.Porn",
+      "title": "Tik.Porn",
+      "description": "Tik.Porn — 短视频聚合",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/tikporn.js"
+    },
   ]
 }
