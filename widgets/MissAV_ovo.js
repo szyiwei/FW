@@ -3,9 +3,12 @@ WidgetMetadata = {
     title: "MissAV_ovo",
     author: "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|CC|EL|Eric|墨白",
     description: "MissAV 视频聚合模块，支持其他模块聚合missav资源、支持高清海报、封面图、预告片、相似推荐、演员信息及头像",
-    version: "3.1",
+    version: "3.2.2",
     requiredVersion: "0.0.1",
     site: "https://missav.ai",
+    globalParams: [
+        { name: "worker", title: "Worker地址", type: "input", value: "" }
+    ],
     modules: [
         {
             title: "最近更新",
@@ -319,6 +322,7 @@ WidgetMetadata = {
                 { name: "page", title: "页码", type: "page" }
             ]
         },
+        /* Temporarily disabled
         {
             id: "loadResource",
             title: "MissAV 播放源",
@@ -327,6 +331,7 @@ WidgetMetadata = {
             type: "stream",
             params: []
         }
+        */
     ],
     search: {
         title: "🌐 全局搜索",
@@ -352,6 +357,16 @@ const PEOPLE_AVATAR_CACHE = {};
 const RECENT_UPDATES_CATEGORY = "recent_updates";
 const RECENT_UPDATES_ENDPOINT = "dm539/cn/new";
 const VIDEO_URL_CACHE = {};
+
+function gs(k) { try { return Widget.storage.get(k) || ""; } catch (e) { return ""; } }
+async function gl(w, u) {
+    try {
+        var r = await Widget.http.get(w + "/qualities/" + u, { headers: HEADERS });
+        var d = typeof r.data == "string" ? JSON.parse(r.data) : r.data;
+        if (d && d.length) return d;
+    } catch (e) {}
+    return null;
+}
 
 function getSortOptions() {
     return [
@@ -894,6 +909,13 @@ function classifyMissavLink(link) {
     return "有码";
 }
 
+function getVersionTag(link) {
+    if (!link) return "";
+    if (link.includes("-uncensored-leak")) return "[无码流出] ";
+    if (link.includes("-chinese-subtitle")) return "[中文字幕] ";
+    return "";
+}
+
 function parseSearchResults(html, targetCode) {
     if (!html || html.includes("Just a moment")) {
         console.warn("[MissAV] 可能被 Cloudflare 拦截，搜索页返回异常");
@@ -914,7 +936,7 @@ function parseSearchResults(html, targetCode) {
         if (!link || seen.has(link)) return;
         seen.add(link);
 
-        const title = $link.text().trim();
+        const title = getVersionTag(link) + $link.text().trim();
         const codeFromLink = extractCodeFromMissAVLink(link);
         const codeFromTitle = extractSearchCode(title, { allowPureNumeric: true });
         const code = codeFromLink || codeFromTitle;
@@ -934,7 +956,7 @@ function parseSearchResults(html, targetCode) {
             const codeFromLink = extractCodeFromMissAVLink(link);
             if (!codeFromLink) return;
             seen.add(link);
-            results.push({ title: $el.text().trim(), link, code: codeFromLink });
+            results.push({ title: getVersionTag(link) + $el.text().trim(), link, code: codeFromLink });
         });
     }
 
@@ -1013,6 +1035,19 @@ const JAVTRAILERS_URL_CACHE = {};
 const JAVTRAILERS_URL_PROMISE_CACHE = {};
 const JAVTRAILERS_FETCH_TIMEOUT_MS = 1200;
 const JAVTRAILERS_MGSTAGE_PREFIXES = new Set(["ABF", "ABW", "JUFE", "MAAN", "PPT", "SIRO", "LUXU", "GANA", "ABP", "CHN"]);
+
+const JAVP_TRAILER_API_BASE = "https://javp.cc.cd/trailers/";
+const JAVP_TRAILER_CACHE = {};
+const JAVP_TRAILER_PROMISE_CACHE = {};
+const JAVP_FETCH_TIMEOUT_MS = 1800;
+const JAVP_HEAD_TIMEOUT_MS = 1200;
+const JAVP_QUALITY_OPTIONS = [
+    { quality: "4k", label: "4K" },
+    { quality: "hhb", label: "1080P" },
+    { quality: "hmb", label: "720P" },
+    { quality: "mhb", label: "576P" },
+    { quality: "mmb", label: "432P" }
+];
 
 function parseJavCodeParts(title) {
     const raw = String(title || "").toUpperCase();
@@ -1094,6 +1129,93 @@ function fetchJavTrailersPageUrl(pageId) {
     return Widget.http.get(`https://javtrailers.com/video/${pageId}`, { headers: HEADERS })
         .then((res) => extractJavTrailersMediaUrl(res.data))
         .catch(() => "");
+}
+
+function normalizeTrailerCode(value) {
+    const code = extractSearchCode(value) || extractVideoId(value) || "";
+    return String(code || "").trim().toLowerCase().replace(/[^a-z0-9_-]/g, "");
+}
+
+function getJavpQualityLabel(quality) {
+    const item = JAVP_QUALITY_OPTIONS.find((q) => q.quality === quality);
+    return item ? item.label : quality;
+}
+
+async function isPlayableTrailerUrl(url) {
+    if (!url) return false;
+    try {
+        const res = await Widget.http.head(url, {
+            headers: {
+                "User-Agent": HEADERS["User-Agent"],
+                "Accept": "video/mp4,application/vnd.apple.mpegurl,application/x-mpegURL,*/*;q=0.8",
+                "Referer": "https://javp.cc/"
+            },
+            timeout: JAVP_HEAD_TIMEOUT_MS
+        });
+        return !!res && res.statusCode >= 200 && res.statusCode < 400;
+    } catch (e) {
+        return false;
+    }
+}
+
+function buildJavpQualityCandidates(trailerUrl) {
+    const raw = String(trailerUrl || "").trim();
+    const matched = raw.match(/^(.*?)(4k|hhb|hmb|mhb|mmb)\.mp4(?:[?#].*)?$/i);
+    if (!matched) return [];
+    const prefix = matched[1];
+    return JAVP_QUALITY_OPTIONS.map((item) => ({
+        quality: item.quality,
+        label: item.label,
+        url: `${prefix}${item.quality}.mp4`
+    }));
+}
+
+async function pickBestJavpTrailerUrl(trailerUrl) {
+    const raw = String(trailerUrl || "").trim();
+    if (!raw) return "";
+
+    const candidates = buildJavpQualityCandidates(raw);
+    if (!candidates.length) return raw;
+
+    const checks = await Promise.all(candidates.map(async (item) => ({
+        ...item,
+        ok: await isPlayableTrailerUrl(item.url)
+    })));
+
+    const best = checks.find((item) => item.ok);
+    return best ? best.url : raw;
+}
+
+async function fetchJavpTrailerUrl(code) {
+    const query = normalizeTrailerCode(code);
+    if (!query) return "";
+    if (Object.prototype.hasOwnProperty.call(JAVP_TRAILER_CACHE, query)) return JAVP_TRAILER_CACHE[query];
+
+    if (!JAVP_TRAILER_PROMISE_CACHE[query]) {
+        JAVP_TRAILER_PROMISE_CACHE[query] = Widget.http.get(`${JAVP_TRAILER_API_BASE}${encodeURIComponent(query)}`, {
+            headers: { ...HEADERS, "Accept": "application/json,text/plain,*/*", "Referer": "https://javp.cc/" },
+            timeout: JAVP_FETCH_TIMEOUT_MS
+        })
+            .then(async (res) => {
+                const data = typeof res.data === "string" ? JSON.parse(res.data) : res.data;
+                const trailerUrl = String(data?.trailer || "").trim();
+                const bestUrl = await pickBestJavpTrailerUrl(trailerUrl);
+                JAVP_TRAILER_CACHE[query] = bestUrl;
+                return bestUrl;
+            })
+            .catch(() => {
+                JAVP_TRAILER_CACHE[query] = "";
+                return "";
+            });
+    }
+
+    return JAVP_TRAILER_PROMISE_CACHE[query];
+}
+
+async function buildPreferredTrailerUrl(titleOrCode) {
+    const javpUrl = await fetchJavpTrailerUrl(titleOrCode);
+    if (javpUrl) return javpUrl;
+    return await buildJavTrailersUrl(titleOrCode);
 }
 
 async function buildJavTrailersUrl(title) {
@@ -1386,7 +1508,7 @@ async function parseVideoList(html, options = {}) {
         const href = $link.attr("href");
 
         if (href) {
-            const title = $link.text().trim();
+            const title = getVersionTag(href) + $link.text().trim();
             const $img = $el.find("img");
             const imgSrc = $img.attr("data-src") || $img.attr("src") || "";
             const duration = $el.find(".absolute.bottom-1.right-1").text().trim();
@@ -2350,6 +2472,22 @@ function extractRelatedItems($, currentLink) {
 }
 
 async function loadDetail(link) {
+    // missav: 伪协议处理（与 missavovo.js 方案一致）
+    if (link && link.indexOf("missav:") === 0) {
+        const pp = link.split(":");
+        if (pp.length >= 4) {
+            return {
+                id: link,
+                type: "video",
+                title: pp[2],
+                videoUrl: decodeURIComponent(pp.slice(3).join(":")),
+                customHeaders: {
+                    Referer: "https://missav.ai/",
+                    Origin: "https://missav.ai"
+                }
+            };
+        }
+    }
     try {
         const res = await Widget.http.get(link, { headers: HEADERS });
         const html = res.data;
@@ -2458,11 +2596,21 @@ async function loadDetail(link) {
             }
         }
 
+        // UUID 提取（与 missavovo.js 方案一致）
+        let uuid = "";
+        $("script").each(function(i, el) {
+            const c = $(el).html() || "";
+            const m = c.match(/surrit\.com\/([a-f0-9\-]+)/);
+            if (m) { uuid = m[1]; return false; }
+            if (!uuid && c.includes("eval(function")) {
+                const um = c.match(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/);
+                if (um) uuid = um[0];
+            }
+        });
+
         // 多路并行：JavTrailers 剧照 + 预告片 + 回退推荐 + 演员头像
         const dvdId = extractDvdIdFromMissAv($, link);
         const trailerTitle = title || $('meta[property="og:title"]').attr('content') || "";
-
-        const finalVideoUrl = extractVideoUrlFromHtml(html);
 
         // 同步解析推荐视频（纯 DOM，无需网络）
         const relatedItems = extractRelatedItems($, link);
@@ -2479,15 +2627,31 @@ async function loadDetail(link) {
             ? Promise.all(peoples.map((p) => p.avatar || resolvePeopleAvatar(p.id)))
             : Promise.resolve([]);
 
-        const [jtMeta, trailerUrl, fallbackItems, avatarUrls] = await Promise.all([
+        // Worker 画质获取（与 missavovo.js 方案一致）
+        const qualitiesPromise = uuid
+            ? (async () => {
+                const worker = gs("worker");
+                const lines = worker ? await gl(worker, uuid) : null;
+                if (lines && lines.length) return lines;
+                const cdn = "https://surrit.com/" + uuid;
+                return [
+                    { label: "1080P", url: cdn + "/1080p/video.m3u8" },
+                    { label: "720P", url: cdn + "/720p/video.m3u8" }
+                ];
+            })()
+            : Promise.resolve([]);
+
+        const [jtMeta, trailerUrl, fallbackItems, avatarUrls, qualityLines] = await Promise.all([
             // JavTrailers 剧照（超时 2500ms）
             dvdId ? fetchJavTrailersMeta(dvdId) : Promise.resolve({ detailUrl: "", contentId: "", backdropPath: "", backdropPaths: [], trailers: [] }),
-            // JavTrailers 预告片地址
-            buildJavTrailersUrl(trailerTitle),
+            // 预告片地址：优先 javp.cc.cd，多画质 HEAD 探测；失败回退 JavTrailers
+            buildPreferredTrailerUrl(dvdId || trailerTitle),
             // 回退推荐视频
             fallbackItemsPromise,
             // 演员头像（与上面所有网络请求并发）
-            avatarPromise
+            avatarPromise,
+            // Worker 画质列表（与 missavovo.js 方案一致）
+            qualitiesPromise
         ]);
 
         const detailCode = extractVideoId(link);
@@ -2528,7 +2692,7 @@ async function loadDetail(link) {
         // 这里用于直接进入详情页等场景，不再依赖 0oo0 私人服务。
         const detailHdCovers = buildCoverUrlsFromVideoId(detailCode);
 
-        if (finalVideoUrl) {
+        if (uuid) {
             var detailPosterCover = detailHdCovers.posterUrl || resolveUrl(missavCover) || "";
             var detailBackdropCover = detailHdCovers.backdropUrlOverride || detailHdCovers.backdropUrl || resolveUrl(missavCover) || detailPosterCover;
 
@@ -2543,18 +2707,20 @@ async function loadDetail(link) {
                 if (!backdropOk) detailBackdropCover = resolveUrl(missavCover) || detailPosterCover;
             }
 
+            // 取默认播放地址；中文字幕版使用720p
+            const qualityIndex = link.includes("-chinese-subtitle") ? 1 : 0;
+            const videoUrl = qualityLines && qualityLines.length > qualityIndex ? qualityLines[qualityIndex].url : "";
+
             const item = {
                 id: link,
                 type: "video",
-                title,
+                title: getVersionTag(link) + title,
                 description: officialDescription,
-                videoUrl: finalVideoUrl,
+                videoUrl: videoUrl,
                 actors,
                 trailers,
                 mediaType: "movie",
-                playerType: "system",
 
-                // 实验 B：
                 // 详情页竖图字段：高清竖图
                 coverUrl: detailPosterCover,
                 posterPath: detailPosterCover,
@@ -2574,9 +2740,8 @@ async function loadDetail(link) {
                 relatedItems: finalRelatedItems,
 
                 customHeaders: {
-                    "Referer": "https://missav.ai/",
-                    "User-Agent": HEADERS["User-Agent"],
-                    "Origin": "https://missav.ai"
+                    Referer: "https://missav.ai/",
+                    Origin: "https://missav.ai"
                 }
             };
 
