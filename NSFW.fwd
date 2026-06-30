@@ -129,5 +129,14 @@
       "author": "EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/tikporn.js"
     },
+    {
+      "id": "51cg",
+      "title": "51吃瓜",
+      "description": "51吃瓜网站聚合.建议搭建自己的CF Worker解密代理",
+      "requiredVersion": "0.0.2",
+      "version": "3.4.0",
+      "author": "Codex/廿二日",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/51cg.js"
+    },
   ]
 }
