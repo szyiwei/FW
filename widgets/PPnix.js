@@ -1,16 +1,16 @@
-﻿// @name PPnix ForwardWidget
+// @name PPnix ForwardWidget
 // @description PPnix 影视模块 (ForwardWidget 版) — 支持电影/电视剧分类浏览、搜索、详情播放
-// @version 1.0.0
+// @version 1.1.0
 // @site https://www.ppnix.com
 
 WidgetMetadata = {
   id: "ppnix.widget",
   title: "PPnix",
   icon: "",
-  version: "1.0.0",
+  version: "1.1.0",
   requiredVersion: "0.0.1",
   description: "PPnix 影视 — 电影/电视剧分类浏览与搜索，支持自定义域名和 CF Cookie",
-  author: "Spider",
+  author: "Spider|Johnny",
   site: "https://github.com",
 
   globalParams: [
@@ -611,7 +611,7 @@ function ppnixExtractPlayResources(host, detailUrl, vodName, html, isMovie, targ
       ? `${host}/info/m3u8/${infoId}/${encodeURIComponent(param)}.m3u8`
       : param;
     resources.push({
-      name: "PPnix",
+      name: "PPnix - 1080P",
       description: vodName + " [正片]",
       url: m3u8Url,
       customHeaders: {
@@ -631,7 +631,7 @@ function ppnixExtractPlayResources(host, detailUrl, vodName, html, isMovie, targ
         ? `${host}/info/m3u8/${infoId}/${encodeURIComponent(param)}.m3u8`
         : param;
       resources.push({
-        name: "PPnix",
+        name: "PPnix - 1080P",
         description: vodName + " 第" + epNo + "集",
         url: m3u8Url,
         customHeaders: {
