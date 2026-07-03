@@ -5,7 +5,7 @@
 // - 从当前详情页 params 中提取番号。
 // - 直接访问 123AV 尝试不同版本的 slug（有码/无码流出/中文字幕）。
 // - 有效版本提取 surritCode（从 x-data 解析），相同 surritCode 去重。
-// - 调用 surrit.store API 获取可播放 m3u8 地址。
+// - 调用 123av.com/stream API 获取可播放 m3u8 地址。
 // - 返回 stream items，name 带版本标识。
 
 var WidgetMetadata = {
@@ -14,7 +14,7 @@ var WidgetMetadata = {
   description: "通过番号匹配 123AV 播放源，并聚合到当前视频详情页",
   author: "meeowzzz",
   site: "https://123av.com",
-  version: "1.0.0",
+  version: "1.0.1",
   requiredVersion: "0.0.1",
   modules: [
     {
@@ -30,7 +30,6 @@ var WidgetMetadata = {
 
 // ==================== 常量定义 ====================
 const BASE = "https://123av.com";
-const SURRIT_API = "https://surrit.store";
 const REQUEST_TIMEOUT = 15000;
 
 const DEFAULT_HEADERS = {
@@ -43,7 +42,7 @@ const DEFAULT_HEADERS = {
 
 const PLAY_HEADERS = {
   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15",
-  "Referer": SURRIT_API + "/"
+  "Referer": BASE + "/"
 };
 
 // 版本 slug 后缀列表（按优先级排序）
@@ -330,11 +329,11 @@ async function getPlayableUrl(surritCode) {
   if (!surritCode) return "";
 
   try {
-    const apiUrl = `${SURRIT_API}/stream?id=${encodeURIComponent(surritCode)}`;
+    const apiUrl = `${BASE}/stream?id=${encodeURIComponent(surritCode)}`;
     const resp = await Widget.http.get(apiUrl, {
       headers: {
         "User-Agent": DEFAULT_HEADERS["User-Agent"],
-        "Referer": `${SURRIT_API}/e/${surritCode}`
+        "Referer": `${BASE}/e/${surritCode}`
       },
       timeout: 8000
     });
