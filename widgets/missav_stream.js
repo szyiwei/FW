@@ -1,21 +1,25 @@
-// ==================== MissAV Stream Source v1.1 ====================
+
+// ==================== MissAV Stream Source v1.3 ====================
 // 用途：作为 Forward 的 stream source，把 MissAV 播放源聚合到其他视频详情页下方。
 //
-// v1.1 改动：
-// 1. 强化 Emby / 本地媒体场景下的番号提取。
-// 2. 除了 title / seriesName / description 等顶层字段，也会扫描 fileName / filename / path / mediaSources 等字段。
-// 3. 如果顶层字段找不到，会递归扫描 params 内部的字符串值。
-// 4. 仍然只做“番号驱动”的精确匹配，不做普通标题模糊匹配，避免误挂源。
+// v1.3 改动：
+// 1. 支持返回同一番号的所有版本（中文/无码/有码），按优先级排序。
+// 2. stream name 中加入版本标识，如 "[中文字幕]MissAV 1080P"。
+// 3. 相同 UUID 的版本自动去重。
+//
+// v1.2 改动：
+// 1. 修复番号提取时 fileName 字段拼写错误。
+// 2. 新增 originalFilename、mediaSources 等字段扫描。
+// 3. 新增递归扫描 params 内部字符串值的兜底策略。
 //
 // 策略：
 // - 从当前详情页 params 中提取番号。
-// - 用番号搜索 MissAV。
-// - 找到精确匹配的 MissAV 详情页。
-// - 提取 surrit UUID。
-// - 检测 1080p 是否存在。
+// - 用番号搜索 MissAV，找到所有精确匹配的详情页。
+// - 按优先级排序：中文字幕 > 无码流出 > 有码。
+// - 逐个提取 surrit UUID，相同 UUID 去重。
+// - 每个 UUID 检测 1080p 是否存在。
 // - 有 1080p：返回 1080p + 720p。
 // - 没有 1080p：只返回 720p。
-// - 不返回 480p / 360p。
 
 var WidgetMetadata = {
   id: "missav_stream",
@@ -23,7 +27,7 @@ var WidgetMetadata = {
   description: "通过番号匹配 MissAV 播放源，并聚合到当前视频详情页",
   author: "meeowzzz",
   site: "https://missav.ai",
-  version: "1.1.0",
+  version: "1.3.0",
   requiredVersion: "0.0.1",
   modules: [
     {
@@ -50,10 +54,20 @@ const DEFAULT_HEADERS = {
 };
 
 const PLAY_HEADERS = {
-  "Referer": "https://missav.ai/",
-  "Origin": "https://missav.ai",
-  "User-Agent": DEFAULT_HEADERS["User-Agent"]
+  Referer: "https://missav.ai/",
+  Origin: "https://missav.ai"
 };
+
+// ==================== Worker 支持（与 ovo 方案一致） ====================
+function gs(k) { try { return Widget.storage.get(k) || ""; } catch (e) { return ""; } }
+async function gl(w, u) {
+  try {
+    var r = await Widget.http.get(w + "/qualities/" + u, { headers: DEFAULT_HEADERS });
+    var d = typeof r.data == "string" ? JSON.parse(r.data) : r.data;
+    if (d && d.length) return d;
+  } catch (e) {}
+  return null;
+}
 
 // ==================== HTTP 封装 ====================
 async function httpGet(url, options = {}) {
@@ -87,6 +101,13 @@ function toAbsoluteUrl(href) {
   if (href.startsWith("http")) return href;
   if (href.startsWith("/")) return DEFAULT_BASE_URL + href;
   return DEFAULT_BASE_URL + "/" + href;
+}
+
+function getVersionTag(link) {
+  if (!link) return "有码";
+  if (link.includes("-chinese-subtitle")) return "中文字幕";
+  if (link.includes("-uncensored-leak")) return "无码破解";
+  return "有码";
 }
 
 // ==================== 番号提取 ====================
@@ -320,7 +341,8 @@ function parseSearchResults(html, targetCode) {
     results.push({
       title,
       link,
-      code
+      code,
+      version: getVersionTag(link)
     });
   });
 
@@ -343,7 +365,8 @@ function parseSearchResults(html, targetCode) {
       results.push({
         title: $el.text().trim(),
         link,
-        code: codeFromLink
+        code: codeFromLink,
+        version: getVersionTag(link)
       });
     });
   }
@@ -374,17 +397,24 @@ async function findMissAVDetailByCode(code) {
 
       if (!results.length) continue;
 
-      const exact = results.find(item => normalizeCode(item.code) === targetLoose);
-      if (exact) return exact.link;
+      // 筛选精确匹配的版本
+      const exactMatches = results.filter(item => normalizeCode(item.code) === targetLoose);
+      if (!exactMatches.length) {
+        console.warn(`[missav_stream] 搜索到结果，但没有精确匹配番号：${code}`);
+        continue;
+      }
 
-      // 保守策略：搜索到结果但没有精确番号，不返回。
-      console.warn(`[missav_stream] 搜索到结果，但没有精确匹配番号：${code}`);
+      // 按优先级排序：中文字幕 > 无码流出 > 有码
+      const priority = { "中文字幕": 0, "无码流出": 1, "有码": 2 };
+      exactMatches.sort((a, b) => (priority[a.version] ?? 99) - (priority[b.version] ?? 99));
+
+      return exactMatches.map(item => ({ link: item.link, version: item.version }));
     } catch (e) {
       console.warn(`[missav_stream] 搜索失败：${key}`, e?.message || e);
     }
   }
 
-  return "";
+  return [];
 }
 
 // ==================== 详情页解析 surrit UUID ====================
@@ -397,30 +427,16 @@ function extractSurritUuidFromHtml(html) {
   $("script").each((i, el) => {
     const scriptContent = $(el).html() || "";
 
-    // 1. 从完整 surrit m3u8 地址中提取 UUID
-    if (scriptContent.includes("surrit.com") && scriptContent.includes(".m3u8")) {
-      const uuidFromUrl = scriptContent.match(/https:\/\/surrit\.com\/([a-f0-9\-]{36})\/[^"'\s]*\.m3u8/i);
-      if (uuidFromUrl && uuidFromUrl[1]) {
-        uuid = uuidFromUrl[1];
-        return false;
-      }
-    }
+    // 1. 从 surrit CDN 地址中提取 UUID（与 ovo 方案一致）
+    const m = scriptContent.match(/surrit\.com\/([a-f0-9\-]+)/);
+    if (m) { uuid = m[1]; return false; }
 
-    // 2. 从 eval 混淆脚本中提取 UUID
+    // 2. 从 eval 混淆脚本中提取 UUID（与 ovo 方案一致）
     if (!uuid && scriptContent.includes("eval(function")) {
-      const uuidMatches = scriptContent.match(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/gi);
-      if (uuidMatches && uuidMatches.length > 0) {
-        uuid = uuidMatches[0];
-        return false;
-      }
+      const um = scriptContent.match(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/);
+      if (um) uuid = um[0];
     }
   });
-
-  // 3. fallback：直接从整页 HTML 中找 UUID
-  if (!uuid) {
-    const match = html.match(/surrit\.com\/([a-f0-9\-]{36})\//i);
-    if (match && match[1]) uuid = match[1];
-  }
 
   return uuid;
 }
@@ -468,7 +484,23 @@ function buildStreamItem(name, description, url) {
   };
 }
 
-async function buildStreamItems(uuid, code, detailLink) {
+async function buildStreamItems(uuid, code, detailLink, version) {
+  const versionTag = version && version !== "有码" ? `[${version}]` : "";
+  const verDesc = version && version !== "有码" ? `\n版本：${version}` : "";
+
+  // Worker 画质获取（与 ovo 方案一致）
+  const worker = gs("worker");
+  const lines = worker ? await gl(worker, uuid) : null;
+
+  if (lines && lines.length) {
+    return lines.map(l => buildStreamItem(
+      `${versionTag}MissAV ${l.label}`,
+      `番号：${code}\n来源：MissAV\n清晰度：${l.label}${verDesc}\n详情页：${detailLink}`,
+      l.url
+    ));
+  }
+
+  // Worker 不可用时，回退到 HEAD 检测
   const url1080 = `https://surrit.com/${uuid}/1080p/video.m3u8`;
   const url720 = `https://surrit.com/${uuid}/720p/video.m3u8`;
 
@@ -479,8 +511,8 @@ async function buildStreamItems(uuid, code, detailLink) {
   if (has1080) {
     items.push(
       buildStreamItem(
-        "MissAV 1080P",
-        `番号：${code}\n来源：MissAV\n清晰度：1080P\n详情页：${detailLink}`,
+        `${versionTag}MissAV 1080P`,
+        `番号：${code}\n来源：MissAV\n清晰度：1080P${verDesc}\n详情页：${detailLink}`,
         url1080
       )
     );
@@ -488,8 +520,8 @@ async function buildStreamItems(uuid, code, detailLink) {
 
   items.push(
     buildStreamItem(
-      "MissAV 720P",
-      `番号：${code}\n来源：MissAV\n清晰度：720P\n详情页：${detailLink}`,
+      `${versionTag}MissAV 720P`,
+      `番号：${code}\n来源：MissAV\n清晰度：720P${verDesc}\n详情页：${detailLink}`,
       url720
     )
   );
@@ -509,25 +541,42 @@ async function loadResource(params = {}) {
 
     console.log(`[missav_stream] 提取到番号：${code}`);
 
-    const detailLink = await findMissAVDetailByCode(code);
+    const detailPages = await findMissAVDetailByCode(code);
 
-    if (!detailLink) {
+    if (!detailPages.length) {
       console.log(`[missav_stream] 未找到 MissAV 精确匹配：${code}`);
       return [];
     }
 
-    console.log(`[missav_stream] 匹配到详情页：${detailLink}`);
+    console.log(`[missav_stream] 匹配到 ${detailPages.length} 个版本：${detailPages.map(p => p.version).join(", ")}`);
 
-    const uuid = await extractSurritUuidFromDetail(detailLink);
+    // 遍历所有版本，提取 UUID 并去重
+    const seenUuids = new Set();
+    const allStreams = [];
 
-    if (!uuid) {
-      console.log(`[missav_stream] 未能提取 surrit UUID：${detailLink}`);
-      return [];
+    for (const page of detailPages) {
+      console.log(`[missav_stream] 处理版本：${page.version} → ${page.link}`);
+
+      const uuid = await extractSurritUuidFromDetail(page.link);
+
+      if (!uuid) {
+        console.log(`[missav_stream] 未能提取 UUID：${page.link}`);
+        continue;
+      }
+
+      if (seenUuids.has(uuid)) {
+        console.log(`[missav_stream] UUID 已存在，跳过重复：${uuid}`);
+        continue;
+      }
+      seenUuids.add(uuid);
+
+      console.log(`[missav_stream] 提取到 UUID：${uuid}`);
+
+      const streams = await buildStreamItems(uuid, code, page.link, page.version);
+      allStreams.push(...streams);
     }
 
-    console.log(`[missav_stream] 提取到 surrit UUID：${uuid}`);
-
-    return await buildStreamItems(uuid, code, detailLink);
+    return allStreams;
   } catch (e) {
     console.error("[missav_stream] loadResource 失败：", e?.message || e);
     return [];
