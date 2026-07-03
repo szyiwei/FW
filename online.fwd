@@ -85,6 +85,15 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/PPnix.js"
     },
     {
+      "id": "girigirilove",
+      "title": "爱动漫",
+      "description": "ギリギリ愛动漫 - 高清动漫线上观看",
+      "requiredVersion": "0.0.1",
+      "version": "1.3.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/girigirilove.js"
+    },
+    {
       "id": "https://t.me/Nzmgs?rev=20260605b",
       "title": "聚合实时榜单",
       "description": "基聚合各平台实时榜单数据",
