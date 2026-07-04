@@ -1,10 +1,10 @@
 WidgetMetadata = {
   "id": "51cg",
   "title": "51吃瓜",
-  "version": "3.4.0",
+  "version": "3.4.1", 
   "requiredVersion": "0.0.2",
   "description": "51吃瓜网站聚合.建议搭建自己的CF Worker解密代理",
-  "author": "Codex/廿二日",
+  "author": "𝓓𝔂𝓵𝓪𝓷/廿二日",
   "site": "https://chigua.com",
   "icon": "https://chigua.com/favicon.ico",
   "detailCacheDuration": 1800,
@@ -184,7 +184,6 @@ async function loadList(params) {
       title: cleanText(title),
       coverUrl: sourcePoster,
       backdropPath: sourcePoster,
-      posterPath: sourcePoster,
       thumbnail: sourcePoster,
       image: sourcePoster,
       sourcePoster: sourcePoster,
@@ -247,7 +246,6 @@ async function search(params) {
       title: cleanText(title),
       coverUrl: sourcePoster,
       backdropPath: sourcePoster,
-      posterPath: sourcePoster,
       thumbnail: sourcePoster,
       image: sourcePoster,
       sourcePoster: sourcePoster
@@ -255,7 +253,7 @@ async function search(params) {
   }
 
   if (needCover && items.length > 0) {
-    items = await hydrateCovers(items, baseUrl, COVER_PROXY);
+    items = await hydrateCovers(items, baseUrl, coverProxy); 
   }
 
   return items;
@@ -316,7 +314,6 @@ async function loadDetail(link) {
     mediaType: "movie",
     title: cleanText(title) || decoded.title || idFromUrl(url),
     coverUrl: resolvedStills[0] || coverUrl,
-    posterPath: resolvedStills[0] || coverUrl,
     backdropPath: resolvedStills[0] || coverUrl,
     backdropPaths: resolvedStills.length > 1 ? resolvedStills : undefined,
     releaseDate: releaseDate,
@@ -352,7 +349,6 @@ async function hydrateCovers(items, baseUrl, coverProxy) {
     cover = cover || sp;
     item.coverUrl = cover;
     item.backdropPath = cover;
-    item.posterPath = cover;
     item.thumbnail = cover;
     item.image = cover;
     delete item.sourcePoster;
@@ -360,16 +356,12 @@ async function hydrateCovers(items, baseUrl, coverProxy) {
   return items;
 }
 
-
-
 async function resolveCoverImage(url, baseUrl, coverProxy) {
   var fullUrl = absoluteUrl(url, baseUrl);
   if (!fullUrl) return "";
   if (!coverProxy) return fullUrl;
   return coverProxy + "?url=" + encodeURIComponent(fullUrl);
 }
-
-
 
 function getHeaders() {
   return {
@@ -432,7 +424,6 @@ async function hydrateRelatedItems(links, baseUrl, coverProxy) {
         type: "url",
         mediaType: "movie",
         title: item.title,
-        posterPath: resolvedCover || undefined,
         backdropPath: resolvedCover || undefined,
         link: encodeLink({ url: item.url, baseUrl: baseUrl, title: item.title, coverProxy: coverProxy })
       };
