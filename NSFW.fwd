@@ -31,6 +31,15 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV_ovo.js"
     },
     {
+      "id": "123av",
+      "title": "123AV",
+      "description": "123AV 日本 AV 在线观看模块。支持最新 / 热门 / 有码 / 无码 / 无码流出分类浏览",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.1",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/123av.js"
+    },
+    {
       "id": "hanime1",
       "title": "Hanime1",
       "description": "统一版：全局搜索、排行、分类、高级检索、新番预告",
@@ -128,24 +137,6 @@
       "version": "1.2.8",
       "author": "廿二日",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/kanav.js"
-    },
-    {
-      "id": "xHamster",
-      "title": "xHamster",
-      "description": "xHamster 是一个以用户上传内容（UGC）为核心的成人视频网站和社区平台",
-      "requiredVersion": "0.0.1",
-      "version": "0.0.1",
-      "author": "GM",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/xHamster.js"
-    },
-    {
-      "id": "Tik.Porn",
-      "title": "Tik.Porn",
-      "description": "Tik.Porn — 短视频聚合",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/tikporn.js"
     },
     {
       "id": "51cg",
