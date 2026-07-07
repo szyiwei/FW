@@ -1,19 +1,19 @@
 WidgetMetadata = {
     id: "gm.xHamster.gm",
     title: "xHamster",
-    version: "0.0.1",
+    version: "1.0.1",
     requiredVersion: "0.0.1",
     description: "xHamster 是一个以用户上传内容（UGC）为核心的成人视频网站和社区平台，创立于 2007 年，由 Hammy Media Ltd. 运营，总部位于塞浦路斯利马索尔。",
     author: "GM",
     site: "https://zh.xhamster.com",
-    detailCacheDuration: 600,
+    detailCacheDuration: 300,
     modules: [
         // ========== 最新视频 ==========
         {
             id: "newVideos",
             title: "最新",
             functionName: "getNewVideos",
-            cacheDuration: 300,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "page",
@@ -29,11 +29,11 @@ WidgetMetadata = {
             id: "bestVideos",
             title: "最佳",
             functionName: "getBestVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
-                    name: "period",
-                    title: "时间范围",
+                    name: "sort_by",
+                    title: "排序方式",
                     type: "enumeration",
                     description: "最佳视频的时间范围",
                     value: "today",
@@ -58,7 +58,7 @@ WidgetMetadata = {
             id: "categoryPopular",
             title: "流行",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -104,7 +104,7 @@ WidgetMetadata = {
             id: "categoryProduction",
             title: "制作",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -165,7 +165,7 @@ WidgetMetadata = {
             id: "categoryActions",
             title: "行为",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -260,7 +260,7 @@ WidgetMetadata = {
             id: "categoryFetish",
             title: "恋物",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -330,7 +330,7 @@ WidgetMetadata = {
             id: "categoryBody",
             title: "身体",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -370,7 +370,7 @@ WidgetMetadata = {
             id: "categoryHair",
             title: "头发",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -396,7 +396,7 @@ WidgetMetadata = {
             id: "categoryApparel",
             title: "服饰",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -434,7 +434,7 @@ WidgetMetadata = {
             id: "categoryOrientation",
             title: "取向",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -456,7 +456,7 @@ WidgetMetadata = {
             id: "categoryAge",
             title: "年龄",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -486,7 +486,7 @@ WidgetMetadata = {
             id: "categoryEthnicity",
             title: "种族",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -516,7 +516,7 @@ WidgetMetadata = {
             id: "categoryPeople",
             title: "人数",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -543,7 +543,7 @@ WidgetMetadata = {
             id: "categorySexToys",
             title: "玩具",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -575,7 +575,7 @@ WidgetMetadata = {
             id: "categoryScenario",
             title: "剧情",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -623,7 +623,7 @@ WidgetMetadata = {
             id: "categoryLocation",
             title: "地点",
             functionName: "getCategoryVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "category",
@@ -1312,16 +1312,16 @@ async function getPeopleVideos(params = {}) {
 async function getBestVideos(params = {}) {
     if (params.genreId) return getCategoryVideos({ ...params, category: params.genreId });
     if (params.peopleId) return getPeopleVideos(params);
-    const period = params.period || "weekly";
+    const sortBy = params.sort_by || "weekly";
     const page = Math.max(1, Number(params.page) || 1);
 
     // xhamster 首页链接：Best Videos = /best/weekly
     let url;
-    if (period === "today") {
+    if (sortBy === "today") {
         url = `${BASE_URL}/best/daily`;
-    } else if (period === "weekly") {
+    } else if (sortBy === "weekly") {
         url = `${BASE_URL}/best/weekly`;
-    } else if (period === "monthly") {
+    } else if (sortBy === "monthly") {
         url = `${BASE_URL}/best/monthly`;
     } else {
         // "all" 也用 weekly（xhamster 没有 /best 页面，会返回 503）
@@ -1376,7 +1376,9 @@ async function getSearchResults(params = {}) {
     }
 
     const html = await fetchPage(url);
-    return parseVideoList(html);
+    const items = parseVideoList(html);
+    items.forEach(function(item) { item.posterPath = item.coverUrl; });
+    return items;
 }
 
 // ============================================================
