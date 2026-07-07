@@ -58,15 +58,6 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/BitchLives.js"
     },
     {
-      "id": "Pornhub",
-      "title": "PornHub",
-      "description": "在线观看PornHub视频",
-      "requiredVersion": "0.0.1",
-      "version": "1.3.1",
-      "author": "海带|EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Pornhub_Tao.js"
-    },
-    {
       "id": "91porn_makka",
       "title": "91Porn",
       "description": "91Porn 分类浏览与全局搜索模块",
@@ -83,15 +74,6 @@
       "version": "0.9.6",
       "author": "網路",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91Porny.js"
-    },
-    {
-      "id": "XVideos",
-      "title": "XVideos",
-      "description": "XVideos 视频资源浏览模块，支持最新、热门、分类、标签、频道和明星筛选",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/XVideos_Tao.js"
     },
     {
       "id": "jable_streams",
@@ -146,6 +128,51 @@
       "version": "3.4.0",
       "author": "Codex/廿二日",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/51cg.js"
+    },
+    {
+      "id": "Pornhub",
+      "title": "PornHub",
+      "description": "在线观看PornHub视频",
+      "requiredVersion": "0.0.1",
+      "version": "1.3.1",
+      "author": "海带|EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Pornhub_Tao.js"
+    },
+    {
+      "id": "XVideos",
+      "title": "XVideos",
+      "description": "XVideos 视频资源浏览模块，支持最新、热门、分类、标签、频道和明星筛选",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/XVideos_Tao.js"
+    },
+    {
+      "id": "xHamster",
+      "title": "xHamster",
+      "description": "xHamster 是一个以用户上传内容（UGC）为核心的成人视频网站和社区平台",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.1",
+      "author": "GM",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/xhamster.js"
+    },
+    {
+      "id": "beeg",
+      "title": "Beeg",
+      "description": "Beeg 视频模块 — 多频道/多模特浏览，HLS 多画质播放",
+      "requiredVersion": "0.0.1",
+      "version": "1.1.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/beeg.js"
+    },
+    {
+      "id": "yesporn",
+      "title": "YesPorn VIP",
+      "description": "YesPorn VIP — 高清成人视频",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/yesporn.js"
     },
   ]
 }
