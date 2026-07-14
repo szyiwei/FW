@@ -8,8 +8,13 @@ DOMAIN-SUFFIX,tmdbimage.vvebo.vip
 DOMAIN-SUFFIX,sleepcycle.com
 DOMAIN-SUFFIX,trakt.tv
 DOMAIN,qbdlx.launchpd.cloud
+DOMAIN-SUFFIX,115.com
+DOMAIN-SUFFIX,webapi.115.com
+DOMAIN-SUFFIX,v.115.com
+DOMAIN-SUFFIX,cpats01.115.com
 
 # emby
+DOMAIN-SUFFIX,inemby.us.ci
 DOMAIN-SUFFIX,ciallo.party
 DOMAIN-SUFFIX,media.asubaka.de
 DOMAIN-SUFFIX,vip1.lz-cdn1.com
