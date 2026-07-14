@@ -4,6 +4,15 @@
   "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon2.PNG",
   "widgets": [
     {
+      "id": "AVDB",
+      "title": "AVDB",
+      "description": "终极瑟瑟模块",
+      "requiredVersion": "0.0.2",
+      "version": "1.6.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/AVDB.js"
+    },
+    {
       "id": "jable",
       "title": "Jable",
       "description": "Jable分类浏览和全局搜索",
