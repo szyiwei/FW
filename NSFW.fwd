@@ -103,13 +103,22 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/123av_stream.js"
     },
     {
-      "id": "supjav.stream",
-      "title": "Supjav Stream",
-      "description": "通过番号匹配 Supjav 播放源",
+      "id": "memojav.stream",
+      "title": "Memojav Stream",
+      "description": "通过番号匹配 Memojav 播放源",
       "requiredVersion": "0.0.1",
       "version": "1.0.5",
       "author": "meeowzzz",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/supjav_stream.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/memojav_stream.js"
+    },
+    {
+      "id": "kanav.stream",
+      "title": "Kanav Stream",
+      "description": "通过番号匹配 Kanav 播放源",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.5",
+      "author": "meeowzzz",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/kanav_stream.js"
     },
     {
       "id": "kanavtao",
@@ -173,6 +182,15 @@
       "version": "1.0.0",
       "author": "EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/yesporn.js"
+    },
+    {
+      "id": "subtitlecat",
+      "title": "SubtitleCat 字幕",
+      "description": "从 subtitlecat.com 搜索字幕",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/SubtitleCat.js"
     },
   ]
 }
