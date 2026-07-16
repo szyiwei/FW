@@ -1,0 +1,15 @@
+{
+  "title": "AiKuai's在线模块",
+  "description": "AiKuai在线模块合集",
+  "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon2.png",
+  "widgets": [
+    {   
+      "id": "chigua",
+      "url": "http://b0b07ade.jisuy.ios999.vip//fw/chigua.js"
+    },
+    {
+      "id": "51fans",
+      "url": "http://b0b07ade.jisuy.ios999.vip//fw/51fans.js"
+    },
+  ]
+}
