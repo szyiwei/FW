@@ -5,11 +5,12 @@
   "widgets": [
     {   
       "id": "chigua",
+      "title": "吃瓜模块",
+      "description": "每日大赛/51吃瓜/91吃瓜/911爆料网",
+      "requiredVersion": "0.0.2",
+      "version": "1.6.0",
+      "author": "AiKuai",
       "url": "http://b0b07ade.jisuy.ios999.vip/fw/chigua.js"
-    },
-    {
-      "id": "51fans",
-      "url": "http://b0b07ade.jisuy.ios999.vip/fw/51fans.js"
     },
   ]
 }
