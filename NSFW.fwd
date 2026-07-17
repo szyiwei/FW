@@ -152,7 +152,7 @@
       "title": "PornHub",
       "description": "在线观看PornHub视频",
       "requiredVersion": "0.0.1",
-      "version": "1.3.1",
+      "version": "2.1.0",
       "author": "海带|EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Pornhub_Tao.js"
     },
@@ -191,6 +191,15 @@
       "version": "1.0.0",
       "author": "EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/yesporn.js"
+    },
+    {
+      "id": "wow",
+      "title": "WOW.4K",
+      "description": "WOW.XXX — 高清成人视频",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/wow.js"
     },
     {
       "id": "subtitlecat",
