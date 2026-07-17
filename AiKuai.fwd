@@ -4,6 +4,15 @@
   "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon2.png",
   "widgets": [
     {   
+      "id": "hsck",
+      "title": "hsck",
+      "description": "hsck",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/hsck.js"
+    },  
+    {   
       "id": "chigua",
       "title": "吃瓜模块",
       "description": "每日大赛/51吃瓜/91吃瓜/911爆料网",
