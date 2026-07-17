@@ -7,8 +7,8 @@
       "id": "chigua",
       "title": "吃瓜模块",
       "description": "每日大赛/51吃瓜/91吃瓜/911爆料网",
-      "requiredVersion": "0.0.2",
-      "version": "1.6.0",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
       "author": "AiKuai",
       "url": "http://b0b07ade.jisuy.ios999.vip/fw/chigua.js"
     },
@@ -20,6 +20,105 @@
       "version": "1.0.0",
       "author": "AiKuai",
       "url": "http://b0b07ade.jisuy.ios999.vip/fw/51fans.js"
+    },
+    {   
+      "id": "selangwu",
+      "title": "色狼屋",
+      "description": "色狼屋",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/selangwu.js"
+    },
+    {   
+      "id": "avbang",
+      "title": "avbang",
+      "description": "avbang",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/avbang.js"
+    },
+    {   
+      "id": "XGR",
+      "title": "XGR",
+      "description": "XGR",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/XGR.js"
+    },
+    {   
+      "id": "xvideo",
+      "title": "xvideo",
+      "description": "xvideo",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/xvideo.js"
+    },
+    {   
+      "id": "Pektino",
+      "title": "Pektino",
+      "description": "Pektino 成人视频排行榜",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/twitter.js"
+    },
+    {   
+      "id": "papapa",
+      "title": "papapa",
+      "description": "papapa",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/papapa.js"
+    },
+    {   
+      "id": "Lvmao",
+      "title": "Lvmao",
+      "description": "Lvmao",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/Lvmao.js"
+    },
+    {   
+      "id": "onlyfans18",
+      "title": "onlyfans18",
+      "description": "onlyfans18",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/onlyfans18.js"
+    },
+    {   
+      "id": "91tiantang",
+      "title": "91tiantang",
+      "description": "91tiantang",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/91tiantang.js"
+    },
+    {   
+      "id": "rou",
+      "title": "rou",
+      "description": "rou",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/rou.js"
+    },
+    {   
+      "id": "91md",
+      "title": "91md",
+      "description": "591md",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "AiKuai",
+      "url": "http://b0b07ade.jisuy.ios999.vip/fw/91md.js"
     },
   ]
 }
