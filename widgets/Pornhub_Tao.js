@@ -5,7 +5,7 @@ const COUNTRY_OPTIONS = [{ title: "全球", value: "world" }, { title: "日本",
 WidgetMetadata = {
     id: "Pornhub_int",
     title: "Pornhub",
-    version: "2.0.0",
+    version: "2.1.0",
     requiredVersion: "0.0.1",
     description: "Pornhub 视频聚合模块，解决列表加载慢的问题、新增详情页演员、剧照功能，全局搜索",
     author: "海带|EL",
@@ -36,7 +36,7 @@ WidgetMetadata = {
             id: "searchKeyword",
             title: "🔍 全站搜索",
             functionName: "getSearchResults",
-            cacheDuration: 86400,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "search_query",
@@ -83,7 +83,7 @@ WidgetMetadata = {
             id: "favorites",
             title: "❤️ 我的最爱",
             functionName: "getFavorites",
-            cacheDuration: 180,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "username",
@@ -132,7 +132,7 @@ WidgetMetadata = {
             id: "searchUser",
             title: "​🌟 优选艺人",
             functionName: "getUserUploads",
-            cacheDuration: 86400,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "username",
@@ -232,7 +232,7 @@ WidgetMetadata = {
             id: "premiumArtists",
             title: "👠 搜索艺人",
             functionName: "getUserUploads",
-            cacheDuration: 300,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "user_type",
@@ -294,7 +294,7 @@ WidgetMetadata = {
             id: "recommended",
             title: "🎬 推荐视频",
             functionName: "getRecommendedVideos",
-            cacheDuration: 86400,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "cookie",
@@ -326,7 +326,7 @@ WidgetMetadata = {
             id: "languageVideos",
             title: "​🌐 语言筛选",
             functionName: "getVideosByLanguage",
-            cacheDuration: 86400,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "language",
@@ -397,7 +397,7 @@ WidgetMetadata = {
             id: "hotVideos",
             title: "🔥 热播视频",
             functionName: "getVideos",
-            cacheDuration: 600,
+            cacheDuration: 86400,
             params: [
                 {
                     name: "pageType",
@@ -446,6 +446,20 @@ WidgetMetadata = {
                     enumOptions: COUNTRY_OPTIONS
                 },
                 {
+                    name: "sort_by",
+                    title: "时间范围",
+                    type: "enumeration",
+                    description: "选择统计时间范围",
+                    value: "",
+                    enumOptions: [
+                        { title: "每周", value: "" },
+                        { title: "每天", value: "t" },
+                        { title: "每月", value: "m" },
+                        { title: "每年", value: "y" },
+                        { title: "迄今为止", value: "a" }
+                    ]
+                },
+                {
                     name: "page",
                     title: "页码",
                     type: "page",
@@ -458,7 +472,7 @@ WidgetMetadata = {
             id: "topViews",
             title: "👀 最多观看",
             functionName: "getVideos",
-            cacheDuration: 600,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "pageType",
@@ -532,7 +546,7 @@ WidgetMetadata = {
             id: "maxRating",
             title: "​🏆 最高评分",
             functionName: "getVideos", // 使用相同的getVideos函数
-            cacheDuration: 600,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "pageType",
@@ -599,7 +613,7 @@ WidgetMetadata = {
             id: "latestFeatured",
             title: "💎 最新精选",
             functionName: "getVideos",
-            cacheDuration: 600,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "c",
@@ -641,7 +655,7 @@ WidgetMetadata = {
             id: "newVideos",
             title: "​🆕 最新视频",
             functionName: "getVideos",
-            cacheDuration: 600,
+            cacheDuration: 259200,
             params: [
                 {
                     name: "pageType",
@@ -2380,6 +2394,27 @@ async function loadDetail(link) {
 
         // 6. 返回 ForwardWidget 兼容的详情对象
         const description = mainAuthor ? `作者：${mainAuthor}` : "";
+
+        // 剧照：从页面尝试提取相册截图
+        const backdropPaths = [];
+        if (coverUrl) {
+            backdropPaths.push(coverUrl);
+        }
+        // 尝试从 HTML 提取更多剧照（photoGallery 中的 data-image）
+        try {
+            const galleryRegex = /<a[^>]+class="photoGallery__item[^"]*"[^>]+data-image="([^"]+)"/g;
+            let gMatch;
+            while ((gMatch = galleryRegex.exec(htmlContent)) !== null) {
+                const imgUrl = gMatch[1].replace(/^\/\//, "https://");
+                if (imgUrl && backdropPaths.indexOf(imgUrl) === -1) {
+                    backdropPaths.push(imgUrl);
+                }
+            }
+        } catch (e) { /* 剧照提取失败不影响主流程 */ }
+
+        // 预告片
+        const trailers = m3u8Data.videoUrl ? [{ url: m3u8Data.videoUrl, coverUrl: coverUrl }] : [];
+
         const result = {
             id: viewkey,
             type: "url",
@@ -2396,8 +2431,10 @@ async function loadDetail(link) {
             duration: 0,
             formats: m3u8Data.formats,
             description: description,
+            backdropPaths: backdropPaths.length > 0 ? backdropPaths : undefined,
             peoples: peoples.length > 0 ? peoples : undefined,
             genreItems: genreItems.length > 0 ? genreItems : undefined,
+            trailers: trailers.length > 0 ? trailers : undefined,
             relatedItems: recommendedVideos
         };
 
