@@ -7,18 +7,21 @@ const STORE_EXPIRES = "ddys_protect_expires";
 const STORE_SESSION_OK = "ddys_protect_session_ok";
 const STORE_VISION_KEY = "ddys_vision_api_key";
 const STORE_VISION_BASE = "ddys_vision_api_base";
+const STORE_ALIAS_PREFIX = "ddys_tmdb_alias_";
+const STORE_MATCH_PREFIX = "ddys_title_match_";
 const COOKIE_SKEW_MS = 6 * 3600 * 1000;
 const SESSION_TTL_MS = 6 * 3600 * 1000;
-const DEFAULT_VISION_BASE = "https://grsai.dakka.com.cn";
-const DEFAULT_VISION_MODEL = "gemini-2.5-flash";
+const META_CACHE_MS = 30 * 86400 * 1000;
+const DEFAULT_VISION_BASE = "https://generativelanguage.googleapis.com/v1beta";
+const DEFAULT_VISION_MODEL = "gemini-3.1-flash-lite";
 
 var WidgetMetadata = {
-  id: "https://ddys.app?mod=resource&v=127",
+  id: "https://ddys.app?mod=resource&v=140",
   title: "低调影视播放源",
-  description: "低调影视播放源；Cookie 自动过门禁续期，无需手抓",
+  description: "低调影视播放源；Cookie 自动过门禁续期，无需手抓；视觉匹配+归一化坐标+原生Gemini API，兼容多模型",
   author: "TG@ZenMoFiShi",
   site: "https://t.me/Nzmgs",
-  version: "1.2.7",
+  version: "1.4.0",
   requiredVersion: "0.0.1",
   globalParams: [
     {
@@ -32,14 +35,14 @@ var WidgetMetadata = {
       name: "visionApiBase",
       title: "视觉 API Base",
       type: "input",
-      description: "默认 https://grsai.dakka.com.cn ，一般不用改",
+      description: "OpenAI 兼容 Base，默认 Google AI Studio；可填根地址或已带 /v1|/v1beta 的地址；已含版本号时不会再拼",
       value: DEFAULT_VISION_BASE
     },
     {
       name: "visionModel",
       title: "视觉模型",
       type: "input",
-      description: "默认 gemini-2.5-flash",
+      description: "默认 gemini-3.1-flash-lite（Google AI Studio 免费可用）",
       value: DEFAULT_VISION_MODEL
     }
   ],
@@ -50,7 +53,7 @@ var WidgetMetadata = {
       description: "低调影视搜索与播放源返回",
       functionName: "loadResource",
       type: "stream",
-      cacheDuration: 120,
+      cacheDuration: 0,
       params: []
     }
   ]
@@ -78,6 +81,22 @@ function storageRemove(key) {
   try {
     if (Widget.storage && Widget.storage.remove) Widget.storage.remove(key);
   } catch (e) {}
+}
+
+function readJsonCache(key, ttl) {
+  try {
+    const raw = storageGet(key);
+    if (!raw) return null;
+    const data = typeof raw === "string" ? JSON.parse(raw) : raw;
+    if (!data || !data.savedAt || Date.now() - data.savedAt > ttl) return null;
+    return data.value;
+  } catch (e) {
+    return null;
+  }
+}
+
+function writeJsonCache(key, value) {
+  storageSet(key, JSON.stringify({ savedAt: Date.now(), value: value }));
 }
 
 function normalizeCookie(raw) {
@@ -153,6 +172,40 @@ function resolveVisionConfig(params) {
   if (!base) base = DEFAULT_VISION_BASE;
   if (!model) model = DEFAULT_VISION_MODEL;
   return { key: key, base: base.replace(/\/+$/, ""), model: model };
+}
+
+function calibrateCoordinates(points, maxW, maxH) {
+  if (!points || points.length < 3) return points;
+  var xs = points.map(function(p) { return p.x; });
+  var ys = points.map(function(p) { return p.y; });
+  var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+  var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+  if (maxX <= maxW && maxY <= maxH && minX >= 0 && minY >= 0) return points;
+  var rangeX = maxX - minX || 1;
+  var rangeY = maxY - minY || 1;
+  var pad = 0.1;
+  var tMinX = maxW * pad, tMaxX = maxW * (1 - pad);
+  var tMinY = maxH * pad, tMaxY = maxH * (1 - pad);
+  var tRangeX = tMaxX - tMinX, tRangeY = tMaxY - tMinY;
+  return points.map(function(p) {
+    return {
+      x: Math.round(tMinX + ((p.x - minX) / rangeX) * tRangeX),
+      y: Math.round(tMinY + ((p.y - minY) / rangeY) * tRangeY)
+    };
+  });
+}
+
+function buildVisionChatEndpoint(base) {
+  var b = String(base || "").replace(/\/+$/, "");
+  if (!b) return "/v1/chat/completions";
+  if (/\/chat\/completions$/i.test(b)) return b;
+  if (/generativelanguage\.googleapis\.com/i.test(b)) {
+    if (/\/openai$/i.test(b)) return b + "/chat/completions";
+    if (/\/v\d+$/i.test(b)) return b + "/openai/chat/completions";
+    return b + "/openai/chat/completions";
+  }
+  if (/\/v\d+$/i.test(b)) return b + "/chat/completions";
+  return b + "/v1/chat/completions";
 }
 
 function buildHeaders(cookie, extra) {
@@ -437,50 +490,122 @@ async function rawPost(url, body, cookie, extra) {
   });
 }
 
+function extractBase64FromDataUrl(dataUrl) {
+  var m = String(dataUrl || "").match(/^data:[^;]+;base64,(.+)$/);
+  return m ? m[1] : "";
+}
+
+function extractMimeFromDataUrl(dataUrl) {
+  var m = String(dataUrl || "").match(/^data:([^;]+);/);
+  return m ? m[1] : "image/png";
+}
+
+async function visionClickPointsNative(vision, promptDataUrl, stageDataUrl) {
+  var promptB64 = extractBase64FromDataUrl(promptDataUrl);
+  var stageB64 = extractBase64FromDataUrl(stageDataUrl);
+  var promptMime = extractMimeFromDataUrl(promptDataUrl);
+  var stageMime = extractMimeFromDataUrl(stageDataUrl);
+  if (!promptB64 || !stageB64) throw new Error("无法提取 base64 图片数据");
+
+  var b = String(vision.base || "").replace(/\/+$/, "");
+  var model = vision.model || DEFAULT_VISION_MODEL;
+  // 从 base 中提取版本路径 (如 /v1beta)
+  var verMatch = b.match(/\/(v\d+[^\/]*)$/);
+  var verPath = verMatch ? verMatch[1] : "v1beta";
+  var url = "https://generativelanguage.googleapis.com/" + verPath + "/models/" + model + ":generateContent?key=" + vision.key;
+
+  var payload = {
+    contents: [{
+      parts: [
+        { text: '点选验证码。图1有3个目标图案(左到右)，图2有5个图案(上3下2)。比较图1每个图案的形状，在图2中找形状相同的3个，给归一化坐标(0~1，左上0,0，右下1,1)。不要识别文字，直接比形状。只输出JSON数组：[{"x":0.17,"y":0.25},{"x":0.5,"y":0.25},{"x":0.33,"y":0.75}]' },
+        { inline_data: { mime_type: promptMime, data: promptB64 } },
+        { inline_data: { mime_type: stageMime, data: stageB64 } },
+      ]
+    }],
+    generationConfig: { temperature: 0, maxOutputTokens: 200 }
+  };
+
+  var res = await Widget.http.post(url, payload, {
+    headers: { "Content-Type": "application/json", "User-Agent": UA }
+  });
+  var data = res && res.data;
+  var text = "";
+  if (typeof data === "string") text = data;
+  else if (data && data.candidates && data.candidates[0] && data.candidates[0].content) {
+    var parts = data.candidates[0].content.parts || [];
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].text) { text += parts[i].text; }
+    }
+  } else {
+    text = JSON.stringify(data || {});
+  }
+  var m = String(text).match(/\[[\s\S]*?\]/);
+  if (!m) throw new Error("视觉接口未返回坐标");
+  var arr = JSON.parse(m[0]);
+  if (!Array.isArray(arr) || arr.length < 3) throw new Error("坐标数量不足");
+  return arr.slice(0, 3).map(function(p) {
+    var px = Number(p.x), py = Number(p.y);
+    if (px >= 0 && px <= 1 && py >= 0 && py <= 1) {
+      return { x: Math.round(px * 320), y: Math.round(py * 150) };
+    }
+    return { x: Math.round(px), y: Math.round(py) };
+  });
+}
+
 async function visionClickPoints(vision, promptDataUrl, stageDataUrl) {
   if (!vision.key) {
     throw new Error("首次使用请在模块参数填写「视觉 API Key」（一次性）。之后 Cookie 会自动续，不用再手抓。");
   }
-  const endpoint = /\/v1$/.test(vision.base)
-    ? (vision.base + "/chat/completions")
-    : (vision.base + "/v1/chat/completions");
-  const content = [
+  // Google AI Studio：优先使用原生 API（更稳定，视觉匹配更准）
+  if (/generativelanguage\.googleapis\.com/i.test(vision.base || "")) {
+    return await visionClickPointsNative(vision, promptDataUrl, stageDataUrl);
+  }
+  // 其他 OpenAI 兼容 API
+  var endpoint = buildVisionChatEndpoint(vision.base);
+  var content = [
     {
       type: "text",
-      text: "中文点选验证码。图1=需依次点击的3个目标字(左到右)，图2=含5个汉字的大图(约320x150，左上角原点)。只输出JSON数组，顺序与图1一致，例如[{\"x\":80,\"y\":40},{\"x\":160,\"y\":40},{\"x\":240,\"y\":110}]，坐标是大图像素中心。"
+      text: '点选验证码。图1有3个目标图案(左到右)，图2有5个图案(上3下2)。比较图1每个图案的形状，在图2中找形状相同的3个，给归一化坐标(0~1，左上0,0，右下1,1)。不要识别文字，直接比形状。只输出JSON数组：[{"x":0.17,"y":0.25},{"x":0.5,"y":0.25},{"x":0.33,"y":0.75}]'
     },
     { type: "image_url", image_url: { url: promptDataUrl } },
     { type: "image_url", image_url: { url: stageDataUrl } }
   ];
-  const payload = {
+  var payload = {
     model: vision.model || DEFAULT_VISION_MODEL,
     messages: [{ role: "user", content: content }],
     temperature: 0,
-    max_tokens: 220
+    max_tokens: 1024
   };
-  const res = await Widget.http.post(endpoint, payload, {
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + vision.key,
-      "User-Agent": UA
-    }
-  });
-  const data = res && res.data;
-  let text = "";
+  var reqHeaders = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + vision.key,
+    "User-Agent": UA
+  };
+  var res = await Widget.http.post(endpoint, payload, { headers: reqHeaders });
+  var data = res && res.data;
+  var text = "";
   if (typeof data === "string") text = data;
   else if (data && data.choices && data.choices[0] && data.choices[0].message) {
-    text = data.choices[0].message.content || "";
+    var msg = data.choices[0].message;
+    text = msg.content || "";
+    // 兼容 reasoning 模型（如 minimax-m3）：content 为空时从 reasoning 提取
+    if (!text && msg.reasoning) text = msg.reasoning;
   } else {
     text = JSON.stringify(data || {});
   }
-  const m = String(text).match(/\[[\s\S]*?\]/);
+  var m = String(text).match(/\[[\s\S]*?\]/);
   if (!m) throw new Error("视觉接口未返回坐标");
-  const arr = JSON.parse(m[0]);
+  var arr = JSON.parse(m[0]);
   if (!Array.isArray(arr) || arr.length < 3) throw new Error("坐标数量不足");
-  return arr.slice(0, 3).map(p => ({
-    x: Math.round(Number(p.x)),
-    y: Math.round(Number(p.y))
-  }));
+  return arr.slice(0, 3).map(function(p) {
+    var px = Number(p.x), py = Number(p.y);
+    if (px >= 0 && px <= 1 && py >= 0 && py <= 1) {
+      return { x: Math.round(px * 320), y: Math.round(py * 150) };
+    }
+    var pt = { x: Math.round(px), y: Math.round(py) };
+    var cal = calibrateCoordinates([pt], 320, 150);
+    return cal[0];
+  });
 }
 
 function encodeForm(obj) {
@@ -662,6 +787,122 @@ function extractSeasonFromText(text) {
   return null;
 }
 
+function htmlDecode(text) {
+  return String(text || "")
+    .replace(/&#(\d+);/g, function(_, n) { return String.fromCharCode(parseInt(n, 10)); })
+    .replace(/&#x([0-9a-f]+);/gi, function(_, n) { return String.fromCharCode(parseInt(n, 16)); })
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">");
+}
+
+function uniqueTitles(values) {
+  const out = [];
+  const seen = {};
+  for (const value of values || []) {
+    const title = htmlDecode(String(value || "").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+    const norm = normalizeName(stripTitleMeta(title));
+    if (!title || !norm || seen[norm]) continue;
+    seen[norm] = true;
+    out.push(title);
+  }
+  return out;
+}
+
+function parseTmdbSearchResults(html, mediaType) {
+  const out = [];
+  const re = /href=["']\/(tv|movie)\/(\d+)(?:[^"']*)?["']/gi;
+  let m;
+  while ((m = re.exec(String(html || "")))) {
+    if (mediaType && m[1] !== mediaType) continue;
+    const key = m[1] + ":" + m[2];
+    if (!out.some(x => x.key === key)) out.push({ key: key, type: m[1], id: m[2] });
+  }
+  return out;
+}
+
+async function loadTmdbAliases(tmdbId, mediaType) {
+  const id = String(tmdbId || "").match(/\d+/);
+  if (!id) return [];
+  const kind = mediaType === "movie" ? "movie" : "tv";
+  const key = STORE_ALIAS_PREFIX + kind + "_" + id[0];
+  const cached = readJsonCache(key, META_CACHE_MS);
+  if (cached) return cached;
+  try {
+    const res = await rawGet("https://www.themoviedb.org/" + kind + "/" + id[0] + "/titles?language=zh-CN", "", {
+      "Referer": "https://www.themoviedb.org/",
+      "Origin": "https://www.themoviedb.org"
+    });
+    const html = String((res && res.data) || "");
+    const titles = [];
+    const og = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)
+      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']/i);
+    if (og) titles.push(og[1]);
+    const td = /<td(?:\s[^>]*)?>([\s\S]*?)<\/td>/gi;
+    let m;
+    while ((m = td.exec(html))) titles.push(m[1]);
+    const result = uniqueTitles(titles);
+    if (result.length) writeJsonCache(key, result);
+    return result;
+  } catch (e) {
+    console.log("[ddys] tmdb alias fetch failed: " + (e.message || e));
+    return [];
+  }
+}
+
+async function searchTmdbCandidates(title, mediaType) {
+  const query = String(title || "").trim();
+  if (!query) return [];
+  try {
+    const res = await rawGet("https://www.themoviedb.org/search?query=" + encodeURIComponent(query) + "&language=zh-CN", "", {
+      "Referer": "https://www.themoviedb.org/",
+      "Origin": "https://www.themoviedb.org"
+    });
+    return parseTmdbSearchResults((res && res.data) || "", mediaType === "movie" ? "movie" : "tv").slice(0, 3);
+  } catch (e) {
+    return [];
+  }
+}
+
+async function buildAliasQueries(params, baseTitle, rawSeries) {
+  const titles = [baseTitle, rawSeries];
+  const mediaType = String((params && params.type) || "") === "movie" ? "movie" : "tv";
+  const tmdbId = params && params.tmdbId;
+  if (tmdbId) {
+    const aliases = await loadTmdbAliases(tmdbId, mediaType);
+    titles.push.apply(titles, aliases);
+  } else if (Widget.tmdb && Widget.tmdb.get) {
+    const seeds = uniqueTitles([baseTitle, rawSeries]);
+    for (const seed of seeds.slice(0, 2)) {
+      const candidates = await searchTmdbCandidates(seed, mediaType);
+      if (candidates.length !== 1) continue;
+      const aliases = await loadTmdbAliases(candidates[0].id, candidates[0].type);
+      titles.push.apply(titles, aliases);
+    }
+  }
+  return uniqueTitles(titles);
+}
+
+function parseDetailAliases(html) {
+  const m = String(html || "").match(/又名\s*[:：]\s*([\s\S]*?)(?:<br\s*\/?>|导演\s*[:：]|演员\s*[:：]|类型\s*[:：]|年份\s*[:：])/i);
+  if (!m) return [];
+  return uniqueTitles(m[1].split(/\s*\/\s*/));
+}
+
+function titleMatchesAny(title, wantedTitles) {
+  const norm = normalizeName(stripTitleMeta(title));
+  if (!norm) return false;
+  for (const wanted of wantedTitles || []) {
+    const want = normalizeName(stripTitleMeta(wanted));
+    if (!want) continue;
+    if (norm === want || norm.indexOf(want) >= 0 || want.indexOf(norm) >= 0) return true;
+  }
+  return false;
+}
+
 function parseSearchResults(html) {
   const out = [];
   const re = /<h2 class="post-title"><a href="(https:\/\/ddys\.app\/[a-z0-9-]+\/)"[^>]*rel="bookmark">([^<]+)<\/a>/g;
@@ -673,6 +914,32 @@ function parseSearchResults(html) {
 async function searchSite(keyword, params) {
   const res = await httpGetAuthed(SITE + "/?s=" + encodeURIComponent(keyword), params);
   return parseSearchResults((res && res.data) || "");
+}
+
+function buildSearchQueries(baseTitle, rawSeries) {
+  const out = [];
+  function add(value) {
+    const q = String(value || "").replace(/\s+/g, " ").trim();
+    if (q && out.indexOf(q) < 0) out.push(q);
+  }
+  [baseTitle, rawSeries].forEach(title => {
+    const raw = String(title || "").trim();
+    if (!raw) return;
+    add(raw);
+    const spaced = raw
+      .replace(/[：:·・,，.。!！?？\-—_'’"“”()（）\[\]【】\/\\]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    add(spaced);
+    add(spaced.replace(/\s+/g, ""));
+    const parts = raw
+      .split(/[：:·・,，.。!！?？\-—_'’"“”()（）\[\]【】\/\\\s]+/)
+      .map(s => s.trim())
+      .filter(s => s.length >= 2)
+      .sort((a, b) => b.length - a.length);
+    parts.forEach(add);
+  });
+  return out.slice(0, 6);
 }
 
 function parsePlaylist(html) {
@@ -693,25 +960,62 @@ function parsePlaylist(html) {
   try { return JSON.parse(html.slice(s, end)); } catch (e) { return null; }
 }
 
-async function loadPlaylist(detailUrl, params) {
+function extractDoubanId(html) {
+  const m = String(html || "").match(/movie\.douban\.com\/subject\/(\d+)/i);
+  return m ? m[1] : "";
+}
+
+function matchCacheKey(params, title) {
+  const id = String((params && (params.tmdbId || params.imdbId || params.id)) || "").trim();
+  return STORE_MATCH_PREFIX + normalizeName(id || title);
+}
+
+async function loadDetailData(detailUrl, params) {
   const res = await httpGetAuthed(detailUrl, params);
-  return parsePlaylist((res && res.data) || "");
+  const html = String((res && res.data) || "");
+  return {
+    playlist: parsePlaylist(html),
+    aliases: parseDetailAliases(html),
+    doubanId: extractDoubanId(html),
+    html: html
+  };
 }
 
-function scoreResult(item, wantBaseNorm) {
+async function loadPlaylist(detailUrl, params) {
+  const data = await loadDetailData(detailUrl, params);
+  return data.playlist;
+}
+
+function scoreResult(item, wantedTitles) {
   const baseNorm = normalizeName(stripTitleMeta(item.rawTitle));
-  if (baseNorm === wantBaseNorm) return 320;
-  if (baseNorm.indexOf(wantBaseNorm) >= 0 || wantBaseNorm.indexOf(baseNorm) >= 0) return 160;
-  return -1;
+  let best = -1;
+  for (const wanted of wantedTitles || []) {
+    const wantBaseNorm = normalizeName(stripTitleMeta(wanted));
+    if (!wantBaseNorm) continue;
+    if (baseNorm === wantBaseNorm) best = Math.max(best, 320);
+    else if (baseNorm.indexOf(wantBaseNorm) >= 0 || wantBaseNorm.indexOf(baseNorm) >= 0) best = Math.max(best, 160);
+  }
+  return best;
 }
 
-function pickBestResult(results, wantBaseNorm) {
+function pickBestResult(results, wantedTitles) {
   let best = null, bestScore = -Infinity;
   for (const it of results) {
-    const sc = scoreResult(it, wantBaseNorm);
+    const sc = scoreResult(it, wantedTitles);
     if (sc > bestScore) { bestScore = sc; best = it; }
   }
   return bestScore >= 0 ? best : null;
+}
+
+async function pickByDetailAliases(results, wantedTitles, params) {
+  for (const item of (results || []).slice(0, 5)) {
+    const detail = await loadDetailData(item.url, params);
+    if (!detail.playlist) continue;
+    if (titleMatchesAny(item.rawTitle, wantedTitles) || detail.aliases.some(a => titleMatchesAny(a, wantedTitles))) {
+      return { item: item, detail: detail };
+    }
+  }
+  return null;
 }
 
 function pickTrack(playlist, wantSeason, wantEpisode, isMovie) {
@@ -743,7 +1047,7 @@ function buildVideoUrl(track) {
 }
 
 async function loadResource(params) {
-  console.log("[ddys] widget version 1.2.7");
+  console.log("[ddys] widget version 1.3.0");
   resolveVisionConfig(params || {});
   const rawSeries = String(params.seriesName || params.title || "").trim();
   const rawEpisodeName = String(params.episodeName || "").trim();
@@ -752,17 +1056,53 @@ async function loadResource(params) {
   const wantEpisode = toInt(params.episode, 0);
   const baseTitle = stripTitleMeta(rawSeries) || rawSeries || rawEpisodeName;
   if (!baseTitle) return [];
-  const wantBaseNorm = normalizeName(baseTitle);
 
-  let results = await searchSite(baseTitle, params);
-  if (!results.length && rawSeries && rawSeries !== baseTitle) results = await searchSite(rawSeries, params);
-  if (!results.length) return [];
+  const wantedTitles = await buildAliasQueries(params, baseTitle, rawSeries);
+  let results = [];
+  let hitQuery = "";
+  let cachedUrl = "";
+  let cachedDetail = null;
+  const cachedMatch = readJsonCache(matchCacheKey(params, baseTitle), META_CACHE_MS);
+  if (cachedMatch && cachedMatch.url) {
+    cachedDetail = await loadDetailData(cachedMatch.url, params);
+    if (cachedDetail && cachedDetail.playlist) cachedUrl = cachedMatch.url;
+  }
+  const searchQueries = [];
+  for (const title of wantedTitles) {
+    const queries = buildSearchQueries(title, title);
+    for (const query of queries) {
+      if (searchQueries.indexOf(query) < 0) searchQueries.push(query);
+    }
+  }
+  for (const query of searchQueries.slice(0, 18)) {
+    if (cachedUrl) break;
+    results = await searchSite(query, params);
+    if (results.length) {
+      hitQuery = query;
+      console.log("[ddys] search hit: " + query + " -> " + results.length);
+      break;
+    }
+  }
+  if (!cachedUrl && !results.length) return [];
 
-  const best = pickBestResult(results, wantBaseNorm);
-  if (!best) return [];
-
-  const playlist = await loadPlaylist(best.url, params);
-  if (!playlist) return [];
+  let best = cachedUrl ? { url: cachedUrl, rawTitle: (cachedMatch && cachedMatch.rawTitle) || baseTitle } : pickBestResult(results, wantedTitles);
+  let detail = cachedDetail;
+  if (best && !detail) {
+    detail = await loadDetailData(best.url, params);
+  } else if (!best) {
+    const matched = await pickByDetailAliases(results, wantedTitles, params);
+    if (matched) {
+      best = matched.item;
+      detail = matched.detail;
+    }
+  }
+  if (!best || !detail || !detail.playlist) return [];
+  writeJsonCache(matchCacheKey(params, baseTitle), {
+    url: best.url,
+    rawTitle: best.rawTitle,
+    doubanId: detail.doubanId || ""
+  });
+  const playlist = detail.playlist;
 
   const track = pickTrack(playlist, wantSeason, wantEpisode, isMovie || playlist.playlistType === "movie");
   if (!track) return [];
