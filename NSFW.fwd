@@ -32,12 +32,12 @@
     },
     {
       "id": "missav",
-      "title": "MissAV_ovo",
+      "title": "MissAV",
       "description": "MissAV 视频聚合模块，支持中文字幕、日本AV、素人、无码影片、亚洲AV、女优、类型、发行商与搜索",
       "requiredVersion": "0.0.1",
       "version": "2.4.0",
       "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖/EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV_ovo.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV.js"
     },
     {
       "id": "123av",
