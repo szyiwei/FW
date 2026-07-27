@@ -85,6 +85,15 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/PPnix.js"
     },
     {
+      "id": "duboku",
+      "title": "duboku",
+      "description": "duboku",
+      "requiredVersion": "0.0.1",
+      "version": "1.4.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/duboku.js"
+    },
+    {
       "id": "girigirilove",
       "title": "爱动漫",
       "description": "ギリギリ愛动漫 - 高清动漫线上观看",
