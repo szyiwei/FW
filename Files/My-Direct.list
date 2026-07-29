@@ -13,6 +13,44 @@ DOMAIN-SUFFIX,webapi.115.com
 DOMAIN-SUFFIX,v.115.com
 DOMAIN-SUFFIX,cpats01.115.com
 
+# 玩偶
+DOMAIN,woggpan.xxooo.cf
+DOMAIN,woggpan.888484.xyz
+DOMAIN,wogg.xxooo.cf
+DOMAIN,www.wogg.net
+# 木偶
+DOMAIN,www.muou.site
+DOMAIN,666.666291.xyz
+DOMAIN,123.666291.xyz
+DOMAIN,www.muou.asia
+# 蜡笔
+DOMAIN,feimo.fun
+DOMAIN,www.xiaocgege.shop
+DOMAIN,xiaocgege.shop
+# 闪电
+DOMAIN,sd.sduc.site
+DOMAIN,shandian.blog
+# 至臻
+DOMAIN,www.mihdr.top
+DOMAIN,mihdr.top
+DOMAIN,www.miqk.cc
+DOMAIN,zhizhen1.top
+# 多多
+DOMAIN,tv.yydsys.top
+DOMAIN,yydsys.de5.net
+DOMAIN,tv.yydsys.cc
+DOMAIN,tv.214521.xyz
+# 欧哥
+DOMAIN,woog.430520.xyz
+DOMAIN,woog.nxog.fun
+DOMAIN,woog.nxog.eu.org
+# 二小
+DOMAIN,wexwp.cc
+DOMAIN,www.wexwp.cc
+DOMAIN,www.2xiaopan.top
+# 虎斑
+IP-CIDR,121.205.88.174/32
+
 # emby
 DOMAIN-SUFFIX,inemby.us.ci
 DOMAIN-SUFFIX,ciallo.party
