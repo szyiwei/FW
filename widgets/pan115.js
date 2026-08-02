@@ -410,14 +410,13 @@ async function listFolder(cookie, cid, page) {
 
 // 修改后：使用搜索接口进行穿透，强制限定 type=4 (视频)，并用 ".mp4" 绕过空词检测
   var url = WEB_API_115 + "/files/search?cid=" + encodeURIComponent(cid)
-    + "&search_value=" + encodeURIComponent(".mp4")
+    + "&search_value=" + encodeURIComponent("")
     + "&type=4"
     + "&file_size=524288000"
     + "&offset=" + offset + "&limit=" + limit
     + "&format=json";
 
   var data = await httpGet(url, { headers: cookieHeader(cookie) });
-
   var parsed = null;
   try { parsed = typeof data === "string" ? JSON.parse(data) : data; } catch (e) { }
 
