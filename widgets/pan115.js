@@ -407,31 +407,22 @@ function cookieHeader(cookie) {
 async function listFolder(cookie, cid, page) {
   var limit = 30;
   var offset = ((page || 1) - 1) * limit;
-
-// 修改后：使用搜索接口进行穿透，强制限定 type=4 (视频)
-  var url = WEB_API_115 + "/files/search?cid=" + encodeURIComponent(cid)
-    + "&search_value=" + encodeURIComponent(".mp4")
-    + "&type=4"
-    + "&file_size=524288000" // 大于 500MB (500 * 1024 * 1024 字节)
+  var url = WEB_API_115 + "/files?cid=" + encodeURIComponent(cid)
     + "&offset=" + offset + "&limit=" + limit
-    + "&format=json";
+    + "&show_dir=1&type=&star=&is_share=&format=json";
 
   var data = await httpGet(url, { headers: cookieHeader(cookie) });
-  var parsed = null;
-  try { parsed = typeof data === "string" ? JSON.parse(data) : data; } catch (e) { }
 
-// 修改后：兼容 search 接口可能出现的双层 data 嵌套
+  var parsed = null;
+  try { parsed = typeof data === "string" ? JSON.parse(data) : data; } catch (e) {}
+
   var allLists = [
-    parsed && parsed.data && parsed.data.data,
     parsed && parsed.data,
     parsed && parsed.data && parsed.data.list,
-    parsed && parsed.data && parsed.data.files,
     parsed && parsed.list,
-    parsed && parsed.files,
+    parsed && parsed.data && parsed.data.files,
   ];
-  
-  var allLists = [filteredList];
-  
+
   var files = [];
   for (var ci = 0; ci < allLists.length; ci++) {
     if (Array.isArray(allLists[ci])) { files = allLists[ci]; break; }
