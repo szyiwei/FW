@@ -408,9 +408,9 @@ async function listFolder(cookie, cid, page) {
   var limit = 30;
   var offset = ((page || 1) - 1) * limit;
 
-// 修改后：使用搜索接口进行穿透，强制限定 type=4 (视频)，并用 ".mp4" 绕过空词检测
+// 修改后：使用搜索接口进行穿透，强制限定 type=4 (视频)
   var url = WEB_API_115 + "/files/search?cid=" + encodeURIComponent(cid)
-    + "&search_value=" + encodeURIComponent("")
+    + "&search_value=" + encodeURIComponent(".mkv|.mp4|.avi|.wmv")
     + "&type=4"
     + "&file_size=524288000"
     + "&offset=" + offset + "&limit=" + limit
