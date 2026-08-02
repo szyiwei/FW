@@ -410,7 +410,7 @@ async function listFolder(cookie, cid, page) {
 
 // 修改后：使用搜索接口进行穿透，强制限定 type=4 (视频)
   var url = WEB_API_115 + "/files/search?cid=" + encodeURIComponent(cid)
-    + "&search_value=" + encodeURIComponent(".mp4")
+    + "&search_value=" + encodeURIComponent("")
     + "&type=4"
     + "&offset=" + offset + "&limit=" + limit
     + "&format=json";
@@ -428,7 +428,26 @@ async function listFolder(cookie, cid, page) {
     parsed && parsed.list,
     parsed && parsed.files,
   ];
+  
+// 找到有效的文件数组
+  var fileList = rawLists.find(item => Array.isArray(item)) || [];
 
+// 过滤：限定文件大小大于 500MB (524288000 字节)，且后缀名为 mp4, mkv, avi, wmv 之一
+  var targetExtensions = [".mp4", ".mkv", ".avi", ".wmv"];
+  var filteredList = fileList.filter(file => {
+  var fileSize = Number(file.file_size || file.size || 0);
+  var fileName = (file.file_name || file.name || "").toLowerCase();
+ 
+// 检查大小是否大于 500MB
+  var isLargeEnough = fileSize > 524288000;
+  
+// 检查后缀名是否匹配
+  var hasValidExt = targetExtensions.some(ext => fileName.endsWith(ext));
+  
+  return isLargeEnough && hasValidExt;
+  });
+  var allLists = [filteredList];
+  
   var files = [];
   for (var ci = 0; ci < allLists.length; ci++) {
     if (Array.isArray(allLists[ci])) { files = allLists[ci]; break; }
