@@ -409,7 +409,7 @@ async function listFolder(cookie, cid, page) {
   var offset = ((page || 1) - 1) * limit;
 
 // 修改后：使用搜索接口进行穿透，强制限定 type=4 (视频)
-  var url = WEB_API_115 + "/files/search?cid=" + encodeURIComponent(cid)
+  var url = WEB_API_115 + "/files/?cid=" + encodeURIComponent(cid)
     + "&file_size=524288000"
     + "&offset=" + offset + "&limit=" + limit
     + "&format=json";
