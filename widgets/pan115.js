@@ -412,6 +412,7 @@ async function listFolder(cookie, cid, page) {
   var url = WEB_API_115 + "/files/search?cid=" + encodeURIComponent(cid)
     + "&search_value=" + encodeURIComponent(".mp4")
     + "&type=4"
+    + "&file_size=524288000"
     + "&offset=" + offset + "&limit=" + limit
     + "&format=json";
 
