@@ -410,9 +410,9 @@ async function listFolder(cookie, cid, page) {
 
 // 修改后：使用搜索接口进行穿透，强制限定 type=4 (视频)
   var url = WEB_API_115 + "/files/search?cid=" + encodeURIComponent(cid)
-    + "&search_value=" + encodeURIComponent(".mp4")
+    + "&search_value=" + encodeURIComponent(".mp4|.mkv|.avi|.wmv")
     + "&type=4"
-    + "&file_size=524288000"
+    + "&file_size>524288000"
     + "&offset=" + offset + "&limit=" + limit
     + "&format=json";
 
