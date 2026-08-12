@@ -211,13 +211,13 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/SubtitleCat.js"
     },
     {
-      "id": "pan115",
-      "title": "pan115",
-      "description": "pan115",
+      "id": "huangdou",
+      "title": "huangdou",
+      "description": "huangdou",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/pan115.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/huangdou.js"
     },
   ]
 }
