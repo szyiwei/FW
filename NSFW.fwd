@@ -139,6 +139,24 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/kanav.js"
     },
     {
+      "id": "manko_stream",
+      "title": "manko_stream",
+      "description": "manko_stream",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/manko_stream.js"
+    },
+    {
+      "id": "manko",
+      "title": "manko",
+      "description": "manko",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/manko.js"
+    },
+    {
       "id": "51cg",
       "title": "51吃瓜",
       "description": "51吃瓜网站聚合.建议搭建自己的CF Worker解密代理",
