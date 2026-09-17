@@ -4,15 +4,6 @@
   "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon2.PNG",
   "widgets": [
     {
-      "id": "AVDB",
-      "title": "AVDB",
-      "description": "终极瑟瑟模块",
-      "requiredVersion": "0.0.2",
-      "version": "1.6.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/AVDB.js"
-    },
-    {
       "id": "jable",
       "title": "Jable",
       "description": "Jable分类浏览和全局搜索",
@@ -83,69 +74,6 @@
       "version": "0.9.6",
       "author": "網路",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91Porny.js"
-    },
-    {
-      "id": "jable_streams",
-      "title": "Jable Stream",
-      "description": "通过番号匹配 Jable 播放源，并聚合到当前视频详情页",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Eric",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Jable_Stream.js"
-    },
-    {
-      "id": "missav_stream",
-      "title": "MissAV Stream",
-      "description": "通过番号匹配 MissAV 播放源，并聚合到当前视频详情页",
-      "requiredVersion": "0.0.1",
-      "version": "1.1.0",
-      "author": "meeowzzz",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/missav_stream.js"
-    },
-    {
-      "id": "123av_stream",
-      "title": "123AV Stream",
-      "description": "通过番号匹配 123AV 播放源，并聚合到当前视频详情页",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "meeowzzz",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/123av_stream.js"
-    },
-    {
-      "id": "memojav.stream",
-      "title": "Memojav Stream",
-      "description": "通过番号匹配 Memojav 播放源",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.5",
-      "author": "meeowzzz",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/memojav_stream.js"
-    },
-    {
-      "id": "kanav.stream",
-      "title": "Kanav Stream",
-      "description": "通过番号匹配 Kanav 播放源",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.5",
-      "author": "meeowzzz",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/kanav_stream.js"
-    },
-    {
-      "id": "kanavtao",
-      "title": "kanavTao",
-      "description": "kanav网站聚合",
-      "requiredVersion": "0.0.2",
-      "version": "1.2.8",
-      "author": "廿二日",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/kanav.js"
-    },
-    {
-      "id": "manko_stream",
-      "title": "manko_stream",
-      "description": "manko_stream",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/manko_stream.js"
     },
     {
       "id": "manko",
