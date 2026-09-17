@@ -49,15 +49,6 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1_EL.js"
     },
     {
-      "id": "Bitch",
-      "title": "Bitch Lives",
-      "description": "碧池直播",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Discount Code：VEUS",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/BitchLives.js"
-    },
-    {
       "id": "91porn_makka",
       "title": "91Porn",
       "description": "91Porn 分类浏览与全局搜索模块",
@@ -74,15 +65,6 @@
       "version": "0.9.6",
       "author": "網路",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91Porny.js"
-    },
-    {
-      "id": "manko",
-      "title": "manko",
-      "description": "manko",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/manko.js"
     },
     {
       "id": "51cg",
@@ -146,15 +128,6 @@
       "version": "1.0.0",
       "author": "EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/wow.js"
-    },
-    {
-      "id": "subtitlecat",
-      "title": "SubtitleCat 字幕",
-      "description": "从 subtitlecat.com 搜索字幕",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/SubtitleCat.js"
     },
     {
       "id": "huangdou",
