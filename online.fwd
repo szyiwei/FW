@@ -10,7 +10,7 @@
       "requiredVersion": "0.0.2",
       "version": "1.1.0",
       "author": "两块",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/jpyy.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/2Kuai/jpyy.js"
     },
     {
       "id": "rr_vod_full",
@@ -65,6 +65,24 @@
       "version": "1.4.0",
       "author": "EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/girigirilove.js"
+    },
+    {
+      "id": "subhd-subtitle",
+      "title": "subhd-subtitle",
+      "description": "subhd-subtitle",
+      "requiredVersion": "0.0.1",
+      "version": "1.4.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/subhd-subtitle.js"
+    },
+    {
+      "id": "xunlei-subtitle",
+      "title": "xunlei-subtitle",
+      "description": "xunlei-subtitle",
+      "requiredVersion": "0.0.1",
+      "version": "1.4.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/xunlei-subtitle.js"
     },
   ]
 }
