@@ -10,7 +10,7 @@
       "requiredVersion": "0.0.2",
       "version": "1.1.0",
       "author": "两块",
-      "url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/jpyy.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/jpyy.js"
     },
     {
       "id": "rr_vod_full",
@@ -40,15 +40,6 @@
       "url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/HotPicks.js"
     },
     {
-      "id": "duboku",
-      "title": "duboku",
-      "description": "duboku",
-      "requiredVersion": "0.0.1",
-      "version": "1.4.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/duboku.js"
-    },
-    {
       "id": "https://t.me/Nzmgs?rev=20260605b",
       "title": "聚合实时榜单",
       "description": "基聚合各平台实时榜单数据",
@@ -65,6 +56,15 @@
       "version": "1.2.0",
       "author": "EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Letterboxd.js"
+    },
+    {
+      "id": "girigirilove",
+      "title": "girigirilove",
+      "description": "girigirilove",
+      "requiredVersion": "0.0.1",
+      "version": "1.4.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/girigirilove.js"
     },
   ]
 }
