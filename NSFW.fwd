@@ -4,13 +4,31 @@
   "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon2.PNG",
   "widgets": [
     {
+      "id": "missav",
+      "title": "MissAV",
+      "description": "MissAV 视频聚合模块，支持中文字幕、日本AV、素人、无码影片、亚洲AV、女优、类型、发行商与搜索",
+      "requiredVersion": "0.0.1",
+      "version": "3.2.3",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖/EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV_ovo.js"
+    },
+    {
+      "id": "hanime1",
+      "title": "Hanime1",
+      "description": "统一版：全局搜索、排行、分类、高级检索、新番预告",
+      "requiredVersion": "0.0.2",
+      "version": "4.5.0",
+      "author": "TaYhu|EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1.js"
+    },
+    {
       "id": "jable",
       "title": "Jable",
       "description": "Jable分类浏览和全局搜索",
       "requiredVersion": "0.0.2",
       "version": "1.4.0",
       "author": "nibiru｜MakkaPakka｜EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Jable_Tao.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/jable.js"
     },
     {
       "id": "javday",
@@ -19,16 +37,16 @@
       "requiredVersion": "0.0.1",
       "version": "1.0.2",
       "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/JAVDay_Tao.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/javday.js"
     },
     {
-      "id": "missav",
-      "title": "MissAV",
-      "description": "MissAV 视频聚合模块，支持中文字幕、日本AV、素人、无码影片、亚洲AV、女优、类型、发行商与搜索",
+      "id": "javrate",
+      "title": "javrate",
+      "description": "javrate",
       "requiredVersion": "0.0.1",
-      "version": "3.2.3",
-      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖/EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/MissAV_ovo.js"
+      "version": "1.0.2",
+      "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/javrate.js"
     },
     {
       "id": "123av",
@@ -40,22 +58,13 @@
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/123av.js"
     },
     {
-      "id": "hanime1",
-      "title": "Hanime1",
-      "description": "统一版：全局搜索、排行、分类、高级检索、新番预告",
-      "requiredVersion": "0.0.2",
-      "version": "4.5.0",
-      "author": "TaYhu|EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Hanime1_EL.js"
-    },
-    {
       "id": "91porn_makka",
       "title": "91Porn",
       "description": "91Porn 分类浏览与全局搜索模块",
       "requiredVersion": "0.0.1",
       "version": "2.0.0",
       "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91Porn_Tao.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91Porn.js"
     },
     {
       "id": "91porny_int",
@@ -64,16 +73,7 @@
       "requiredVersion": "0.0.1",
       "version": "0.9.6",
       "author": "網路",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91Porny.js"
-    },
-    {
-      "id": "51cg",
-      "title": "51吃瓜",
-      "description": "51吃瓜网站聚合.建议搭建自己的CF Worker解密代理",
-      "requiredVersion": "0.0.2",
-      "version": "3.4.0",
-      "author": "Codex/廿二日",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/51cg.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/91porny.js"
     },
     {
       "id": "Pornhub",
@@ -82,7 +82,7 @@
       "requiredVersion": "0.0.1",
       "version": "2.1.0",
       "author": "海带|EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/Pornhub_Tao.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/pornhub.js"
     },
     {
       "id": "XVideos",
@@ -91,43 +91,16 @@
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖|EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/XVideos_Tao.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/xvideos.js"
     },
     {
-      "id": "xHamster",
-      "title": "xHamster",
-      "description": "xHamster 是一个以用户上传内容（UGC）为核心的成人视频网站和社区平台",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.1",
-      "author": "GM",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/xHamster.js"
-    },
-    {
-      "id": "beeg",
-      "title": "Beeg",
-      "description": "Beeg 视频模块 — 多频道/多模特浏览，HLS 多画质播放",
-      "requiredVersion": "0.0.1",
-      "version": "1.1.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/beeg.js"
-    },
-    {
-      "id": "yesporn",
-      "title": "YesPorn VIP",
-      "description": "YesPorn VIP — 高清成人视频",
+      "id": "ph.twitter",
+      "title": "ph.twitter",
+      "description": "ph.twitter",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/yesporn.js"
-    },
-    {
-      "id": "wow",
-      "title": "WOW.4K",
-      "description": "WOW.XXX — 高清成人视频",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/wow.js"
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/ph.twitter.js"
     },
     {
       "id": "huangdou",
