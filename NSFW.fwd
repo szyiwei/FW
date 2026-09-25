@@ -3,6 +3,51 @@
   "description": "自用NSFW模块合集",
   "icon": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/icon2.PNG",
   "widgets": [
+     {
+      "id": "AVDB",
+      "title": "AVDB",
+      "description": "终极瑟瑟模块",
+      "requiredVersion": "0.0.2",
+      "version": "1.6.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/FSFW/AVDB.js"
+    },
+    {
+      "id": "missav_stream",
+      "title": "MissAV Stream",
+      "description": "通过番号匹配 MissAV 播放源，并聚合到当前视频详情页",
+      "requiredVersion": "0.0.1",
+      "version": "1.1.0",
+      "author": "meeowzzz",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/FSFW/missav-stream.js"
+    },
+    {
+      "id": "123av_stream",
+      "title": "123AV Stream",
+      "description": "通过番号匹配 123AV 播放源，并聚合到当前视频详情页",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "meeowzzz",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/FSFW/123av-stream.js"
+    },
+    {
+      "id": "kanav_stream",
+      "title": "Kanav Stream",
+      "description": "通过番号匹配 Kanav 播放源",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.5",
+      "author": "meeowzzz",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/FSFW/kanav-stream.js"
+    },
+    {
+      "id": "manko_stream",
+      "title": "manko_stream",
+      "description": "manko_stream",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/FSFW/manko-stream.js"
+    },
     {
       "id": "missav",
       "title": "MissAV",
@@ -47,15 +92,6 @@
       "version": "1.0.2",
       "author": "𝙈𝙖𝙠𝙠𝙖𝙋𝙖𝙠𝙠𝙖",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/javrate.js"
-    },
-    {
-      "id": "123av",
-      "title": "123AV",
-      "description": "123AV 日本 AV 在线观看模块。支持最新 / 热门 / 有码 / 无码 / 无码流出分类浏览",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.1",
-      "author": "EL",
-      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/123av.js"
     },
     {
       "id": "91porn_makka",
