@@ -147,5 +147,14 @@
       "author": "EL",
       "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/huangdou.js"
     },
+    {
+      "id": "huangguo",
+      "title": "huangguo",
+      "description": "huangguo",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "EL",
+      "url": "https://raw.githubusercontent.com/szyiwei/FW/refs/heads/main/widgets/FSFW/rexhuangguo.js"
+    },
   ]
 }
